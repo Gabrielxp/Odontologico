@@ -8,32 +8,34 @@ public class Dentista extends Funcionario {
 
 	protected int cro;
 
-	Scanner teclado = new Scanner(System.in);		
 
 	public void cadastrarDentista(){   
-
-		super.cadastraFuncionario();
-		boolean continua = false;
 		
-		do{
+		super.cadastraFuncionario();
+		
+		
+		
+	/*	do{
 			try{
 				System.out.println("Informe seu CRO:");
 				cro = teclado.nextInt();
 				continua = false;
 			}catch(Exception e ){
+				teclado.nextLine();
 				continua = true;
 				System.err.println("Informe um numero inteiro!");
 			}
-		}while(continua);
-
+		}while(continua == true);
+*/
+		System.out.println(toStringDentista());
 		Gravar g = new Gravar();
-		g.grava("br/com/uniciss/odontologico/documentos/dentistas.txt", toString());
-		g.grava("br/com/uniciss/odontologico/documentos/users.txt", toString2());
+		g.grava("src/br/com/uniciss/odontologico/documentos/dentistas.txt", toStringDentista());
+		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
 		
 	}
 
 	//Metodo toString para cadastro de Funcionarios
-		public String toString(){
+		public String toStringDentista(){
 			return "Funcionario"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+isStatus()+","+getCro();
 		}
 	
