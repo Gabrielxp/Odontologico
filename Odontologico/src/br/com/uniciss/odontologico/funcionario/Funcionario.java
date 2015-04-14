@@ -57,7 +57,7 @@ abstract public class Funcionario extends Pessoa {
 	
 	public void cadastraFuncionario(){
 		Scanner teclado = new Scanner(System.in);
-		
+		  
 		do{
 			System.out.println("Informe o nome do Funcionario: ");
 			setNome(teclado.nextLine());
