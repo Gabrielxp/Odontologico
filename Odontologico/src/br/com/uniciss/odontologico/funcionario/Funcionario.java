@@ -2,8 +2,10 @@ package br.com.uniciss.odontologico.funcionario;
 
 import java.util.Date;
 
+import br.com.uniciss.odontologico.cliente.Pessoa;
 
-abstract public class Funcionario {
+
+abstract public class Funcionario extends Pessoa {
 	protected Date HoraDeEntrada;
 	protected Date HoraDeSaida;
 	protected String login;
