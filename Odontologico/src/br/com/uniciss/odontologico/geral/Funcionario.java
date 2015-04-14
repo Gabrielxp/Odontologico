@@ -1,4 +1,4 @@
-package br.com.uniciss.odontologico;
+package br.com.uniciss.odontologico.geral;
 
 import java.util.Date;
 
