@@ -75,6 +75,8 @@ abstract public class Funcionario extends Pessoa {
 		System.out.println("Informe o Tipo do Funcionario: ");
 		setTipo(teclado.nextLine());
 		
+		setStatus(true);
+		
 		Gravar g = new Gravar();
 		g.grava("Funcionarios.txt", toString());
 		g.grava("Usuarios.txt", toString2());
