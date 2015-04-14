@@ -8,8 +8,8 @@ public class Secretario extends Funcionario {
 		super.cadastraFuncionario();
 		
 		Gravar g = new Gravar();
-		g.grava("br/com/uniciss/odontologico/documentos/secretarios.txt", toString());
-		g.grava("br/com/uniciss/odontologico/documentos/users.txt", toString2());
+		g.grava("src/br/com/uniciss/odontologico/documentos/secretarios.txt", toString());
+		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
 		
 	}
 
