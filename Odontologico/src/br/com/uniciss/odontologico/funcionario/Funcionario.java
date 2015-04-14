@@ -1,13 +1,12 @@
 package br.com.uniciss.odontologico.funcionario;
 
-import java.util.Date;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
 abstract public class Funcionario extends Pessoa {
-	protected Date HoraDeEntrada;
-	protected Date HoraDeSaida;
+	protected String HoraDeEntrada;
+	protected String HoraDeSaida;
 	protected String login;
 	protected String senha;
 	protected String tipo;
@@ -30,19 +29,19 @@ abstract public class Funcionario extends Pessoa {
 		this.tipo = tipo;
 	}
 
-	protected Date getHoraDeEntrada() {
+	protected String getHoraDeEntrada() {
 		return HoraDeEntrada;
 	}
 
-	public void setHoraDeEntrada(Date horaDeEntrada) {
-		HoraDeEntrada = horaDeEntrada;
+	public void setHoraDeEntrada(String string) {
+		HoraDeEntrada = string;
 	}
 
-	public Date getHoraDeSaida() {
+	public String getHoraDeSaida() {
 		return HoraDeSaida;
 	}
 
-	public void setHoraDeSaida(Date horaDeSaida) {
+	public void setHoraDeSaida(String horaDeSaida) {
 		HoraDeSaida = horaDeSaida;
 	}
 
