@@ -3,7 +3,6 @@ package br.com.uniciss.odontologico.funcionario;
 import java.util.Date;
 import java.util.Scanner;
 
-import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
 abstract public class Funcionario extends Pessoa {
@@ -12,6 +11,7 @@ abstract public class Funcionario extends Pessoa {
 	protected String login;
 	protected String senha;
 	protected String tipo;
+	private Scanner teclado;
 
 	// Getters And Setters
 	public String getLogin() {
@@ -67,7 +67,7 @@ abstract public class Funcionario extends Pessoa {
 	}
 
 	public void cadastraFuncionario() {
-		Scanner teclado = new Scanner(System.in);
+		teclado = new Scanner(System.in);
 
 		do {
 			System.out.println("Informe o nome do Funcionario: ");
@@ -105,8 +105,16 @@ abstract public class Funcionario extends Pessoa {
 
 		} while (getTipo().equals(""));
 
-		setStatus(true);
+		do {
+			System.out.println("Informe a Hora de Entrada no trabalho: ");
+			setHoraDeEntrada(teclado.nextLine());
+		} while (getHoraDeEntrada().equals(""));
 
+		do {
+			System.out.println("Informe a Hora de Saida no trabalho: ");
+			setHoraDeSaida(teclado.nextLine());
+		} while (getHoraDeEntrada().equals(""));
+		setStatus(true);
 
 	}
 
