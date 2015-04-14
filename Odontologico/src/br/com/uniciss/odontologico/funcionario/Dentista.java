@@ -10,7 +10,7 @@ public class Dentista extends Funcionario {
 
 	Scanner teclado = new Scanner(System.in);		
 
-	public void cadastrarDentista(){
+	public void cadastrarDentista(){   
 
 		super.cadastraFuncionario();
 		boolean continua = false;
