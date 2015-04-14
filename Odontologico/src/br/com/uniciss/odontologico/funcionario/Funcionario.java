@@ -6,89 +6,108 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
-
 abstract public class Funcionario extends Pessoa {
 	protected Date HoraDeEntrada;
 	protected Date HoraDeSaida;
 	protected String login;
 	protected String senha;
 	protected String tipo;
-	
-	//Getters And Setters
+
+	// Getters And Setters
 	public String getLogin() {
 		return login;
 	}
+
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 	protected Date getHoraDeEntrada() {
 		return HoraDeEntrada;
 	}
+
 	public void setHoraDeEntrada(Date horaDeEntrada) {
 		HoraDeEntrada = horaDeEntrada;
 	}
+
 	public Date getHoraDeSaida() {
 		return HoraDeSaida;
 	}
+
 	public void setHoraDeSaida(Date horaDeSaida) {
 		HoraDeSaida = horaDeSaida;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	//Metodo toString para cadastro de Funcionarios
-	public String toString(){
-		return "Funcionario"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+isStatus();
+
+	// Metodo toString para cadastro de Funcionarios
+	public String toString() {
+		return "Funcionario" + "," + getCodigo() + "," + getNome() + ","
+				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
+				+ isStatus();
 	}
-	
-	public String toString2(){
-		return "Usuario"+","+getLogin()+","+getSenha()+","+getTipo();
+
+	public String toString2() {
+		return "Usuario" + "," + getLogin() + "," + getSenha() + ","
+				+ getTipo();
 	}
-	
-	public void cadastraFuncionario(){
+
+	public void cadastraFuncionario() {
 		Scanner teclado = new Scanner(System.in);
-		  
-		do{
+
+		do {
 			System.out.println("Informe o nome do Funcionario: ");
 			setNome(teclado.nextLine());
-		}while(getNome().equals(""));
-		
-		System.out.println("Informe o Rg do Funcionario: ");
-		setRg(teclado.nextLine());
-		
-		System.out.println("Informe o Cpf do Funcionario: ");
-		setCpf(teclado.nextLine());
-		System.out.println("Informe o Endereço do Funcionario: ");
-		setEndereco(teclado.nextLine());
-		
-		System.out.println("Informe o Login do Funcionario: ");
-		setLogin(teclado.nextLine());
-		System.out.println("Informe a Senha do Funcionario: ");
-		setSenha(teclado.nextLine());
-		System.out.println("Informe o Tipo do Funcionario: ");
-		setTipo(teclado.nextLine());
-		
-		setStatus(true);
-		
-		Gravar g = new Gravar();
-		g.grava("Funcionarios.txt", toString());
-		g.grava("Usuarios.txt", toString2());
-		teclado.close();
-		
-		
-	}
-	
-	
+		} while (getNome().equals(""));
 
-	
+		do {
+			System.out.println("Informe o Rg do Funcionario: ");
+			setRg(teclado.nextLine());
+		} while (getRg().equals(""));
+
+		do {
+			System.out.println("Informe o Cpf do Funcionario: ");
+			setCpf(teclado.nextLine());
+		} while (getCpf().equals(""));
+
+		do {
+			System.out.println("Informe o Endereço do Funcionario: ");
+			setEndereco(teclado.nextLine());
+		} while (getEndereco().equals(""));
+
+		do {
+			System.out.println("Informe o Login do Funcionario: ");
+			setLogin(teclado.nextLine());
+		} while (getLogin().equals(""));
+
+		do {
+			System.out.println("Informe a Senha do Funcionario: ");
+			setSenha(teclado.nextLine());
+		} while (getSenha().equals(""));
+
+		do {
+			System.out.println("Informe o Tipo do Funcionario: ");
+			setTipo(teclado.nextLine());
+
+		} while (getTipo().equals(""));
+
+		setStatus(true);
+
+
+	}
+
 }
