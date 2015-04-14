@@ -1,4 +1,4 @@
-package br.com.uniciss.odontologico.geral;
+package br.com.uniciss.odontologico.funcionario;
 
 
 public class Secretario {
