@@ -9,7 +9,7 @@ public class Programa {
 		
 		Cliente cliente = new Cliente();
 		
-		cliente.cadastraCliente();
+		cliente.cadastro();
 
 	}
 
