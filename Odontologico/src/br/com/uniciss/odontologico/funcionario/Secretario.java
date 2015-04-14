@@ -9,10 +9,9 @@ public class Secretario extends Funcionario {
 
 	public void cadastrarSecretario() {
 		super.cadastraPessoa();
-		cadastraFuncionario();
 		
 		Gravar g = new Gravar();
-		g.grava("/Secretarios.txt", toString());
+		g.grava("secretarios.txt", toString());
 		g.grava("Usuarios.txt", toString2());
 		teclado.close();
 		
