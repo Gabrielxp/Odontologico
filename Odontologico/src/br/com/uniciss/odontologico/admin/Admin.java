@@ -27,7 +27,7 @@ public class Admin {
 			if (nome.equals(s.getNome())){
 				s.cadastraFuncionario();
 			}
-		}
+		} 
 	}
 	public void editarDentista(){
 		
