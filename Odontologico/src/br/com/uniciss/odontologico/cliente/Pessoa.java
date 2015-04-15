@@ -111,8 +111,10 @@ public abstract class Pessoa {
 	}
 	/**
 	 * Metodo public void cadastro(), utilizado para realizacao de cadastro de pessoas
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void cadastro() {
+	public void cadastro() throws FileNotFoundException, IOException {
 		teclado = new Scanner(System.in);
 
 		
@@ -131,17 +133,14 @@ public abstract class Pessoa {
 		
 		// Le e valida CPF
 		cpf = "0";
-		while (validaCpf() == false) {
+		do{
 			System.out.println("Insira o CPF");
 			this.cpf = teclado.next();
 
 			cpf = cpf.replace("-", "");
 			cpf = cpf.replace(".", "");
-
-			if (!validaCpf() == true) {
-				System.out.println("cpf invalido");
-			}
-		}
+			
+		}while ((validaCpf() == false) || (validaCpfExistente() == true));
 		
 			//Le o endereco
 			System.out.println("Informe o Endereço: ");
@@ -223,18 +222,18 @@ public abstract class Pessoa {
 		return txt.matches("[a-zA-Z]+");
 	}
 	
-	public String validaCpfExistente() throws IOException, FileNotFoundException{
-		String linha=""; 
-			int i = 0;
-			BufferedReader bf = new BufferedReader(new FileReader(arquivo));
-			while ((linha = bf.readLine()) != null) {  
-	            i++;  
-	            while (linha.lastIndexOf(cpf) >= 0) {  
-	                return linha + " Linha: " + i + "\n";  
-	            }  
-			}
-			return linha;
-			
+	public boolean validaCpfExistente() throws IOException, FileNotFoundException{
+		String arquivo="src/br/com/uniciss/odontologico/documentos/dentistas.txt"; 
 		
+		BufferedReader br = new BufferedReader(new FileReader(arquivo));    
+		
+		while(br.ready()) {    
+		       String linha = br.readLine();    
+		       if (linha.contains(cpf)) {    
+		              return true;
+		       }  
+		}
+			br.close();
+			return false;
 	}
 }
