@@ -105,7 +105,7 @@ public class LeituraDeDados {
 	
 	//Metodo que faz a leitura do arquivo tratamentos.txt
 	public void leituraTratamento(List<Tratamentos>listaTratamento,Map<Integer, Tratamentos>mapaTratamento){
-		try{
+		try{  
 			FileReader arq = new FileReader("documentos/tratamentos.txt");
 			BufferedReader lerArq = new BufferedReader(arq); 
 			String linha = lerArq.readLine();  
