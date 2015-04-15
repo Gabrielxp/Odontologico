@@ -28,7 +28,7 @@ public class Gravar {
 	}
 		public void leituraUsuario(Map<String, Funcionario> listaUsuario){
 			try {
-				FileReader arq = new FileReader("users.txt");
+				FileReader arq = new FileReader("documentos/users.txt");
 				BufferedReader lerArq = new BufferedReader(arq); 
 				String linha = lerArq.readLine();  
 				

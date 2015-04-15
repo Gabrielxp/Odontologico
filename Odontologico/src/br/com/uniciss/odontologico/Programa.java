@@ -1,13 +1,15 @@
 package br.com.uniciss.odontologico;
 
+import java.io.IOException;
+
 
 public class Programa {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		System.out.println("Sistema de atendimento Odontologico");
-		Menu m = new Menu();
+		Menus m = new Menus();
 		
-		m.login();
+		m.Login();
 		
 		
 		
