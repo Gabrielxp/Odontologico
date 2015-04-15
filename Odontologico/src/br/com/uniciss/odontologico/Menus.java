@@ -1,6 +1,7 @@
 package br.com.uniciss.odontologico;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
@@ -132,5 +134,48 @@ public class Menus {
 			System.out.println("Opção inválida.");
 		}
 	}
+	public void menuAdmin() throws FileNotFoundException, IOException{
+		Secretario c = new Secretario();
+		Dentista d = new Dentista();
+		Admin a = new Admin();
+		System.out.println(" -' Administrador '-");
+		System.out.println("Escolha a opção: ");
+		System.out.println("1 - Cadastrar Secretario");
+		System.out.println("2 - Editar Secretario");
+		System.out.println("3 - Cadastrar Dentista");
+		System.out.println("4 - Editar Dentista");
+		System.out.println("5 - Menu Secretario");
+		System.out.println("6 - Menu Dentista");
+		System.out.println("7 - Sair");
+		s = new Scanner(System.in);
+		int opc = s.nextInt();
+		switch (opc) {
+		case 1:
+			c.cadastrarSecretario();
+			break;
+		case 2:
+			a.editarSecretario();
+			break;
+		case 3:
+			d.cadastrarDentista();
+		break;
+		case 4:
+			a.editarDentista();
+			break;
+		case 5:
+			menuSecretario();
+			break;
+		case 6:
+			menuDentista();
+			break;
+		case 7: 
+			return;
+		default:
+			System.out.println("Opção inválida.");
+		
+		
+		
+	}
 
+}
 }
