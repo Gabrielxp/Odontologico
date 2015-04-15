@@ -1,5 +1,9 @@
 package br.com.uniciss.odontologico.cliente;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -35,12 +39,23 @@ public abstract class Pessoa {
 	/**
 	 * Variavel teclado, relacionada a entrada de dados do teclado
 	 */
+	protected String arquivo;
+	
+	
 	private Scanner teclado;
 
 	// Getters e Setters
 	
 	public String getNome() {
 		return nome;
+	}
+
+	public String getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(String arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	public String getDataDeNascimento() {
@@ -104,18 +119,16 @@ public abstract class Pessoa {
 		do {
 			System.out.println("Informe o nome : ");
 			setNome(teclado.nextLine());
-		} while (getNome().equals(""));
-
-		if (!validaNome(nome)) {
-			System.out.println("invalido");
-		}
-
+		} while (!validaNome(nome));
+		
+		
 		// le e valida RG
 		do {
 			System.out.println("Insira o RG");
 			this.rg = teclado.next();
-		} while (rg.matches("[a-zA-Z]+"));
+		} while (!validaRg(rg) && rg.length() != 11);
 
+		
 		// Le e valida CPF
 		cpf = "0";
 		while (validaCpf() == false) {
@@ -129,15 +142,10 @@ public abstract class Pessoa {
 				System.out.println("cpf invalido");
 			}
 		}
-		teclado.nextLine();
-		do {
-			System.out.println("Informe a Data de Nascimento: ");
-			setDataDeNascimento(teclado.nextLine());
-		} while (getDataDeNascimento().equals(""));
-		do {
+		
+			//Le o endereco
 			System.out.println("Informe o Endereço: ");
-			setEndereco(teclado.nextLine());
-		} while (getEndereco().equals(""));
+			setEndereco(teclado.next());
 
 		/* DESNECESSARIO EU ACHO
 		 * System.out.println("Insira o codigo"); try{ this.codigo =
@@ -213,5 +221,20 @@ public abstract class Pessoa {
 
 	public boolean validaNome(String txt) {
 		return txt.matches("[a-zA-Z]+");
+	}
+	
+	public String validaCpfExistente() throws IOException, FileNotFoundException{
+		String linha=""; 
+			int i = 0;
+			BufferedReader bf = new BufferedReader(new FileReader(arquivo));
+			while ((linha = bf.readLine()) != null) {  
+	            i++;  
+	            while (linha.lastIndexOf(cpf) >= 0) {  
+	                return linha + " Linha: " + i + "\n";  
+	            }  
+			}
+			return linha;
+			
+		
 	}
 }
