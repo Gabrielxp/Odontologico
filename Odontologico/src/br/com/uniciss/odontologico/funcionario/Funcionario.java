@@ -97,12 +97,6 @@ abstract public class Funcionario extends Pessoa {
 		cadastro();
 
 		do {
-			System.out.println("Informe o Tipo do Funcionario: ");
-			setTipo(teclado.nextLine());
-
-		} while (getTipo().equals(""));
-
-		do {
 			System.out.println("Informe a Hora de Entrada no trabalho: ");
 			setHoraDeEntrada(teclado.nextLine());
 		} while (getHoraDeEntrada().equals(""));

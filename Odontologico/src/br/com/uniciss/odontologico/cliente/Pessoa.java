@@ -144,8 +144,9 @@ public abstract class Pessoa {
 		}while ((validaCpf() == false) || (validaCpfExistente() == true));
 		
 			//Le o endereco
+			teclado.nextLine();
 			System.out.println("Informe o Endereço: ");
-			setEndereco(teclado.nextLine());
+			endereco = (teclado.next());
 
 		/* DESNECESSARIO EU ACHO
 		 * System.out.println("Insira o codigo"); try{ this.codigo =
