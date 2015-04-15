@@ -5,12 +5,30 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
 abstract public class Funcionario extends Pessoa {
+	/**
+	 * Variavel HoraDeEntrada, relacionada a hora de entrada do trabalho
+	 */
 	protected String HoraDeEntrada;
+	/**
+	 * Variavel HoraDeSaida, relacionada a hora de saida do trabalho
+	 */
 	protected String HoraDeSaida;
+	/**
+	 * Variavel login, relacionada ao acesso de determinado nivel
+	 */
 	protected String login;
+	/**
+	 * Variavel senha, relacionada ao acesso de determinado nivel
+	 */
 	protected String senha;
+	/**
+	 * Variavel tipo, relacionada ao tipo de funcionario
+	 */
 	protected String tipo;
-	private Scanner teclado;
+	/**
+	 * Variavel teclado, relacionada a entrada de dados por meio do teclado
+	 */
+	protected Scanner teclado;
 
 	// Getters And Setters
 	public String getLogin() {
@@ -57,7 +75,7 @@ abstract public class Funcionario extends Pessoa {
 	public String toString() {
 		return "Funcionario" + "," + getCodigo() + "," + getNome() + ","
 				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
-				+ isStatus();
+				+ getDataDeNascimento()+","+ isStatus();
 	}
 
 	public String toString2() {
@@ -65,38 +83,14 @@ abstract public class Funcionario extends Pessoa {
 				+ getTipo();
 	}
 
+	/**
+	 * Metodo cadastraFuncionario relacionado ao cadastro de funcionarios
+	 */
 	public void cadastraFuncionario() {
 		teclado = new Scanner(System.in);
 
-		do {
-			System.out.println("Informe o nome do Funcionario: ");
-			setNome(teclado.nextLine());
-		} while (getNome().equals(""));
-
-		do {
-			System.out.println("Informe o Rg do Funcionario: ");
-			setRg(teclado.nextLine());
-		} while (getRg().equals(""));
-
-		do {
-			System.out.println("Informe o Cpf do Funcionario: ");
-			setCpf(teclado.nextLine());
-		} while (getCpf().equals(""));
-
-		do {
-			System.out.println("Informe o Endereço do Funcionario: ");
-			setEndereco(teclado.nextLine());
-		} while (getEndereco().equals(""));
-
-		do {
-			System.out.println("Informe o Login do Funcionario: ");
-			setLogin(teclado.nextLine());
-		} while (getLogin().equals(""));
-
-		do {
-			System.out.println("Informe a Senha do Funcionario: ");
-			setSenha(teclado.nextLine());
-		} while (getSenha().equals(""));
+		// Metodo com o cadastro de pessoa herdado
+		cadastro();
 
 		do {
 			System.out.println("Informe o Tipo do Funcionario: ");
@@ -114,7 +108,16 @@ abstract public class Funcionario extends Pessoa {
 			setHoraDeSaida(teclado.nextLine());
 		} while (getHoraDeEntrada().equals(""));
 		setStatus(true);
+		do {
+			System.out.println("Informe o Login: ");
+			setLogin(teclado.nextLine());
 
+		} while (getLogin().equals(""));
+		do {
+			System.out.println("Informe a Senha: ");
+			setSenha(teclado.nextLine());
+
+		} while (getSenha().equals(""));
 	}
 
 }

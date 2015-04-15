@@ -4,16 +4,51 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Pessoa {
+	/**
+	 * Variavel nome, relacionada ao nome da pessoa
+	 */
 	protected String nome;
+	/**
+	 * Variavel rg, relacionada ao rg da pessoa
+	 */
 	protected String rg;
+	/**
+	 * Variavel cpf, relacionada ao cpf da pessoa
+	 */
 	protected String cpf;
+	/**
+	 * Variavel endereco, relacionada ao endereco da pessoa. ex.: Rua tal
+	 */
 	protected String endereco;
+	/**
+	 * Variavel codigo, relacionada ao codigo individual
+	 */
 	protected int codigo;
+	/**
+	 * Variavel status, relacionada ao status se esta pessoa esta ativa ou nao
+	 */
 	protected boolean status;
+	/**
+	 * Variavel dataDeNascimento, relacionada a data de nascimento da pessoa
+	 */
+	protected String dataDeNascimento;
+	/**
+	 * Variavel teclado, relacionada a entrada de dados do teclado
+	 */
+	private Scanner teclado;
 
 	// Getters e Setters
+	
 	public String getNome() {
 		return nome;
+	}
+
+	public String getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+
+	public void setDataDeNascimento(String dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
 	}
 
 	public void setNome(String nome) {
@@ -59,113 +94,124 @@ public abstract class Pessoa {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	/**
+	 * Metodo public void cadastro(), utilizado para realizacao de cadastro de pessoas
+	 */
+	public void cadastro() {
+		teclado = new Scanner(System.in);
 
-	public void cadastro(){
-		Scanner teclado = new Scanner(System.in);
 		
-		System.out.println("--------Cadastrado de Clientes-------");
-		System.out.println("Insira o nome");
-		this.nome = teclado.next();
-		
-		if(!validaNome(nome)){
+		do {
+			System.out.println("Informe o nome : ");
+			setNome(teclado.nextLine());
+		} while (getNome().equals(""));
+
+		if (!validaNome(nome)) {
 			System.out.println("invalido");
 		}
-		
-		//le e valida RG
-		do{
+
+		// le e valida RG
+		do {
 			System.out.println("Insira o RG");
 			this.rg = teclado.next();
-		}while (rg.matches("[a-zA-Z]+"));
+		} while (rg.matches("[a-zA-Z]+"));
 
-		
-		//Le e valida CPF
+		// Le e valida CPF
 		cpf = "0";
 		while (validaCpf() == false) {
 			System.out.println("Insira o CPF");
 			this.cpf = teclado.next();
-			
+
 			cpf = cpf.replace("-", "");
 			cpf = cpf.replace(".", "");
-		
-			if (!validaCpf() == true){
+
+			if (!validaCpf() == true) {
 				System.out.println("cpf invalido");
 			}
 		}
-		
-		System.out.println("Insira o endereco");
-		this.endereco = teclado.next();
-		
-		System.out.println("Insira o codigo");
-		try{
-			this.codigo = teclado.nextInt();
-			System.out.println("Cadastro COncluido com Sucesso!");
-		}catch (java.util.InputMismatchException e) {
-			System.out.println("Codigo Invalido");
+		teclado.nextLine();
+		do {
+			System.out.println("Informe a Data de Nascimento: ");
+			setDataDeNascimento(teclado.nextLine());
+		} while (getDataDeNascimento().equals(""));
+		do {
+			System.out.println("Informe o Endereço: ");
+			setEndereco(teclado.nextLine());
+		} while (getEndereco().equals(""));
+
+		/* DESNECESSARIO EU ACHO
+		 * System.out.println("Insira o codigo"); try{ this.codigo =
+		 * teclado.nextInt();
+		 * System.out.println("Cadastro COncluido com Sucesso!"); }catch
+		 * (java.util.InputMismatchException e) {
+		 * System.out.println("Codigo Invalido"); }
+		 */
+	}
+	/**
+	 * Metodo public boolean validaCpf(), utilizado para realizacao de validacao
+	 */
+	public boolean validaCpf() {
+
+		if (cpf.equals("00000000000") || cpf.equals("11111111111")
+				|| cpf.equals("22222222222") || cpf.equals("33333333333")
+				|| cpf.equals("44444444444") || cpf.equals("55555555555")
+				|| cpf.equals("66666666666") || cpf.equals("77777777777")
+				|| cpf.equals("88888888888") || cpf.equals("99999999999")
+				|| (cpf.length() != 11))
+			return (false);
+
+		char dig10, dig11;
+		int sm, i, r, num, peso;
+
+		try {
+			sm = 0;
+			peso = 10;
+			for (i = 0; i < 9; i++) {
+				num = (int) (cpf.charAt(i) - 48);
+				sm = sm + (num * peso);
+				peso = peso - 1;
+			}
+
+			r = 11 - (sm % 11);
+
+			if ((r == 10) || (r == 11)) {
+				dig10 = '0';
+			} else {
+				dig10 = (char) (r + 48);
+			}
+
+			sm = 0;
+			peso = 11;
+
+			for (i = 0; i < 10; i++) {
+				num = (int) (cpf.charAt(i) - 48);
+				sm = sm + (num * peso);
+				peso = peso - 1;
+			}
+
+			r = 11 - (sm % 11);
+
+			if ((r == 10) || (r == 11)) {
+				dig11 = '0';
+			} else {
+				dig11 = (char) (r + 48);
+			}
+
+			if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))) {
+				return (true);
+			} else {
+				return (false);
+			}
+		} catch (InputMismatchException erro) {
+			return (false);
 		}
 	}
-	
-	public boolean validaCpf(){
-	
-		if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") ||
-			cpf.equals("44444444444") || cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") ||
-			cpf.equals("88888888888") || cpf.equals("99999999999") || (cpf.length() != 11))
-			return (false);
-		
-	 char dig10, dig11;
-	 int sm, i, r, num, peso;
-	 
-	 try{
-		 sm=0;
-		 peso=10;
-		 for(i=0; i<9;i++){
-			 num = (int)(cpf.charAt(i)-48);
-			 sm = sm + (num * peso);
-			 peso = peso - 1;
-		 }
-		 
-		 r= 11 - (sm % 11);
 
-		 if ((r==10)||(r==11)){
-			 dig10='0';
-		 }
-		 else{
-			 dig10 = (char)(r + 48);
-		 }
-		 
-		 sm=0;
-		 peso=11;
-		 
-		 for(i=0; i <10; i++){
-		 num = (int)(cpf.charAt(i)-48);
-		 sm = sm + (num*peso);
-		 peso = peso - 1;			 
-	 }
-		 
-		 r= 11 - (sm%11);
-	 
-		 if((r == 10) || (r == 11)){
-			 dig11 = '0';
-		 }
-		 else {
-			 dig11 = (char)(r+48);
-		 }
-	 
-		 if ((dig10 == cpf.charAt(9)) && (dig11 == cpf.charAt(10))){
-			 return(true);
-		 }
-		 else{
-			 return(false);
-		 }
-	 }catch(InputMismatchException erro){
-		 return(false);
-	 }
+	public boolean validaRg(String texto) {
+		return texto.matches("^[0-9]*$");
 	}
-	
-	public boolean validaRg(String texto){
-		return texto.matches("^[0-9]*$") ;
-	}
-	
-	public boolean validaNome(String txt){
+
+	public boolean validaNome(String txt) {
 		return txt.matches("[a-zA-Z]+");
 	}
 }
