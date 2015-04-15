@@ -55,9 +55,9 @@ public class LeituraDeDados {
 
 				Secretario s = new Secretario();
 				s.setCodigo(Integer.parseInt(palavras[1]));
-				s.setNome(palavras[2]);
+				s.setNome(palavras[2]); 
 				s.setRg(palavras[3]);
-				s.setCpf(palavras[4]);
+				s.setCpf(palavras[4]);   
 				s.setEndereco(palavras[4]);
 				s.setDataDeNascimento(palavras[5]);
 				s.setStatus(Boolean.parseBoolean(palavras[6]));
