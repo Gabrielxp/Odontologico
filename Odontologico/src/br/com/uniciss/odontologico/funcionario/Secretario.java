@@ -9,8 +9,8 @@ public class Secretario extends Funcionario {
 		
 		tipo = "secretario";  
 		Gravar g = new Gravar();
-		g.grava("src/br/com/uniciss/odontologico/documentos/secretarios.txt", toString());
-		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
+		g.grava("documentos/secretarios.txt", toString());
+		g.grava("documentos/users.txt", toString2());
 		return;
 	}
 
