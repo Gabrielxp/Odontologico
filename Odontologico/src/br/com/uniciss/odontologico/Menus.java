@@ -65,7 +65,7 @@ public class Menus {
 	}
 
 	//Menu dentista
-	public void menuDentista() {
+	public void menuDentista() { 
 
 		Dentista d = new Dentista();
 
