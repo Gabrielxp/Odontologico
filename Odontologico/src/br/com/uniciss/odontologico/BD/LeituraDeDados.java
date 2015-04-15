@@ -46,7 +46,7 @@ public class LeituraDeDados {
 	//Metodo que faz a leitura do arquivo secretarios.txt
 	public void leituraSecretario(List<Secretario>listaSecretario,Map<Integer, Secretario>mapaSecretario){
 		try{
-			FileReader arq = new FileReader("src/br/com/uniciss/odontologico/documentos/secretarios.txt");
+			FileReader arq = new FileReader("documentos/secretarios.txt");
 			BufferedReader lerArq = new BufferedReader(arq); 
 			String linha = lerArq.readLine();  
 
