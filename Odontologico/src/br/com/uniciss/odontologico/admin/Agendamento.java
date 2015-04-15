@@ -59,7 +59,7 @@ public class Agendamento {
 		s = new Scanner(System.in);
 
 		System.out.println("Informe o nome do paciente: ");
-		setNome(s.nextLine());
+		setNome(s.nextLine());  
 
 		verificaData();
 
