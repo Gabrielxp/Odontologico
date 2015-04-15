@@ -28,7 +28,8 @@ public class Dentista extends Funcionario {
 		}while(continua == true);
 
 		System.out.println(toStringDentista());
-		Gravar g = new Gravar();
+		tipo = "dentista";      
+		Gravar g = new Gravar();  
 		g.grava("src/br/com/uniciss/odontologico/documentos/dentistas.txt", toStringDentista());
 		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
 		return;
@@ -38,7 +39,7 @@ public class Dentista extends Funcionario {
 
 	//Metodo toString para cadastro de Funcionarios
 		public String toStringDentista(){
-			return "Dentista"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+isStatus()+","+getCro();
+			return "Dentista"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+getDataDeNascimento()+","+isStatus()+","+getCro();
 		}
 	
 	public void consultar() {
