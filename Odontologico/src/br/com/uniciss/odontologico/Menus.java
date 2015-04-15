@@ -47,7 +47,11 @@ public class Menus {
 				} else if ((mapaUsuario.containsKey(usuario))
 						&& (mapaUsuario.get(usuario).getTipo().equals("secretario"))) {
 					menuSecretario();
+				} else if ((mapaUsuario.containsKey(usuario))
+						&& (mapaUsuario.get(usuario).getTipo().equals("admin"))) {
+					menuAdmin();
 				}
+				
 			} else {
 				System.out.println("Usuario e/ou senha invalido(s)!");
 				System.out.println("");
@@ -67,7 +71,7 @@ public class Menus {
 	}
 
 	//Menu dentista
-	public void menuDentista() { 
+	public void menuDentista() throws IOException { 
 
 		Dentista d = new Dentista();
 
@@ -96,7 +100,7 @@ public class Menus {
 			d.encaminharPaciente();
 			break;
 		case 5:
-			return;
+			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
 		}
@@ -104,7 +108,7 @@ public class Menus {
 	
 	
 	//Menu Secretario
-	public void menuSecretario() {
+	public void menuSecretario() throws IOException {
 
 		Secretario c = new Secretario();
 
@@ -115,7 +119,8 @@ public class Menus {
 		System.out.println("1 - Listar Pacientes");
 		System.out.println("2 - Editar Paciente");
 		System.out.println("3 - Alterar Status Paciente");
-		System.out.println("4 - Sair");
+		System.out.println("4 - Agendar Consulta");
+		System.out.println("5 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
@@ -129,7 +134,10 @@ public class Menus {
 			c.alterarStatusPaciente();
 		break;
 		case 4:
-			return;
+			System.out.println("AGENDAR AQUI");
+		break;
+		case 5:
+			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
 		}
@@ -169,7 +177,7 @@ public class Menus {
 			menuDentista();
 			break;
 		case 7: 
-			return;
+			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
 		
