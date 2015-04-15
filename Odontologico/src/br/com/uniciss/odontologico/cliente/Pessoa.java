@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -144,7 +145,7 @@ public abstract class Pessoa {
 		
 			//Le o endereco
 			System.out.println("Informe o Endereço: ");
-			setEndereco(teclado.next());
+			setEndereco(teclado.nextLine());
 
 		/* DESNECESSARIO EU ACHO
 		 * System.out.println("Insira o codigo"); try{ this.codigo =
@@ -222,18 +223,38 @@ public abstract class Pessoa {
 		return txt.matches("[a-zA-Z]+");
 	}
 	
+	@SuppressWarnings("resource")
 	public boolean validaCpfExistente() throws IOException, FileNotFoundException{
-		String arquivo="src/br/com/uniciss/odontologico/documentos/dentistas.txt"; 
 		
-		BufferedReader br = new BufferedReader(new FileReader(arquivo));    
+		BufferedReader dentista = new BufferedReader(new FileReader("documentos/dentistas.txt"));
+		BufferedReader secretario = new BufferedReader(new FileReader("documentos/secretarios.txt"));
+		BufferedReader paciente = new BufferedReader(new FileReader("documentos/pacientes.txt"));
 		
-		while(br.ready()) {    
-		       String linha = br.readLine();    
+		while(dentista.ready()) {    
+		       String linha = dentista.readLine();    
 		       if (linha.contains(cpf)) {    
 		              return true;
-		       }  
+		       }
+		    
 		}
-			br.close();
-			return false;
-	}
+		dentista.close();
+		
+		while(secretario.ready()) {    
+		       String linha = secretario.readLine();    
+		       if (linha.contains(cpf)) {    
+		              return true;
+		       }	
+		}
+		secretario.close();
+		
+		while(paciente.ready()) {    
+		       String linha = paciente.readLine();    
+		       if (linha.contains(cpf)) {    
+		              return true;
+		       }
+		}
+		paciente.close();
+		
+		return false;
+	}	
 }
