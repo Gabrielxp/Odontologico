@@ -220,7 +220,7 @@ public abstract class Pessoa {
 	}
 
 	public boolean validaNome(String txt) {
-		return txt.matches("[a-zA-Z]+");
+		return txt.matches("[a-z A-Z]+");
 	}
 	
 	@SuppressWarnings("resource")
