@@ -12,7 +12,7 @@ import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class Gravar {
-	public void grava(String aonde,String oque){
+	public void grava(String aonde,String oque) throws IOException{
 		File ficheiro = new File(aonde); 
 		try { 
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ficheiro, true));  
@@ -22,8 +22,8 @@ public class Gravar {
 				bw.flush(); 
 				bw.close(); 
 			} 
-		}catch (IOException e){
-			
+		}catch (java.io.FileNotFoundException e){
+			System.out.println("Erro");
 		} 
 	}
 		public void leituraUsuario(Map<String, Funcionario> listaUsuario){
