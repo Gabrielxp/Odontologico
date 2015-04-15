@@ -1,5 +1,7 @@
 package br.com.uniciss.odontologico.funcionario;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.cliente.Pessoa;
@@ -85,8 +87,10 @@ abstract public class Funcionario extends Pessoa {
 
 	/**
 	 * Metodo cadastraFuncionario relacionado ao cadastro de funcionarios
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void cadastraFuncionario() {
+	public void cadastraFuncionario() throws FileNotFoundException, IOException {
 		teclado = new Scanner(System.in);
 
 		// Metodo com o cadastro de pessoa herdado

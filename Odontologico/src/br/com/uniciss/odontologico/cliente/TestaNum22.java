@@ -1,5 +1,7 @@
 package br.com.uniciss.odontologico.cliente;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.funcionario.Dentista;
@@ -7,7 +9,7 @@ import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class TestaNum22 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// TODO Auto-generated method stub
 
 		Scanner ler  = new Scanner(System.in);
