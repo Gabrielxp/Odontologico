@@ -146,7 +146,7 @@ public class Menus {
 		System.out.println("4 - Editar Dentista");
 		System.out.println("5 - Menu Secretario");
 		System.out.println("6 - Menu Dentista");
-		
+		System.out.println("7 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
 		switch (opc) {
