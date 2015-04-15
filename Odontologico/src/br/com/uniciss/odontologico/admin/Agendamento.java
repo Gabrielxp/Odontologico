@@ -1,10 +1,12 @@
 package br.com.uniciss.odontologico.admin;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
 import br.com.uniciss.odontologico.BD.Gravar;
 
 public class Agendamento {
@@ -54,7 +56,7 @@ public class Agendamento {
 				+ observações;
 	}
 
-	public void agendarConsulta() throws java.text.ParseException {
+	public void agendarConsulta() throws java.text.ParseException, IOException {
 
 		s = new Scanner(System.in);
 

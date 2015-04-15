@@ -1,10 +1,12 @@
 package br.com.uniciss.odontologico.cliente;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+import br.com.uniciss.odontologico.BD.Gravar;
 
 public class Tratamentos {
 
-	protected String tempo;
 	protected String valor;
 	protected String tratamento;
 	protected int codigo;
@@ -16,14 +18,6 @@ public class Tratamentos {
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getTempo() {
-		return tempo;
-	}
-
-	public void setTempo(String tempo) {
-		this.tempo = tempo;
 	}
 
 	public String getValor() {
@@ -41,8 +35,13 @@ public class Tratamentos {
 	public void setTratamento(String tratamento) {
 		this.tratamento = tratamento;
 	}
+	
+	public String toString() {
+		return "Tratamento" + "," + getCodigo() + "," + getTratamento() + ","
+				+ getValor();
+	}
 
-	public void cadastraTratamentos() {
+	public void cadastraTratamentos() throws IOException {
 		do {
 			System.out.println("Escreva o Tratamento a ser feito: ");
 			setTratamento(teclado.nextLine());
@@ -53,21 +52,10 @@ public class Tratamentos {
 			setValor(teclado.nextLine());
 		} while (getValor() == "");
 
-		// SALVAR O TRATAMENTO NO TXT E GERAR UM CODIGO PARA ELE
-		return;
-	}
-
-	public void selecionaTratamento() {
-		// RELACIONAR O CLIENTE COM O TRATAMENTO
-		//EMPRIMIR A LISTA DE TRATAMENTOS
-		//SELECIONAR UM
+		Gravar g = new Gravar();
+		g.grava("tratamentos.txt", toString());
 		
-		do {
-			System.out.println("Determine o tempo de tratamento em meses: ");
-			setTempo(teclado.nextLine());
-		} while (getTempo() == "");
-
-		// SALVAR NO CLIENTE OS TRATAMENTOS A SEREM FEITOS
 		return;
 	}
+
 }
