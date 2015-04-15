@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uniciss.odontologico.cliente.Cliente;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Secretario;
 
@@ -71,4 +72,33 @@ public class LeituraDeDados {
 
 		}
 	}
+	
+	//Metodo que faz a leitura do arquivo pacientes.txt
+		public void leituraPacientes(List<Cliente>listaPacientes){
+			try{
+				FileReader arq = new FileReader("documentos/pacientes.txt");
+				BufferedReader lerArq = new BufferedReader(arq); 
+				String linha = lerArq.readLine();  
+
+				while (linha != null) {
+					String palavras[] = linha.split(",");
+
+					Cliente c = new Cliente();
+					c.setCodigo(Integer.parseInt(palavras[1]));
+					c.setNome(palavras[2]); 
+					c.setRg(palavras[3]);
+					c.setCpf(palavras[4]);   
+					c.setEndereco(palavras[4]);
+					c.setDataDeNascimento(palavras[5]);
+					c.setStatus(Boolean.parseBoolean(palavras[6]));
+					c.setTratamento(palavras[7]);
+					
+					listaPacientes.add(c);
+				} 
+
+				arq.close();
+			}catch (IOException e) { 
+
+			}
+		}
 }
