@@ -23,7 +23,7 @@ public class Gravar {
 				bw.close(); 
 			} 
 		}catch (IOException e){
-			
+			System.out.println("Erro");
 		} 
 	}
 		public void leituraUsuario(Map<String, Funcionario> listaUsuario){
