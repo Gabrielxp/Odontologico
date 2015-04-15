@@ -29,7 +29,7 @@ public class Dentista extends Funcionario {
 
 		System.out.println(toStringDentista());
 		tipo = "dentista";   
-		Gravar g = new Gravar();
+		Gravar g = new Gravar();  
 		g.grava("src/br/com/uniciss/odontologico/documentos/dentistas.txt", toStringDentista());
 		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
 		return;
