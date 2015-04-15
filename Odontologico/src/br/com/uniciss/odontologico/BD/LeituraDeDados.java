@@ -69,7 +69,7 @@ public class LeituraDeDados {
 
 			arq.close();
 		}catch (IOException e) { 
-
+			System.err.println("ERRO LEITURA");
 		}
 	}
 	
