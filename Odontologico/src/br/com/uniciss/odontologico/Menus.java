@@ -39,11 +39,11 @@ public class Menus {
 				// Chamada do menu, conforme o tipo de Usuário
 
 				if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo().equals("1"))) {
+						&& (mapaUsuario.get(usuario).getTipo().equals("dentista"))) {
 					menuDentista();
 
 				} else if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo().equals("2"))) {
+						&& (mapaUsuario.get(usuario).getTipo().equals("secretario"))) {
 					menuSecretario();
 				}
 			} else {
@@ -77,7 +77,7 @@ public class Menus {
 		System.out.println("2 - Editar Paciente");
 		System.out.println("3 - Requisitar Materiais");
 		System.out.println("4 - Encaminhar Paciente");
-
+		System.out.println("5 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
@@ -92,7 +92,9 @@ public class Menus {
 			break;
 		case 4:
 			d.encaminharPaciente();
-
+			break;
+		case 5:
+			return;
 		default:
 			System.out.println("Opção inválida.");
 		}
@@ -111,7 +113,7 @@ public class Menus {
 		System.out.println("1 - Listar Pacientes");
 		System.out.println("2 - Editar Paciente");
 		System.out.println("3 - Alterar Status Paciente");
-
+		System.out.println("4 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
@@ -123,8 +125,9 @@ public class Menus {
 			break;
 		case 3:
 			c.alterarStatusPaciente();
-			
-
+		break;
+		case 4:
+			return;
 		default:
 			System.out.println("Opção inválida.");
 		}
