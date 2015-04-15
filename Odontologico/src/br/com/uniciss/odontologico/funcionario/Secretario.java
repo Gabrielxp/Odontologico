@@ -8,6 +8,7 @@ public class Secretario extends Funcionario {
 		super.cadastraFuncionario();
 		
 		tipo = "secretario";  
+		setStatus(true);
 		Gravar g = new Gravar();
 		g.grava("documentos/secretarios.txt", toString());
 		g.grava("documentos/users.txt", toString2());
