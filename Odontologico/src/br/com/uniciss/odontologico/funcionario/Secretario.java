@@ -7,6 +7,7 @@ public class Secretario extends Funcionario {
 	public void cadastrarSecretario() {
 		super.cadastraFuncionario();
 		
+		tipo = "secretario";
 		Gravar g = new Gravar();
 		g.grava("src/br/com/uniciss/odontologico/documentos/secretarios.txt", toString());
 		g.grava("src/br/com/uniciss/odontologico/documentos/users.txt", toString2());
