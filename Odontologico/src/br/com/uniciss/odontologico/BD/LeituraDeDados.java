@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.cliente.Tratamentos;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class LeituraDeDados {
 
-	
+
 	//Metodo que faz a leitura do arquivo dentistas.txt
 	public void leituraDentista(List<Dentista>listaDentista,Map<Integer, Dentista>mapaDentista){
 		try {
@@ -62,7 +63,7 @@ public class LeituraDeDados {
 				s.setEndereco(palavras[4]);
 				s.setDataDeNascimento(palavras[5]);
 				s.setStatus(Boolean.parseBoolean(palavras[6]));
-				
+
 				listaSecretario.add(s);
 				mapaSecretario.put(s.getCodigo(), s);
 			} 
@@ -72,33 +73,58 @@ public class LeituraDeDados {
 
 		}
 	}
-	
+
 	//Metodo que faz a leitura do arquivo pacientes.txt
-		public void leituraPacientes(List<Cliente>listaPacientes){
-			try{
-				FileReader arq = new FileReader("documentos/pacientes.txt");
-				BufferedReader lerArq = new BufferedReader(arq); 
-				String linha = lerArq.readLine();  
+	public void leituraPacientes(List<Cliente>listaPacientes){
+		try{
+			FileReader arq = new FileReader("documentos/pacientes.txt");
+			BufferedReader lerArq = new BufferedReader(arq); 
+			String linha = lerArq.readLine();  
 
-				while (linha != null) {
-					String palavras[] = linha.split(",");
+			while (linha != null) {
+				String palavras[] = linha.split(",");
 
-					Cliente c = new Cliente();
-					c.setCodigo(Integer.parseInt(palavras[1]));
-					c.setNome(palavras[2]); 
-					c.setRg(palavras[3]);
-					c.setCpf(palavras[4]);   
-					c.setEndereco(palavras[4]);
-					c.setDataDeNascimento(palavras[5]);
-					c.setStatus(Boolean.parseBoolean(palavras[6]));
-					c.setTratamento(palavras[7]);
-					
-					listaPacientes.add(c);
-				} 
+				Cliente c = new Cliente();
+				c.setCodigo(Integer.parseInt(palavras[1]));
+				c.setNome(palavras[2]); 
+				c.setRg(palavras[3]);
+				c.setCpf(palavras[4]);   
+				c.setEndereco(palavras[4]);
+				c.setDataDeNascimento(palavras[5]);
+				c.setStatus(Boolean.parseBoolean(palavras[6]));
+				c.setTratamento(palavras[7]);
 
-				arq.close();
-			}catch (IOException e) { 
+				listaPacientes.add(c);
+			} 
 
-			}
+			arq.close();
+		}catch (IOException e) { 
+
 		}
+	}
+	
+	//Metodo que faz a leitura do arquivo tratamentos.txt
+	public void leituraTratamento(List<Tratamentos>listaTratamento,Map<Integer, Tratamentos>mapaTratamento){
+		try{
+			FileReader arq = new FileReader("documentos/tratamentos.txt");
+			BufferedReader lerArq = new BufferedReader(arq); 
+			String linha = lerArq.readLine();  
+
+			while (linha != null) {
+				String palavras[] = linha.split(",");
+
+				Tratamentos t = new Tratamentos();
+				t.setCodigo(Integer.parseInt(palavras[1]));
+				t.setTratamento(palavras[2]);
+				t.setValor(palavras[3]);
+
+				listaTratamento.add(t);
+				mapaTratamento.put(t.getCodigo(), t);
+			} 
+
+			arq.close();
+		}catch (IOException e) { 
+
+		}
+	}
 }
