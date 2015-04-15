@@ -1,5 +1,8 @@
 package br.com.uniciss.odontologico.cliente;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Cliente extends Pessoa{
 	/**
 	 *  Variavel tratamento, utilizada para determincao do tratamento que o paciente vai fazer
@@ -17,7 +20,7 @@ public class Cliente extends Pessoa{
 	}
 
 
-	public void cadastrarCliente(){
+	public void cadastrarCliente() throws FileNotFoundException, IOException{
 		System.out.println("---------Cadastro de Clientes--------");
 		cadastro();
 		

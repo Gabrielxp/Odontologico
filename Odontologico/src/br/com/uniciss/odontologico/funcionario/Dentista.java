@@ -1,6 +1,9 @@
 package br.com.uniciss.odontologico.funcionario;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import br.com.uniciss.odontologico.BD.Gravar;
 
 public class Dentista extends Funcionario {
@@ -10,7 +13,7 @@ public class Dentista extends Funcionario {
 	protected int cro;
 
 
-	public void cadastrarDentista(){   
+	public void cadastrarDentista() throws FileNotFoundException, IOException{   
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
 		
