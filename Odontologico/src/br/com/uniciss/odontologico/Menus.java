@@ -64,6 +64,7 @@ public class Menus {
 
 	}
 
+	//Menu dentista
 	public void menuDentista() {
 
 		Dentista d = new Dentista();
@@ -96,7 +97,9 @@ public class Menus {
 			System.out.println("Opção inválida.");
 		}
 	}
-
+	
+	
+	//Menu Secretario
 	public void menuSecretario() {
 
 		Secretario c = new Secretario();
