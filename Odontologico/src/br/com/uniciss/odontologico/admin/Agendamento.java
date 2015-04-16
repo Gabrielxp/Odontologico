@@ -74,20 +74,20 @@ public class Agendamento {
 		// Cliente
 
 		List<Cliente>listaPacientes = new ArrayList<Cliente>();
-		Map<Integer, Cliente>mapaCliente = new HashMap<Integer, Cliente>();
 
 		leitura.leituraPacientes(listaPacientes);
-
+		boolean existePaciente = false;
+		
 		Cliente paciente = new Cliente();
 
 		for(Cliente client : listaPacientes){
 			if(client.getNome().equals(nomePaciente) && client.isStatus()){
-				existe = true;
+				existePaciente = true;
 				paciente = client;
 			}
 		}
 
-		if(!existe){
+		if(!existePaciente){
 			System.out.println("Paciente não encontrado");
 
 			 System.out.println("1- Deseja continuar");
