@@ -16,6 +16,7 @@ import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.cliente.Tratamentos;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 
 public class Agendamento {
@@ -80,7 +81,7 @@ public class Agendamento {
 		Cliente paciente = new Cliente();
 
 		for(Cliente client : listaPacientes){
-			if(client.getNome().equals(nomeDentista) && client.isStatus()){
+			if(client.getNome().equals(nomePaciente) && client.isStatus()){
 				existe = true;
 				paciente = client;
 			}
@@ -88,6 +89,46 @@ public class Agendamento {
 
 		if(!existe){
 			System.out.println("Paciente não encontrado");
+
+			 System.out.println("1- Deseja continuar");
+			System.out.println("2- Deseja voltar ao Menu anterior");
+			int opc = teclado.nextInt();
+			teclado.nextLine();
+
+			switch (opc) {
+			case 1:
+				agendar();
+				break;
+
+			case 2:
+				Menus m = new Menus();
+				m.menuSecretario();
+				
+			default:
+				System.out.println("Opção invalida");
+				break;
+			}
+		}
+		
+		System.out.println("Informe o nome do Tratamento");
+		String tratamento = teclado.nextLine();
+
+		List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
+		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+
+		leitura.leituraTratamento(listaTratamento, mapaTratamento);;
+
+		Tratamentos tratamentos = new Tratamentos();
+
+		for(Tratamentos tratado : listaTratamento){
+			if(tratado.getTratamento().equals(tratamento)){
+				existe = true;
+				tratamentos = tratado;
+			}
+		}
+
+		if(!existe){
+			System.out.println("Tratamento não encontrado");
 
 			System.out.println("1- Deseja continuar");
 			System.out.println("2- Deseja voltar ao Menu anterior");
