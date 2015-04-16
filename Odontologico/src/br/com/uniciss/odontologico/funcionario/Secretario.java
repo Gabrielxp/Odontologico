@@ -37,11 +37,13 @@ public class Secretario extends Funcionario {
 		
 		leitura.leituraSecretario(listaSecretario, mapaSecretario);
 		
+		System.out.println("    SELECIONE UMA OPÇÃO ");
 		System.out.println("1- Consultar Secretario por Nome");
 		System.out.println("2- Consultar Secretario por ID");
 		
 		teclado = new Scanner(System.in);
 		opc = teclado.nextInt();
+		teclado.nextLine();
 		
 		switch (opc) {
 		case 1:
@@ -66,6 +68,23 @@ public class Secretario extends Funcionario {
 			}
 			break;
 		case 2:
+			Secretario secretario = new Secretario();
+			
+			System.out.println("Informe seu ID");
+			int cro = teclado.nextInt();
+			
+			try{
+				secretario = listaSecretario.get(codigo);
+				System.out.println("------- Secretario "+secretario.getNome()+"------");
+				System.out.println("Codigo:"+secretario.getCodigo());
+				System.out.println("Nome:"+secretario.getNome());
+				System.out.println("RG:"+secretario.getRg());
+				System.out.println("CPF:"+secretario.getCpf());
+				System.out.println("Endereço:"+secretario.getEndereco());
+				System.out.println("---------------------");
+			}catch(NullPointerException e){
+				System.out.println("Secretario não encontrado");
+			}
 			
 			break;
 		}
