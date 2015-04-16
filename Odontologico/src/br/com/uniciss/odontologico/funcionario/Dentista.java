@@ -39,6 +39,15 @@ public class Dentista extends Funcionario {
 		System.out.println(toStringDentista());
 		tipo = "dentista"; 
 		setStatus(true);
+		
+		LeituraDeDados leitura = new LeituraDeDados();
+		List<Dentista>listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
+		
+		leitura.leituraDentista(listaDentista, mapaDentista);
+		
+		setCodigo(listaDentista.size());
+			
 		Gravar g = new Gravar();  
 		g.grava("documentos/dentistas.txt", toStringDentista());
 		g.grava("documentos/users.txt", toString2());
@@ -62,14 +71,18 @@ public class Dentista extends Funcionario {
 		leitura.leituraDentista(listaDentista, mapaDentista);
 		try{
 			dentista = mapaDentista.get(cro);
-			System.out.println("-------Dentista "+dentista.getNome()+"------");
-			System.out.println("Codigo:"+dentista.getCodigo());
-			System.out.println("Nome:"+dentista.getNome());
-			System.out.println("CRO:"+dentista.getCro());
-			System.out.println("RG:"+dentista.getRg());
-			System.out.println("CPF:"+dentista.getCpf());
-			System.out.println("Endereço:"+dentista.getEndereco());
-			System.out.println("---------------------");
+			if(dentista.isStatus()){
+				System.out.println("-------Dentista "+dentista.getNome()+"------");
+				System.out.println("Codigo:"+dentista.getCodigo());
+				System.out.println("Nome:"+dentista.getNome());
+				System.out.println("CRO:"+dentista.getCro());
+				System.out.println("RG:"+dentista.getRg());
+				System.out.println("CPF:"+dentista.getCpf());
+				System.out.println("Endereço:"+dentista.getEndereco());
+				System.out.println("---------------------");
+			} else {
+				System.out.println("Dentista esta como inativo");
+			}
 		}catch(NullPointerException e){
 			System.out.println("Dentista não encontrado");
 		}
