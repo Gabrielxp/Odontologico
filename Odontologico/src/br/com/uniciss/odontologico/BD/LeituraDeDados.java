@@ -37,6 +37,7 @@ public class LeituraDeDados {
 
 				listaDentista.add(d);
 				mapaDentista.put(d.getCro(), d);
+				linha = lerArq.readLine();
 			} 
 
 			arq.close();
@@ -66,6 +67,7 @@ public class LeituraDeDados {
 
 				listaSecretario.add(s);
 				mapaSecretario.put(s.getCodigo(), s);
+				linha = lerArq.readLine();
 			} 
 
 			arq.close();
@@ -95,6 +97,7 @@ public class LeituraDeDados {
 				c.setTratamento(palavras[7]);
 
 				listaPacientes.add(c);
+				linha = lerArq.readLine();
 			} 
 
 			arq.close();
@@ -120,6 +123,8 @@ public class LeituraDeDados {
 
 				listaTratamento.add(t);
 				mapaTratamento.put(t.getCodigo(), t);
+				
+				linha = lerArq.readLine();
 			} 
 
 			arq.close();
