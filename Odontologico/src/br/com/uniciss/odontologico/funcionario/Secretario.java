@@ -37,7 +37,7 @@ public class Secretario extends Funcionario {
 		
 		leitura.leituraSecretario(listaSecretario, mapaSecretario);
 		
-		System.out.println("    SELECIONE UMA OPÇÃO ");
+		System.out.println("    SELECIONE UMA OPÇÃO ");  
 		System.out.println("1- Consultar Secretario por Nome");
 		System.out.println("2- Consultar Secretario por ID");
 		
