@@ -1,141 +1,114 @@
 package br.com.uniciss.odontologico.admin;
 
+import java.awt.Menu;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
+import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.funcionario.Dentista;
 
 public class Agendamento {
 
+	Scanner teclado = new Scanner(System.in);
 
-	private String nome;
-	private String data;
-	private String horario;
-	private String observações;
-	private Scanner s;
+	public void agendar() throws IOException{
+		System.out.println("Informe o nome do Dentista");
+		String nomeDentista = teclado.nextLine();
 
-	public String getNome() {
-		return nome;
-	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+		LeituraDeDados leitura = new LeituraDeDados();
 
-	public String getData() {
-		return data;
-	}
+		List<Dentista>listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
 
-	public void setData(String data) {
-		this.data = data;
-	}
+		leitura.leituraDentista(listaDentista, mapaDentista);
 
-	public String getHorario() {
-		return horario;
-	}
+		Dentista dentista = new Dentista();
 
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
+		boolean existe = false;
 
-	public String getObservações() {
-		return observações;
-	}
-
-	public void setObservações(String observações) {
-		this.observações = observações;
-	}
-
-	@Override
-	public String toString() {
-		return "Consulta," + nome + "," + data + "," + horario + ","
-				+ observações;
-	}
-
-	public void agendarConsulta() throws java.text.ParseException, IOException {
-
-		s = new Scanner(System.in);
-
-		System.out.println("Informe o nome do paciente: ");
-		setNome(s.nextLine());  
-
-		verificaData();
-
-		verificaHoras();
-
-		System.out.println("Informe informações sobre a consulta: ");
-		setObservações(s.nextLine());
-
-		Gravar g = new Gravar();
-		g.grava("Consultas.txt", toString());
-	}
-
-	@SuppressWarnings("unused")
-	public boolean verificaData() {
-
-		String data;
-
-		System.out.println("Informe o dia da consulta: ");
-		String a = s.nextLine();
-
-		Date hoje = GregorianCalendar.getInstance().getTime();
-		SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
-		data = formata.format(hoje);
-
-		Date d = new Date();
-		formata = new SimpleDateFormat("dd/MM/yyyy");
-		formata.setLenient(false);
-		try {
-			d = formata.parse(a);
-
-			if ((new Date()).getTime() < d.getTime()) {
-				setData(a);
-
-			} else if ((new Date()).getTime() >= d.getTime()) {
-				System.out
-				.println("Não é possivel marcar consultas para este dia, informe outra data!");
-				System.out.println("");
-				verificaData();
+		for(Dentista denti : listaDentista){
+			if(denti.getNome().equals(nomeDentista) && denti.isStatus()){
+				existe = true;
+				dentista = denti;
 			}
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-			System.out.println("Você informou uma data inválida!");
-			return false;
 		}
-		return true;
-	}
 
-	@SuppressWarnings("unused")
-	public boolean verificaHoras() {
+		if(!existe){
+			System.out.println("Dentista não encontrado");
 
-		s = new Scanner(System.in);
-		String hora;
+			System.out.println("1- Deseja continuar");
+			System.out.println("2- Deseja voltar ao Menu anterior");
+			int opc = teclado.nextInt();
+			teclado.nextLine();
 
-		System.out.println("Informe o horário da consulta: ");
-		String a = s.nextLine();
+			switch (opc) {
+			case 1:
+				agendar();
+				break;
 
-		Date hoje = GregorianCalendar.getInstance().getTime();
-		SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
-		hora = formata.format(hoje);
-
-		Date d = new Date();
-		formata = new SimpleDateFormat("HH:mm");
-		formata.setLenient(false);
-
-		try {
-			d = formata.parse(a);
-			setHorario(a);
-		} catch (ParseException e) {
-			e.printStackTrace();
-			System.out.println("Você informou um horário inválido!");
-			return false;
+			case 2:
+				Menus m = new Menus();
+				m.menuSecretario();
+				
+			default:
+				System.out.println("Opção invalida");
+				break;
+			}
 		}
-		return true;
+		
+		System.out.println("Informe o nome do Paciente");
+		String nomePaciente = teclado.nextLine();
+		// Cliente
+
+		List<Cliente>listaPacientes = new ArrayList<Cliente>();
+		Map<Integer, Cliente>mapaCliente = new HashMap<Integer, Cliente>();
+
+		leitura.leituraPacientes(listaPacientes);
+
+		Cliente paciente = new Cliente();
+
+		for(Cliente client : listaPacientes){
+			if(client.getNome().equals(nomeDentista) && client.isStatus()){
+				existe = true;
+				paciente = client;
+			}
+		}
+
+		if(!existe){
+			System.out.println("Paciente não encontrado");
+
+			System.out.println("1- Deseja continuar");
+			System.out.println("2- Deseja voltar ao Menu anterior");
+			int opc = teclado.nextInt();
+			teclado.nextLine();
+
+			switch (opc) {
+			case 1:
+				agendar();
+				break;
+
+			case 2:
+				Menus m = new Menus();
+				m.menuSecretario();
+				
+			default:
+				System.out.println("Opção invalida");
+				break;
+			}
+		}
+
 
 	}
 }

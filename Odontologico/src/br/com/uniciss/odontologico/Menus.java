@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.admin.Admin;
+import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
@@ -134,7 +135,8 @@ public class Menus {
 			c.alterarStatusPaciente();
 		break;
 		case 4:
-			System.out.println("AGENDAR AQUI");
+			Agendamento ag = new Agendamento();
+			ag.agendar();
 		break;
 		case 5:
 			Programa.main(null);
