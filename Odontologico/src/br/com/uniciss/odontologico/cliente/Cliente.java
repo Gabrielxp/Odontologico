@@ -29,7 +29,7 @@ public class Cliente extends Pessoa{
 		tratamento="";
 		
 		Gravar g = new Gravar();  
-		g.grava("documentos/dentistas.txt", toString());
+		g.grava("documentos/pacientes.txt", toString());
 		
 		return;
 	}
