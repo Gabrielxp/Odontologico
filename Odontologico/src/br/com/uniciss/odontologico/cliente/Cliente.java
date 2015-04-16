@@ -2,8 +2,11 @@ package br.com.uniciss.odontologico.cliente;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.BD.LeituraDeDados;
 
 public class Cliente extends Pessoa{
 	/**
@@ -27,6 +30,12 @@ public class Cliente extends Pessoa{
 		cadastro();
 		setStatus(true);
 		tratamento="";
+		
+		LeituraDeDados leitura = new  LeituraDeDados();
+		List<Cliente>listaPacientes = new ArrayList<Cliente>();
+		
+		leitura.leituraPacientes(listaPacientes);
+		setCodigo(listaPacientes.size());
 		
 		Gravar g = new Gravar();  
 		g.grava("documentos/pacientes.txt", toString());
