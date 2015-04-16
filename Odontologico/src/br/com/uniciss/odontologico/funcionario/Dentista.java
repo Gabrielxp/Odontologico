@@ -83,7 +83,7 @@ public class Dentista extends Funcionario {
 				System.out.println("Dentista esta como inativo");
 			}
 		}catch(NullPointerException e){
-			System.out.println("Dentista não encontrado");
+			System.err.println("Dentista não encontrado");
 		}
 		
 	}
