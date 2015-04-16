@@ -18,7 +18,7 @@ public class LeituraDeDados {
 	public void leituraDentista(List<Dentista>listaDentista,Map<Integer, Dentista>mapaDentista){
 		try {
 
-			FileReader arq = new FileReader("src/br/com/uniciss/odontologico/documentos/dentistas.txt");
+			FileReader arq = new FileReader("documentos/dentistas.txt");
 			BufferedReader lerArq = new BufferedReader(arq); 
 			String linha = lerArq.readLine();  
 
@@ -42,7 +42,7 @@ public class LeituraDeDados {
 
 			arq.close();
 		}catch (IOException e) { 
-
+			System.out.println("Deu Pau");
 		} 
 	}
 
