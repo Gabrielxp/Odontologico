@@ -27,7 +27,7 @@ public class Secretario extends Funcionario {
 		return;
 	}
 
-	public void listarPaciente() {
+	public void consultarSecretario() {
 
 		int opc;
 		LeituraDeDados leitura = new LeituraDeDados();

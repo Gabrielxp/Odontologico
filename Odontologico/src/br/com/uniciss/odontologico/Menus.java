@@ -125,7 +125,7 @@ public class Menus {
 		opc = s.nextInt();
 		switch (opc) {
 		case 1:
-			c.listarPaciente();
+			//c.consultaSecretario();
 			break;
 		case 2:
 			c.editarPaciente();
