@@ -65,8 +65,50 @@ public class Admin {
 		}
 	}
 
-	public void editarDentista() {
+	public void editarDentista() throws FileNotFoundException, IOException {
+		String nome;
+		List<Dentista> listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
+		leia.leituraDentista(listaDentista, mapaDentista);
+		Menus m = new Menus();
+		System.out.println("Determine o nome da pessoa a ser editado: ");
+		nome = entrada.nextLine();
+		boolean continua = false;
 
+		for (Dentista s : listaDentista) {
+
+			if (nome.equals(s.getNome())) {
+
+				s.cadastro();
+				continua = true;
+
+			}
+			Gravar g = new Gravar();
+			g.editar("documentos/dentistas.txt");
+			for (Dentista f : listaDentista) {
+				g.grava("documentos/dentistas.txt", f.toString());
+			}
+
+		}
+
+		if (continua == false) {
+
+			int escolha;
+
+			System.out.println("Determinaste um nome invalido"
+					+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
+			escolha = entrada.nextInt();
+			entrada.nextLine();
+			if (escolha == 1) {
+				m.menuAdmin();
+			} else if (escolha != 1) {
+				editarSecretario();
+			}
+		}
+		if (continua == true) {
+			System.out.println("\n Edição realizada com sucesso!\n");
+			m.menuAdmin();
+		}
 	}
 
 }

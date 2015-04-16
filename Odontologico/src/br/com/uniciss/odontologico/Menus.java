@@ -13,6 +13,7 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.admin.Agendamento;
+import br.com.uniciss.odontologico.cliente.Cliente;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
@@ -42,17 +43,19 @@ public class Menus {
 				// Chamada do menu, conforme o tipo de Usuário
 
 				if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo().equals("dentista"))) {
+						&& (mapaUsuario.get(usuario).getTipo()
+								.equals("dentista"))) {
 					menuDentista();
 
 				} else if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo().equals("secretario"))) {
+						&& (mapaUsuario.get(usuario).getTipo()
+								.equals("secretario"))) {
 					menuSecretario();
 				} else if ((mapaUsuario.containsKey(usuario))
 						&& (mapaUsuario.get(usuario).getTipo().equals("admin"))) {
 					menuAdmin();
 				}
-				
+
 			} else {
 				System.out.println("Usuario e/ou senha invalido(s)!");
 				System.out.println("");
@@ -71,8 +74,8 @@ public class Menus {
 
 	}
 
-	//Menu dentista
-	public void menuDentista() throws IOException { 
+	// Menu dentista
+	public void menuDentista() throws IOException {
 
 		Dentista d = new Dentista();
 
@@ -89,7 +92,7 @@ public class Menus {
 		opc = s.nextInt();
 		switch (opc) {
 		case 1:
-			//d.consultar();
+			// d.consultar();
 			break;
 		case 2:
 			d.editarPaciente();
@@ -106,9 +109,8 @@ public class Menus {
 			System.out.println("Opção inválida.");
 		}
 	}
-	
-	
-	//Menu Secretario
+
+	// Menu Secretario
 	public void menuSecretario() throws IOException {
 
 		Secretario c = new Secretario();
@@ -117,34 +119,44 @@ public class Menus {
 		System.out.println();
 		System.out.println("-' Secretario '- ");
 		System.out.println("Escolha uma opção:");
-		System.out.println("1 - Listar Pacientes");
-		System.out.println("2 - Editar Paciente");
-		System.out.println("3 - Alterar Status Paciente");
-		System.out.println("4 - Agendar Consulta");
-		System.out.println("5 - Sair");
+		System.out.println("1 - Cadastrar Pacientes");
+		System.out.println("2 - Listar Pacientes");
+		System.out.println("3 - Editar Paciente");
+		System.out.println("4 - Alterar Status Paciente");
+		System.out.println("5 - Agendar Consulta");
+		System.out.println("6 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
 		case 1:
-			//c.consultaSecretario();
+			Cliente cliente = new Cliente();
+			cliente.cadastrarCliente();
 			break;
 		case 2:
-			c.editarPaciente();
+			//FAZER O LISTAR
+			System.out.println("LISTARR");
+
 			break;
 		case 3:
-			c.alterarStatusPaciente();
-		break;
+			c.editarPaciente();
+			break;
 		case 4:
+			c.alterarStatusPaciente();
+
+			break;
+		case 5:
 			Agendamento ag = new Agendamento();
 			ag.agendar();
-		break;
-		case 5:
+			break;
+		case 6:
 			Programa.main(null);
+
 		default:
 			System.out.println("Opção inválida.");
 		}
 	}
-	public void menuAdmin() throws FileNotFoundException, IOException{
+
+	public void menuAdmin() throws FileNotFoundException, IOException {
 		Secretario c = new Secretario();
 		Dentista d = new Dentista();
 		Admin a = new Admin();
@@ -152,13 +164,16 @@ public class Menus {
 		System.out.println("Escolha a opção: ");
 		System.out.println("1 - Cadastrar Secretario");
 		System.out.println("2 - Editar Secretario");
-		System.out.println("3 - Cadastrar Dentista");
-		System.out.println("4 - Editar Dentista");
-		System.out.println("5 - Menu Secretario");
-		System.out.println("6 - Menu Dentista");
-		System.out.println("7 - Sair");
+		System.out.println("3 - Procurar Secretario");
+		System.out.println("4 - Cadastrar Dentista");
+		System.out.println("5 - Editar Dentista");
+		System.out.println("6 - Procurar Dentista");
+		System.out.println("7 - Menu Secretario");
+		System.out.println("8 - Menu Dentista");
+		System.out.println("9 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
+		s.nextLine();
 		switch (opc) {
 		case 1:
 			c.cadastrarSecretario();
@@ -167,25 +182,31 @@ public class Menus {
 			a.editarSecretario();
 			break;
 		case 3:
-			d.cadastrarDentista();
-		break;
+			c.consultarSecretario();
+			break;
 		case 4:
-			a.editarDentista();
+			d.cadastrarDentista();
 			break;
 		case 5:
-			menuSecretario();
+			a.editarDentista();
 			break;
 		case 6:
+			System.out.println("Informe o CRO do Dentista");
+			int cro = s.nextInt();
+			d.consultar(cro);
+			break;
+		case 7:
+			menuSecretario();
+			break;
+		case 8:
 			menuDentista();
 			break;
-		case 7: 
+		case 9:
 			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
-		
-		
-		
-	}
 
-}
+		}
+
+	}
 }
