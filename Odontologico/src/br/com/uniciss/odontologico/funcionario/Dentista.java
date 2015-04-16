@@ -23,7 +23,7 @@ public class Dentista extends Funcionario {
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
 		
-		boolean continua;
+		boolean continua; 
 		do{
 			try{
 				System.out.println("Informe seu CRO:");
