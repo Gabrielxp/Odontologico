@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Scanner;
+
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
 
@@ -50,13 +52,13 @@ public class Gravar {
 			}	
 
 	}
-		public void editar(String aonde, String oque) throws IOException{
-			
+		public void editar(String nome, String aonde, String oque) throws IOException{
+			Scanner ler = new Scanner(System.in);
 			
 			System.out.println("Informe o nome de quem quer editar: ");
-			
+			nome = (ler.nextLine());
 				
-			File arq = new File(aonde+".txt");
+			File arq = new File(nome+".txt");
 			arq.delete();
 			File ficheiro = new File(aonde); 
 			try { 
@@ -70,6 +72,6 @@ public class Gravar {
 			}catch (java.io.FileNotFoundException e){
 				System.out.println("Erro");
 			} 
-			
+			ler.close();
 		}
 }
