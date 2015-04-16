@@ -54,11 +54,26 @@ public class Dentista extends Funcionario {
 	
 	public void consultar(int cro) {
 		LeituraDeDados leitura = new LeituraDeDados();
+		Dentista dentista = new Dentista();
+		
 		List<Dentista>listaDentista = new ArrayList<Dentista>();
 		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
 		
 		leitura.leituraDentista(listaDentista, mapaDentista);
-		System.out.println(mapaDentista.get(cro).getNome());
+		try{
+			dentista = mapaDentista.get(cro);
+			System.out.println("-------Dentista "+dentista.getNome()+"------");
+			System.out.println("Codigo:"+dentista.getCodigo());
+			System.out.println("Nome:"+dentista.getNome());
+			System.out.println("CRO:"+dentista.getCro());
+			System.out.println("RG:"+dentista.getRg());
+			System.out.println("CPF:"+dentista.getCpf());
+			System.out.println("Endereço:"+dentista.getEndereco());
+			System.out.println("---------------------");
+		}catch(NullPointerException e){
+			System.out.println("Dentista não encontrado");
+		}
+		
 	}
 
 	public void editarPaciente() {
