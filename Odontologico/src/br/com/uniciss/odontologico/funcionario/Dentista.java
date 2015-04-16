@@ -1,7 +1,9 @@
 package br.com.uniciss.odontologico.funcionario;
 
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,24 +19,21 @@ public class Dentista extends Funcionario {
 	 * Variavel cro, relacionada ao cro do dentista
 	 */
 	protected int cro;
-
+	String croTexto;
 
 	public void cadastrarDentista() throws FileNotFoundException, IOException{   
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
 		
-		boolean continua; 
 		do{
-			try{
-				System.out.println("Informe seu CRO:");
-				cro = teclado.nextInt();
-				continua = false;
-			}catch(Exception e ){
-				teclado.nextLine();
-				continua = true;
-				System.err.println("Informe um numero inteiro!");
-			}
-		}while(continua == true);
+			System.out.println("Informe seu CRO:");
+			cro = teclado.nextInt();
+			croTexto = String.valueOf(cro);
+			
+			if ((!validaCro(croTexto) || validaCro() == true))
+				System.out.println("CRO invalido ou ja cadastrado");
+			
+		}while((!validaCro(croTexto) || validaCro() == true));
 
 		System.out.println(toStringDentista());
 		tipo = "dentista"; 
@@ -87,6 +86,24 @@ public class Dentista extends Funcionario {
 			System.out.println("Dentista não encontrado");
 		}
 		
+	}
+	
+	@SuppressWarnings("resource")
+	public boolean validaCro() throws IOException{
+		BufferedReader d = new BufferedReader(new FileReader("documentos/dentistas.txt"));
+		
+		while(d.ready()) {    
+			String linha = d.readLine();    
+		       if (linha.contains(croTexto)) {    
+		              return true;
+		       }
+		    }
+			d.close();
+			return false;
+	}
+	
+	public boolean validaCro(String texto) {
+		return texto.matches("^[0-9]*$");
 	}
 
 	public void editarPaciente() {

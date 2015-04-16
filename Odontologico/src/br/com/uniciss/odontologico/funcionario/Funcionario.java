@@ -2,6 +2,8 @@ package br.com.uniciss.odontologico.funcionario;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.cliente.Pessoa;
@@ -30,6 +32,10 @@ abstract public class Funcionario extends Pessoa {
 	/**
 	 * Variavel teclado, relacionada a entrada de dados por meio do teclado
 	 */
+	
+	String hora;
+	double horaG;
+	
 	protected Scanner teclado;
 
 	// Getters And Setters
@@ -97,15 +103,20 @@ abstract public class Funcionario extends Pessoa {
 		cadastro();
 
 		do {
-			System.out.println("Informe a Hora de Entrada no trabalho: ");
+			System.out.println("Informe a Hora de Entrada no trabalho(HH:MM)");
 			setHoraDeEntrada(teclado.nextLine());
-		} while (getHoraDeEntrada().equals(""));
+			hora = HoraDeEntrada;
+			
+		} while (validaHora() == false);
 
 		do {
-			System.out.println("Informe a Hora de Saida no trabalho: ");
+			System.out.println("Informe a Hora de Saida no trabalho(HH:MM)");
 			setHoraDeSaida(teclado.nextLine());
-		} while (getHoraDeEntrada().equals(""));
-		setStatus(true);
+			hora = HoraDeSaida;
+			
+		}while (validaHora() == false);
+			
+		//Cadastro de login
 		do {
 			System.out.println("Informe o Login: ");
 			setLogin(teclado.nextLine());
@@ -118,4 +129,17 @@ abstract public class Funcionario extends Pessoa {
 		} while (getSenha().equals(""));
 	}
 
+	
+	public boolean validaHora(){
+		SimpleDateFormat h = new SimpleDateFormat("HH:mm");
+		h.setLenient(false);
+		
+		try{
+			h.parse(hora);
+			return true;
+		}catch (ParseException e){
+			System.out.println("Hora invalida, por favor insira novamente");
+			return false;
+		}
+	}
 }
