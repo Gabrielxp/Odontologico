@@ -88,7 +88,7 @@ public class Menus {
 		opc = s.nextInt();
 		switch (opc) {
 		case 1:
-			d.consultar();
+			//d.consultar();
 			break;
 		case 2:
 			d.editarPaciente();

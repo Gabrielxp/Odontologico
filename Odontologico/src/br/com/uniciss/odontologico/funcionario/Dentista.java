@@ -3,8 +3,14 @@ package br.com.uniciss.odontologico.funcionario;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.cliente.Cliente;
 
 public class Dentista extends Funcionario {
 	/**
@@ -46,8 +52,13 @@ public class Dentista extends Funcionario {
 			return "Dentista"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+getDataDeNascimento()+","+isStatus()+","+getCro();
 		}
 	
-	public void consultar() {
-
+	public void consultar(int cro) {
+		LeituraDeDados leitura = new LeituraDeDados();
+		List<Dentista>listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
+		
+		leitura.leituraDentista(listaDentista, mapaDentista);
+		System.out.println(mapaDentista.get(cro).getNome());
 	}
 
 	public void editarPaciente() {
