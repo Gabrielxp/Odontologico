@@ -8,6 +8,8 @@ import java.nio.Buffer;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -280,12 +282,28 @@ public abstract class Pessoa {
 		DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		data.setLenient(false);
 		
-		try{
-			data.parse(dataDeNascimento);
-			return true;
-		}catch (ParseException e){
-			System.out.println("Data Invalida, por favor tente novamente!");
-			return false;
+		Calendar c = Calendar.getInstance();
+		
+		Date d = new Date();
+		DateFormat sis = new SimpleDateFormat("dd/MM/yyyy");
+		sis.format(d);
+		
+		System.out.println(d);
+		System.out.println(sis);
+		System.out.println(c);
+		
+		try {
+			c.setTime(data.parse(dataDeNascimento));
+			if (c.before(d)){
+				return true;
+			}
+		} catch (ParseException e1) {
+			System.out.println("sapora funciona");
+				return false;
 		}
+		return false;
+		
+		
+		
 	}
 }
