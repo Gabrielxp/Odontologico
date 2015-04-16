@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.cliente.Cliente;
 
 public class Secretario extends Funcionario {
 	
@@ -25,6 +26,30 @@ public class Secretario extends Funcionario {
 		g.grava("documentos/secretarios.txt", toString());
 		g.grava("documentos/users.txt", toString2());
 		return;
+	}
+	
+	public void consultarPaciente(){
+		List<Cliente> listaPaciente = new ArrayList<Cliente>();
+		
+		System.out.println("Informe o nome do Paciente");
+		String nome = teclado.nextLine();
+		nome = nome.replace(" ", "");
+		nome = nome.toLowerCase();
+		
+		for(Cliente paciente : listaPaciente){
+			String nomeDaVez = paciente.getNome().replace(" ", "");
+			
+			if(nomeDaVez.toLowerCase().equals(nome)){
+				System.out.println("------- Paciente "+paciente.getNome()+"------");
+				System.out.println("Codigo:"+paciente.getCodigo());
+				System.out.println("Nome:"+paciente.getNome());
+				System.out.println("RG:"+paciente.getRg());
+				System.out.println("CPF:"+paciente.getCpf());
+				System.out.println("Endereço:"+paciente.getEndereco());
+				System.out.println("---------------------");
+			}
+		}
+		
 	}
 
 	public void consultarSecretario() {
