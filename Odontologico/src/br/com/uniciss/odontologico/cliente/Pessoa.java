@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.Buffer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -122,6 +125,9 @@ public abstract class Pessoa {
 		do {
 			System.out.println("Informe o nome : ");
 			setNome(teclado.nextLine());
+			
+			if (!validaNome(nome))
+				System.out.println("Nome invalido, por favor insira novamente!");
 		} while (!validaNome(nome));
 		
 		
@@ -129,7 +135,13 @@ public abstract class Pessoa {
 		do {
 			System.out.println("Insira o RG");
 			this.rg = teclado.next();
-		} while (!validaRg(rg) && rg.length() != 11);
+			
+			rg.replace("-", "");
+			rg.replace(".", "");
+			
+			if (!validaRg(rg) || rg.length() >= 14 || rg.length() < 7)
+					System.out.println("Rg invalido, por favor tente novamente");
+		} while (!validaRg(rg) || rg.length() >= 14 || rg.length() < 7);
 
 		
 		// Le e valida CPF
@@ -141,20 +153,25 @@ public abstract class Pessoa {
 			cpf = cpf.replace("-", "");
 			cpf = cpf.replace(".", "");
 			
+			if ((validaCpf() == false) || (validaCpfExistente() == true))
+				System.out.println("Cpf Invalido, por favor insira novamente");
+			
 		}while ((validaCpf() == false) || (validaCpfExistente() == true));
 		
 			//Le o endereco
 			teclado.nextLine();
 			System.out.println("Informe o Endereço: ");
 			endereco = (teclado.next());
+			
+			//ativa o status da pessoa
+			setStatus(true);
+			
+			//Le e valida a data de nascimento
+			do{
+				System.out.println("Insira a data de nascimento(DD/MM/AAAA)");
+				dataDeNascimento = teclado.next();
+			}while (validaData() == false);
 
-		/* DESNECESSARIO EU ACHO
-		 * System.out.println("Insira o codigo"); try{ this.codigo =
-		 * teclado.nextInt();
-		 * System.out.println("Cadastro COncluido com Sucesso!"); }catch
-		 * (java.util.InputMismatchException e) {
-		 * System.out.println("Codigo Invalido"); }
-		 */
 	}
 	/**
 	 * Metodo public boolean validaCpf(), utilizado para realizacao de validacao
@@ -257,5 +274,18 @@ public abstract class Pessoa {
 		paciente.close();
 		
 		return false;
-	}	
+	}
+	
+	public boolean validaData(){
+		DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		data.setLenient(false);
+		
+		try{
+			data.parse(dataDeNascimento);
+			return true;
+		}catch (ParseException e){
+			System.out.println("Data Invalida, por favor tente novamente!");
+			return false;
+		}
+	}
 }
