@@ -83,7 +83,7 @@ abstract public class Funcionario extends Pessoa {
 	public String toString() {
 		return "Funcionario" + "," + getCodigo() + "," + getNome() + ","
 				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
-				+ getDataDeNascimento()+","+ isStatus();
+				+ getDataDeNascimento()+","+ isStatus()+","+getHoraDeEntrada()+","+getHoraDeSaida();
 	}
 
 	public String toString2() {
