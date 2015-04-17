@@ -22,6 +22,15 @@ public class Secretario extends Funcionario {
 
 		tipo = "secretario";  
 		setStatus(true);
+		
+		LeituraDeDados leitura = new LeituraDeDados();
+		List<Secretario>listaSecretario = new ArrayList<Secretario>();
+		Map<Integer, Secretario>mapaSecretario = new HashMap<Integer, Secretario>();
+
+		leitura.leituraSecretario(listaSecretario, mapaSecretario);
+
+		setCodigo(listaSecretario.size());
+		
 		Gravar g = new Gravar();
 		g.grava("documentos/secretarios.txt", toString());
 		g.grava("documentos/users.txt", toString2());
@@ -158,7 +167,8 @@ public class Secretario extends Funcionario {
 					System.out.println("Este Secretario ja foi inativado");
 				}else{
 					s.setStatus(false);
-
+					System.out.println("Paciente Inativado Com Sucesso");
+					
 					Gravar g = new Gravar();
 					g.editar("documentos/secretarios.txt");
 
@@ -168,7 +178,11 @@ public class Secretario extends Funcionario {
 
 				}
 			}
-		}	
+		}
+		
+		if(!existe){
+			System.out.println("Secretario Inexistente");
+		}
 	}
 	
 	public void inativarPaciente() throws IOException{
@@ -192,7 +206,7 @@ public class Secretario extends Funcionario {
 					System.out.println("Este Paciente ja foi inativado");
 				}else{
 					client.setStatus(false);
-
+					System.out.println("Paciente Inativado Com Sucesso");
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
 

@@ -141,8 +141,7 @@ public class Menus {
 			admin.editarPaciente();
 			break;
 		case 4:
-			c.alterarStatusPaciente();
-
+			c.inativarPaciente();
 			break;
 		case 5:
 			Agendamento ag = new Agendamento();
@@ -171,7 +170,8 @@ public class Menus {
 		System.out.println("7 - Menu Secretario");
 		System.out.println("8 - Menu Dentista");
 		System.out.println("9 - Inativar Dentista");
-		System.out.println("10 - Sair");
+		System.out.println("10 - Inativar Secretario");
+		System.out.println("11 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
 		s.nextLine();
@@ -206,6 +206,8 @@ public class Menus {
 			d.inativarDentista();
 			break;
 		case 10:
+			c.inativarSecretario();
+		case 11:
 			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
