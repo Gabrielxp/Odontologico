@@ -1,6 +1,8 @@
 package br.com.uniciss.odontologico.admin;
 
 import java.awt.Menu;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +24,9 @@ import br.com.uniciss.odontologico.funcionario.Dentista;
 public class Agendamento {
 
 	Scanner teclado = new Scanner(System.in);
-
+	String data = "";
+	String hora = "";
+	
 	public void agendar() throws IOException{
 		System.out.println("Informe o CRO do Dentista");
 		int cro = teclado.nextInt();
@@ -36,7 +40,7 @@ public class Agendamento {
 		leitura.leituraDentista(listaDentista, mapaDentista);
 
 		Dentista dentista = new Dentista();
-
+		
 		boolean existeDentista = false;
 
 		if(mapaDentista.containsKey(cro)){
@@ -190,6 +194,57 @@ public class Agendamento {
 					break;
 				}
 			}
-		}while(cont);	
+		}while(cont);
+		
+		System.out.println("Insira a data da consulta");
+		data = teclado.nextLine();
+		
+		
+		do{
+		System.out.println("Insira a hora da consulta");
+		hora = teclado.nextLine();
+		
+		if (validaHoraAngendada() == false || validaHoraDiponivel() == true)
+			System.out.println("Horario indisponivel");
+		}while(validaHoraAngendada() == false || validaHoraDiponivel() == true);
+		
 	}
-}
+		
+	public boolean validaHoraDiponivel() throws IOException{
+		BufferedReader agenda = new BufferedReader(new FileReader(""));
+		
+		while(agenda.ready()) {    
+		       String linha = agenda.readLine();    
+		       if (linha.contains(hora)) {    
+		              return true;
+		       }
+		    }
+			agenda.close();
+			return false;
+	}
+	
+		public boolean validaHoraAngendada(){
+			SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
+
+			Date horaInformada = new Date();
+			formata = new SimpleDateFormat("HH:mm");
+			formata.setLenient(false);
+			
+			try {
+				horaInformada = formata.parse(hora);
+				Date horaInicio = formata.parse("07:00");
+				Date horaFim = formata.parse("22:00");
+				
+				if (horaInformada.getTime() > horaInicio.getTime() && horaInformada.getTime() < horaFim.getTime()){
+					return true;
+				}else{
+					return false;
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return false;
+
+		}
+	}
