@@ -96,7 +96,8 @@ public class Menus {
 			// d.consultar();
 			break;
 		case 2:
-			d.editarPaciente();
+			Admin admin = new Admin();
+			admin.editarPaciente();
 			break;
 		case 3:
 		Tratamentos t = new Tratamentos();

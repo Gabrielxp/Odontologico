@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 
@@ -119,10 +120,13 @@ public class Dentista extends Funcionario {
 					
 				}
 			}
+		
 		}
 		if(!existe){
 			System.out.println("CRO inexistente");
 		}
+		Menus m = new Menus();
+		m.menuAdmin();
 	}
 
 	@SuppressWarnings("resource")
@@ -143,13 +147,6 @@ public class Dentista extends Funcionario {
 		return texto.matches("^[0-9]*$");
 	}
 
-	public void editarPaciente() {
-
-	}
-
-	public void requisitarMateriais() {
-
-	}
 
 	public void encaminharPaciente() {
 

@@ -19,7 +19,7 @@ public class Admin {
 	Scanner entrada = new Scanner(System.in);
 	LeituraDeDados leia = new LeituraDeDados();
 
-	//Metodo que edita um Dentista caso ele exista e esteja com o status Ativo 
+	// Metodo que edita um Dentista caso ele exista e esteja com o status Ativo
 	public void editarSecretario() throws FileNotFoundException, IOException {
 
 		String nome;
@@ -34,14 +34,15 @@ public class Admin {
 		for (Secretario s : listaSecretario) {
 
 			if (nome.equals(s.getNome())) {
-				if(s.isStatus()){
+				if (s.isStatus()) {
 					s.cadastro();
 					continua = true;
 				} else {
-					System.out.println("Esse Dentista esta cadastrado porem esta inativo");
+					System.out
+							.println("Esse Dentista esta cadastrado porem esta inativo");
 					continua = false;
 				}
-				
+
 			}
 			Gravar g = new Gravar();
 			g.editar("documentos/secretarios.txt");
@@ -55,8 +56,9 @@ public class Admin {
 
 			int escolha;
 
-			System.out.println("Determinaste um nome invalido ou o dentista esta inativo"
-					+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
+			System.out
+					.println("Determinaste um nome invalido ou o dentista esta inativo"
+							+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
 			escolha = entrada.nextInt();
 			entrada.nextLine();
 			if (escolha == 1) {
@@ -71,7 +73,7 @@ public class Admin {
 		}
 	}
 
-	//Metodo que edita um Dentista caso ele exista e esteja com o status Ativo 
+	// Metodo que edita um Dentista caso ele exista e esteja com o status Ativo
 	public void editarDentista() throws FileNotFoundException, IOException {
 		String nome;
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -85,14 +87,15 @@ public class Admin {
 		for (Dentista s : listaDentista) {
 
 			if (nome.equals(s.getNome())) {
-				if(s.isStatus()){
+				if (s.isStatus()) {
 					s.cadastro();
 					continua = true;
-				}else{
-					System.out.println("Esse Dentista esta cadastrado porem esta inativo");
+				} else {
+					System.out
+							.println("Esse Dentista esta cadastrado porem esta inativo");
 					continua = false;
 				}
-				
+
 			}
 			Gravar g = new Gravar();
 			g.editar("documentos/dentistas.txt");
@@ -106,8 +109,9 @@ public class Admin {
 
 			int escolha;
 
-			System.out.println("Determinaste um nome invalido ou o dentista esta inativo"
-					+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
+			System.out
+					.println("Determinaste um nome invalido ou o dentista esta inativo"
+							+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
 			escolha = entrada.nextInt();
 			entrada.nextLine();
 			if (escolha == 1) {
@@ -121,60 +125,62 @@ public class Admin {
 			m.menuAdmin();
 		}
 	}
-	
-	//Metodo que edita um Paciente caso ele exista e esteja com o status Ativo 
-		public void editarPaciente() throws FileNotFoundException, IOException {
-			int cod;
-			List<Cliente> listaPacientes = new ArrayList<Cliente>();
-			Menus m = new Menus();
-			
-			leia.leituraPacientes(listaPacientes);
-			
-			System.out.println("Determine o codigo da pessoa a ser editado: ");
-			cod = entrada.nextInt();
-			boolean continua = false;
 
-			for (Cliente cliente : listaPacientes) {
+	// Metodo que edita um Paciente caso ele exista e esteja com o status Ativo
+	public void editarPaciente() throws FileNotFoundException, IOException {
+		int cod;
+		List<Cliente> listaPacientes = new ArrayList<Cliente>();
+		Menus m = new Menus();
 
-				if (cod == cliente.getCodigo()) {
-					if(cliente.isStatus()){
-						cliente.cadastro();
-						
-						Gravar g = new Gravar();
-						g.editar("documentos/pacientes.txt");
-						for (Cliente f : listaPacientes) {
-							g.grava("documentos/pacientes.txt", f.toString());
-						}
-						
-						continua = true;
-					}else{
-						System.out.println("Esse Paciente esta cadastrado porem esta inativo");
-						continua = false;
+		leia.leituraPacientes(listaPacientes);
+
+		System.out.println("Determine o codigo da pessoa a ser editado: ");
+		cod = entrada.nextInt();
+		boolean continua = false;
+
+		for (Cliente cliente : listaPacientes) {
+
+			if (cod == cliente.getCodigo()) {
+				if (cliente.isStatus()) {
+					Secretario secretario = new Secretario();
+					secretario.editarPaciente();
+
+					Gravar g = new Gravar();
+					g.editar("documentos/pacientes.txt");
+					for (Cliente f : listaPacientes) {
+						g.grava("documentos/pacientes.txt", f.toString());
 					}
-					
+
+					continua = true;
+				} else {
+					System.out
+							.println("Esse Paciente esta cadastrado porem esta inativo");
+					continua = false;
 				}
-				
 
 			}
 
-			if (continua == false) {
+		}
 
-				int escolha;
+		if (continua == false) {
 
-				System.out.println("Determinaste um nome invalido ou o Paciente esta inativo"
-						+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
-				escolha = entrada.nextInt();
-				entrada.nextLine();
-				if (escolha == 1) {
-					m.menuAdmin();
-				} else if (escolha != 1) {
-					editarPaciente();
-				}
-			}
-			if (continua == true) {
-				System.out.println("\n Edição realizada com sucesso!\n");
+			int escolha;
+
+			System.out
+					.println("Determinaste um nome invalido ou o Paciente esta inativo"
+							+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
+			escolha = entrada.nextInt();
+			entrada.nextLine();
+			if (escolha == 1) {
 				m.menuAdmin();
+			} else if (escolha != 1) {
+				editarPaciente();
 			}
 		}
+		if (continua == true) {
+			System.out.println("\n Edição realizada com sucesso!\n");
+			m.menuSecretario();
+		}
+	}
 
 }
