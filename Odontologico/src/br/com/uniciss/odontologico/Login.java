@@ -33,7 +33,7 @@ public class Login extends JFrame implements ActionListener {
 	public Login() {
 		super("Atendimento Odontologico");
 
-		logar = new JButton("Logar");
+		logar = new JButton("Logar"); 
 		logar.addActionListener(this);
 
 		cancelar = new JButton("Cancelar");
