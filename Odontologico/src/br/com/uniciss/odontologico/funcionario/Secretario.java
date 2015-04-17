@@ -202,7 +202,10 @@ public class Secretario extends Funcionario {
 
 				}
 			}
-		}	
+		}
+		if(!existe){
+			System.out.println("Paciente Inexistente");
+		}
 	}
 	
 	
