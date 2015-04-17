@@ -95,10 +95,9 @@ public class LeituraDeDados {
 				c.setNome(palavras[2]); 
 				c.setRg(palavras[3]);
 				c.setCpf(palavras[4]);   
-				c.setEndereco(palavras[4]);
-				c.setDataDeNascimento(palavras[5]);
-				c.setStatus(Boolean.parseBoolean(palavras[6]));
-				c.setTratamento(palavras[7]);
+				c.setEndereco(palavras[5]);
+				c.setDataDeNascimento(palavras[6]);
+				c.setStatus(Boolean.parseBoolean(palavras[7]));
 
 				listaPacientes.add(c);
 				linha = lerArq.readLine();

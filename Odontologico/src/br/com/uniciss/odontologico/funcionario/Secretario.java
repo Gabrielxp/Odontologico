@@ -44,6 +44,9 @@ public class Secretario extends Funcionario {
 			
 			if(nomeDaVez.toLowerCase().equals(nome)){
 				System.out.println("------- Paciente "+paciente.getNome()+"------");
+				if(!paciente.isStatus()){
+					System.out.println("Atenção estre paciente esta como inativo");
+				}
 				System.out.println("Codigo:"+paciente.getCodigo());
 				System.out.println("Nome:"+paciente.getNome());
 				System.out.println("RG:"+paciente.getRg());
