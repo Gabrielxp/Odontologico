@@ -107,13 +107,13 @@ abstract public class Funcionario extends Pessoa {
 			setHoraDeEntrada(teclado.nextLine());
 	
 			
-		} while (validaHora() == false);
+		} while (validaHora(getHoraDeEntrada()) == false);
 
 		do {
 			System.out.println("Informe a Hora de Saida no trabalho(HH:MM)");
 			setHoraDeSaida(teclado.nextLine());
 			
-		}while (validaHora() == false);
+		}while (validaHora(getHoraDeSaida()) == false);
 			
 		//Cadastro de login
 		do {
@@ -129,7 +129,7 @@ abstract public class Funcionario extends Pessoa {
 	}
 
 	
-	public boolean validaHora(){
+	public boolean validaHora(String hora){
 		SimpleDateFormat h = new SimpleDateFormat("HH:mm");
 		h.setLenient(false);
 		
