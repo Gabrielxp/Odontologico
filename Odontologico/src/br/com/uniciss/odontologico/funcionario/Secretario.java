@@ -171,6 +171,40 @@ public class Secretario extends Funcionario {
 		}	
 	}
 	
+	public void inativarPaciente() throws IOException{
+		LeituraDeDados leitura = new LeituraDeDados();
+
+		List<Cliente>listaPacientes = new ArrayList<Cliente>();
+
+		leitura.leituraPacientes(listaPacientes);
+		teclado = new Scanner(System.in);
+
+		System.out.println("Informe o codigo do Paciente");
+		int codPaciente = teclado.nextInt();
+
+		boolean existe = false;
+
+		for(Cliente client : listaPacientes){
+			if(client.getCodigo() == codPaciente){
+
+				existe = true;
+				if(!client.isStatus()){
+					System.out.println("Este Paciente ja foi inativado");
+				}else{
+					client.setStatus(false);
+
+					Gravar g = new Gravar();
+					g.editar("documentos/pacientes.txt");
+
+					for (Cliente cc : listaPacientes) {
+						g.grava("documentos/pacientes.txt", cc.toStringPaciente());
+					}
+
+				}
+			}
+		}	
+	}
+	
 	
 
 	public void editarPaciente() {

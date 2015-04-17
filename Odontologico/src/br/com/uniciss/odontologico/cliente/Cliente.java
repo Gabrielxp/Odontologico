@@ -46,7 +46,7 @@ public class Cliente extends Pessoa{
 		m.menuSecretario();
 	}
 	
-	public String toString() {
+	public String toStringPaciente() {
 		return "Paciente" + "," + getCodigo() + "," + getNome() + ","
 				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
 				+ getDataDeNascimento()+","+ isStatus()+","+getTratamento();
