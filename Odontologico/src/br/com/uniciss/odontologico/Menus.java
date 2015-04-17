@@ -137,7 +137,8 @@ public class Menus {
 			secretario.consultarPaciente();
 			break;
 		case 3:
-			c.editarPaciente();
+			Admin admin = new Admin();
+			admin.editarPaciente();
 			break;
 		case 4:
 			c.alterarStatusPaciente();
