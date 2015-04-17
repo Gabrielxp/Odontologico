@@ -14,6 +14,7 @@ import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.cliente.Tratamentos;
 import br.com.uniciss.odontologico.funcionario.Dentista;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 import br.com.uniciss.odontologico.funcionario.Secretario;
@@ -85,7 +86,7 @@ public class Menus {
 		System.out.println("Escolha uma opção:");
 		System.out.println("1 - Consultar");
 		System.out.println("2 - Editar Paciente");
-		System.out.println("3 - Requisitar Materiais");
+		System.out.println("3 - Cadastrar Tratamento");
 		System.out.println("4 - Encaminhar Paciente");
 		System.out.println("5 - Sair");
 		s = new Scanner(System.in);
@@ -98,7 +99,8 @@ public class Menus {
 			d.editarPaciente();
 			break;
 		case 3:
-			d.requisitarMateriais();
+		Tratamentos t = new Tratamentos();
+		t.cadastraTratamentos();
 			break;
 		case 4:
 			d.encaminharPaciente();
