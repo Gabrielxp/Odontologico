@@ -56,7 +56,7 @@ public class Tratamentos {
 		do {
 			System.out.println("Determine o valor: ");
 			setValor(teclado.nextLine());
-		} while (getValor() == "");
+		} while (getValor() == "");   
 
 		LeituraDeDados leitura = new LeituraDeDados();
 		List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
