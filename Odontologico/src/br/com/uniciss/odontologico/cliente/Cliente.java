@@ -40,7 +40,7 @@ public class Cliente extends Pessoa{
 		setCodigo(listaPacientes.size());
 		
 		Gravar g = new Gravar();  
-		g.grava("documentos/pacientes.txt", toString());
+		g.grava("documentos/pacientes.txt", toStringPaciente());
 		
 		Menus m = new Menus();
 		m.menuSecretario();
