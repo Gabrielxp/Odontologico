@@ -4,6 +4,7 @@ import java.awt.Menu;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,15 +26,16 @@ public class Agendamento {
 
 	Scanner teclado = new Scanner(System.in);
 	private int cod;
-	private String data = "";
+	private String dataDoAgendamento = "";
 	private String hora = "";
 	private int croDentista;
 	private int idPaciente;
 	private int idTratamento;
+	String procura;
 
 	@Override
 	public String toString() {
-		return "Agendamento,"+getCod()+","+getData()+","+getHora()+","+getCroDentista()+","+getIdPaciente()+","+getIdTratamento();
+		return "Agendamento,"+getCod()+","+getDataDoAgendamento()+","+getHora()+","+getCroDentista()+","+getIdPaciente()+","+getIdTratamento();
 	}
 
 	public void agendar() throws IOException{
@@ -207,34 +209,42 @@ public class Agendamento {
 			}
 		}while(cont);
 
-		System.out.println("Insira a data da consulta");
-		data = teclado.nextLine();
+		//Le e valida a data agendada
+		do{
+			System.out.println("Insira a data da consulta");
+			dataDoAgendamento = teclado.nextLine();
+			procura = dataDoAgendamento;
+			
+			if (validaDataAgendada() == false)
+				System.out.println("Data invalida");
+		}while (validaDataAgendada() == false);
 
-
+		
+		//le e valida a hora agendada
 		do{
 			System.out.println("Insira a hora da consulta");
 			hora = teclado.nextLine();
-
-			if (validaHoraAngendada() == false || validaHoraDiponivel() == true)
-				System.out.println("Horario indisponivel");
-		}while(validaHoraAngendada() == false || validaHoraDiponivel() == true);
+			procura = hora;
+			
+			if (validaHoraAngendada() == false || validaDataHoraDiponivel() == true)
+				System.out.println("Horario invalido ou indisponivel");
+		}while(validaHoraAngendada() == false || validaDataHoraDiponivel() == true);
 
 		Gravar gravar = new Gravar();
 		gravar.grava("documentos/consultas.txt", toString());
 	}
 
-
-
-
-
-
-
-	public boolean validaHoraDiponivel() throws IOException{
+	
+	
+	
+	@SuppressWarnings("resource")
+	public boolean validaDataHoraDiponivel() throws IOException{
+		@SuppressWarnings("resource")
 		BufferedReader agenda = new BufferedReader(new FileReader("documentos/consultas.txt"));
 
 		while(agenda.ready()) {    
 			String linha = agenda.readLine();    
-			if (linha.contains(hora)) {    
+			if (linha.contains(procura)) {    
 				return true;
 			}
 		}
@@ -264,9 +274,33 @@ public class Agendamento {
 			// TODO: handle exception
 		}
 		return false;
-
 	}
 
+		
+		public boolean validaDataAgendada(){
+			DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+			data.setLenient(false);
+				
+			SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+
+			Date dataInformada = new Date();
+			formata = new SimpleDateFormat("dd/MM/yyyy");
+			formata.setLenient(false);
+				
+					
+			try {
+				dataInformada = formata.parse(dataDoAgendamento);
+				data.parse(dataDoAgendamento);
+				
+				if ((new Date()).getTime() < dataInformada.getTime()){
+					return true;
+				}
+				
+			} catch (ParseException e) {
+				return false;
+		}
+			return false;		
+	}
 
 
 	public int getCod() {
@@ -281,14 +315,14 @@ public class Agendamento {
 
 
 
-	public String getData() {
-		return data;
+	public String getDataDoAgendamento() {
+		return dataDoAgendamento;
 	}
 
 
 
-	public void setData(String data) {
-		this.data = data;
+	public void setDataDoAgendamento(String dataDoAgendamento) {
+		this.dataDoAgendamento = dataDoAgendamento;
 	}
 
 
