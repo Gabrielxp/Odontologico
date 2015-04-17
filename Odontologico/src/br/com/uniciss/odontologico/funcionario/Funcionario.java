@@ -55,7 +55,7 @@ abstract public class Funcionario extends Pessoa {
 		this.tipo = tipo;
 	}
 
-	protected String getHoraDeEntrada() {
+	public String getHoraDeEntrada() {
 		return horaDeEntrada;
 	}
 

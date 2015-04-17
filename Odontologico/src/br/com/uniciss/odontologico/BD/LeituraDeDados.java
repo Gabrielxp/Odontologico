@@ -63,11 +63,11 @@ public class LeituraDeDados {
 				s.setNome(palavras[2]); 
 				s.setRg(palavras[3]);
 				s.setCpf(palavras[4]);   
-				s.setEndereco(palavras[4]);
-				s.setDataDeNascimento(palavras[5]);
-				s.setStatus(Boolean.parseBoolean(palavras[6]));
-				s.setHoraDeEntrada(palavras[7]);
-				s.setHoraDeSaida(palavras[8]);
+				s.setEndereco(palavras[5]);
+				s.setDataDeNascimento(palavras[6]);
+				s.setStatus(Boolean.parseBoolean(palavras[7]));
+				s.setHoraDeEntrada(palavras[8]);
+				s.setHoraDeSaida(palavras[9]);
 
 				listaSecretario.add(s);
 				mapaSecretario.put(s.getCodigo(), s);

@@ -87,6 +87,8 @@ public class Secretario extends Funcionario {
 					System.out.println("RG:"+secretario.getRg());
 					System.out.println("CPF:"+secretario.getCpf());
 					System.out.println("Endereço:"+secretario.getEndereco());
+					System.out.println("Hora Entrada:"+secretario.getHoraDeEntrada());
+					System.out.println("Hora Saida:"+secretario.getHoraDeSaida());
 					System.out.println("---------------------");
 				}
 				
@@ -99,13 +101,15 @@ public class Secretario extends Funcionario {
 			int cro = teclado.nextInt();
 			
 			try{
-				secretario = listaSecretario.get(codigo);
+				secretario = listaSecretario.get(cro);
 				System.out.println("------- Secretario "+secretario.getNome()+"------");
 				System.out.println("Codigo:"+secretario.getCodigo());
 				System.out.println("Nome:"+secretario.getNome());
 				System.out.println("RG:"+secretario.getRg());
 				System.out.println("CPF:"+secretario.getCpf());
 				System.out.println("Endereço:"+secretario.getEndereco());
+				System.out.println("Hora Entrada:"+secretario.getHoraDeEntrada());
+				System.out.println("Hora Saida:"+secretario.getHoraDeSaida());
 				System.out.println("---------------------");
 			}catch(NullPointerException e){
 				System.out.println("Secretario não encontrado");
@@ -113,12 +117,7 @@ public class Secretario extends Funcionario {
 			
 			break;
 		}
-		try{
-			
-		}catch(NullPointerException e){
-			System.out.println("Secretario nao encontrado!");
-		}
-		
+	
 	}
 
 	public void editarPaciente() {
