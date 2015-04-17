@@ -230,7 +230,7 @@ public class Agendamento {
 
 
 	public boolean validaHoraDiponivel() throws IOException{
-		BufferedReader agenda = new BufferedReader(new FileReader(""));
+		BufferedReader agenda = new BufferedReader(new FileReader("documentos/consultas.txt"));
 
 		while(agenda.ready()) {    
 			String linha = agenda.readLine();    
