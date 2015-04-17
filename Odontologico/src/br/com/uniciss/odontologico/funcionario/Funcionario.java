@@ -139,23 +139,8 @@ abstract public class Funcionario extends Pessoa {
 	}
 
 	
-	/*public boolean validaHora(String hora){
-		SimpleDateFormat h = new SimpleDateFormat("HH:mm");
-		h.setLenient(false);
-		
-		try{
-			h.parse(hora);
-			return true;
-		}catch (ParseException e){
-			System.out.println("Hora invalida, por favor insira novamente");
-			return false;
-		}
-	}*/
-	
 	public boolean validaHora(){
-		Date now = GregorianCalendar.getInstance().getTime();
 		SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
-		String hora = formata.format(now);
 
 		Date horaInformada = new Date();
 		formata = new SimpleDateFormat("HH:mm");
