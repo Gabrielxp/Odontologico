@@ -133,9 +133,8 @@ public class Menus {
 			cliente.cadastrarCliente();
 			break;
 		case 2:
-			//FAZER O LISTAR
-			System.out.println("LISTARR");
-
+			Secretario secretario = new Secretario();
+			secretario.consultarPaciente();
 			break;
 		case 3:
 			c.editarPaciente();

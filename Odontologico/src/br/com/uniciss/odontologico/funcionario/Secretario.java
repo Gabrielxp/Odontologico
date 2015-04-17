@@ -31,6 +31,9 @@ public class Secretario extends Funcionario {
 	public void consultarPaciente(){
 		List<Cliente> listaPaciente = new ArrayList<Cliente>();
 		
+		LeituraDeDados leitura = new LeituraDeDados();
+		leitura.leituraPacientes(listaPaciente);
+		
 		System.out.println("Informe o nome do Paciente");
 		String nome = teclado.nextLine();
 		nome = nome.replace(" ", "");
