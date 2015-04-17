@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.cliente.Pessoa;
@@ -78,7 +80,8 @@ abstract public class Funcionario extends Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	String horarioSelecionado;
+	
 	// Metodo toString para cadastro de Funcionarios
 	public String toString() {
 		return "Funcionario" + "," + getCodigo() + "," + getNome() + ","
@@ -98,22 +101,29 @@ abstract public class Funcionario extends Pessoa {
 	 */
 	public void cadastraFuncionario() throws FileNotFoundException, IOException {
 		teclado = new Scanner(System.in);
-
+		
 		// Metodo com o cadastro de pessoa herdado
 		cadastro();
 
+		//leiitura do hoario de entrada
 		do {
 			System.out.println("Informe a Hora de Entrada no trabalho(HH:MM)");
 			setHoraDeEntrada(teclado.nextLine());
+			horarioSelecionado = horaDeEntrada;
 	
-			
-		} while (validaHora(getHoraDeEntrada()) == false);
+			if (validaHora() == false)
+				System.out.println("Horario indisponivel, por favor tente novamente");
+		} while (validaHora() == false);
 
+		//leitura do horario de saida
 		do {
 			System.out.println("Informe a Hora de Saida no trabalho(HH:MM)");
 			setHoraDeSaida(teclado.nextLine());
+			horarioSelecionado = horaDeSaida;
 			
-		}while (validaHora(getHoraDeSaida()) == false);
+			if(validaHora() == false)
+				System.out.println("Horario indisponivel, por favor tente novamente");
+		}while (validaHora() == false);
 			
 		//Cadastro de login
 		do {
@@ -129,7 +139,7 @@ abstract public class Funcionario extends Pessoa {
 	}
 
 	
-	public boolean validaHora(String hora){
+	/*public boolean validaHora(String hora){
 		SimpleDateFormat h = new SimpleDateFormat("HH:mm");
 		h.setLenient(false);
 		
@@ -140,5 +150,32 @@ abstract public class Funcionario extends Pessoa {
 			System.out.println("Hora invalida, por favor insira novamente");
 			return false;
 		}
+	}*/
+	
+	public boolean validaHora(){
+		Date now = GregorianCalendar.getInstance().getTime();
+		SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
+		String hora = formata.format(now);
+
+		Date horaInformada = new Date();
+		formata = new SimpleDateFormat("HH:mm");
+		formata.setLenient(false);
+		
+		try {
+			horaInformada = formata.parse(horarioSelecionado);
+			Date horaInicio = formata.parse("07:00");
+			Date horaFim = formata.parse("22:00");
+			
+			if (horaInformada.getTime() > horaInicio.getTime() && horaInformada.getTime() < horaFim.getTime()){
+				return true;
+			}else{
+				return false;
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+
 	}
 }
