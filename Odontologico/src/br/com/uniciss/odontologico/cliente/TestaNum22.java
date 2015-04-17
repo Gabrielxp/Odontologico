@@ -23,7 +23,11 @@ public class TestaNum22 {
 		}
 		if(opc == 2){
 			Secretario s = new Secretario();
-			s.cadastrarSecretario();
+			s.consultarSecretario();
+		}
+		if(opc == 3 ){
+			Cliente c = new Cliente();
+			c.cadastrarCliente();
 		}
 	}
 

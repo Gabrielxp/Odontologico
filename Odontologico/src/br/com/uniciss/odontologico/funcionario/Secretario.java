@@ -88,6 +88,9 @@ public class Secretario extends Funcionario {
 				
 				if(nomeDaVez.toLowerCase().equals(nome)){
 					System.out.println("------- Secretario "+secretario.getNome()+"------");
+					if(!secretario.isStatus()){
+						System.out.println("Atenção estre paciente esta como inativo");
+					}
 					System.out.println("Codigo:"+secretario.getCodigo());
 					System.out.println("Nome:"+secretario.getNome());
 					System.out.println("RG:"+secretario.getRg());
@@ -109,6 +112,9 @@ public class Secretario extends Funcionario {
 			try{
 				secretario = listaSecretario.get(cro);
 				System.out.println("------- Secretario "+secretario.getNome()+"------");
+				if(!secretario.isStatus()){
+					System.out.println("Atenção estre paciente esta como inativo");
+				}
 				System.out.println("Codigo:"+secretario.getCodigo());
 				System.out.println("Nome:"+secretario.getNome());
 				System.out.println("RG:"+secretario.getRg());
