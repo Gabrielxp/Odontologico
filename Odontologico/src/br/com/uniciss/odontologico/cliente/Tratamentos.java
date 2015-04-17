@@ -1,9 +1,15 @@
 package br.com.uniciss.odontologico.cliente;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class Tratamentos {
 
@@ -48,12 +54,20 @@ public class Tratamentos {
 		} while (getTratamento() == "");
 
 		do {
-			System.out.println("Determine o valor por mês: ");
+			System.out.println("Determine o valor: ");
 			setValor(teclado.nextLine());
 		} while (getValor() == "");
 
+		LeituraDeDados leitura = new LeituraDeDados();
+		List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
+		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+
+		leitura.leituraTratamento(listaTratamento, mapaTratamento);
+
+		setCodigo(listaTratamento.size());
+		
 		Gravar g = new Gravar();
-		g.grava("tratamentos.txt", toString());
+		g.grava("documentos/tratamentos.txt", toString());
 		
 		return;
 	}
