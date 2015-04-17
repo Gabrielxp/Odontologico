@@ -24,12 +24,21 @@ import br.com.uniciss.odontologico.funcionario.Dentista;
 public class Agendamento {
 
 	Scanner teclado = new Scanner(System.in);
-	String data = "";
-	String hora = "";
-	
+	private int cod;
+	private String data = "";
+	private String hora = "";
+	private int croDentista;
+	private int idPaciente;
+	private int idTratamento;
+
+	@Override
+	public String toString() {
+		return "Agendamento,"+getCod()+","+getData()+","+getHora()+","+getCroDentista()+","+getIdPaciente()+","+getIdTratamento();
+	}
+
 	public void agendar() throws IOException{
 		System.out.println("Informe o CRO do Dentista");
-		int cro = teclado.nextInt();
+		croDentista = teclado.nextInt();
 		teclado.nextLine();
 
 		LeituraDeDados leitura = new LeituraDeDados();
@@ -40,13 +49,13 @@ public class Agendamento {
 		leitura.leituraDentista(listaDentista, mapaDentista);
 
 		Dentista dentista = new Dentista();
-		
+
 		boolean existeDentista = false;
 
-		if(mapaDentista.containsKey(cro)){
-			if(mapaDentista.get(cro).isStatus()){
+		if(mapaDentista.containsKey(croDentista)){
+			if(mapaDentista.get(croDentista).isStatus()){
 				existeDentista = true;
-				dentista = mapaDentista.get(cro);
+				dentista = mapaDentista.get(croDentista);
 			}else{
 				System.out.println("Dentista existe mas porem esta inativo!");
 				existeDentista = false;
@@ -93,7 +102,7 @@ public class Agendamento {
 		boolean continua = false;
 
 		Scanner tecladoP = new Scanner(System.in);
-		
+
 		do{
 			System.out.println("Informe o nome do Paciente");
 			String nomePaciente = tecladoP.nextLine();
@@ -109,6 +118,7 @@ public class Agendamento {
 				if(client.getNome().equals(nomePaciente) && client.isStatus()){
 					existePaciente = true;
 					paciente = client;
+					idPaciente = client.getCodigo();
 					continua = false;
 				}
 			}
@@ -139,7 +149,7 @@ public class Agendamento {
 		}while(continua);
 
 		boolean cont = false;
-		
+
 		Scanner tecladoT = new Scanner(System.in); 
 
 		// Parte do Tratamento
@@ -160,6 +170,7 @@ public class Agendamento {
 				if(tratado.getTratamento().equals(tratamento)){
 					existeTratamento = true;
 					tratamentos = tratado;
+					idTratamento = tratado.getCodigo();
 					cont = false;
 				}
 			}
@@ -195,56 +206,137 @@ public class Agendamento {
 				}
 			}
 		}while(cont);
-		
+
 		System.out.println("Insira a data da consulta");
 		data = teclado.nextLine();
-		
-		
+
+
 		do{
-		System.out.println("Insira a hora da consulta");
-		hora = teclado.nextLine();
-		
-		if (validaHoraAngendada() == false || validaHoraDiponivel() == true)
-			System.out.println("Horario indisponivel");
+			System.out.println("Insira a hora da consulta");
+			hora = teclado.nextLine();
+
+			if (validaHoraAngendada() == false || validaHoraDiponivel() == true)
+				System.out.println("Horario indisponivel");
 		}while(validaHoraAngendada() == false || validaHoraDiponivel() == true);
-		
+
+		Gravar gravar = new Gravar();
+		gravar.grava("documentos/consultas.txt", toString());
 	}
-		
+
+
+
+
+
+
+
 	public boolean validaHoraDiponivel() throws IOException{
 		BufferedReader agenda = new BufferedReader(new FileReader(""));
-		
+
 		while(agenda.ready()) {    
-		       String linha = agenda.readLine();    
-		       if (linha.contains(hora)) {    
-		              return true;
-		       }
-		    }
-			agenda.close();
-			return false;
-	}
-	
-		public boolean validaHoraAngendada(){
-			SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
-
-			Date horaInformada = new Date();
-			formata = new SimpleDateFormat("HH:mm");
-			formata.setLenient(false);
-			
-			try {
-				horaInformada = formata.parse(hora);
-				Date horaInicio = formata.parse("07:00");
-				Date horaFim = formata.parse("22:00");
-				
-				if (horaInformada.getTime() > horaInicio.getTime() && horaInformada.getTime() < horaFim.getTime()){
-					return true;
-				}else{
-					return false;
-				}
-				
-			} catch (Exception e) {
-				// TODO: handle exception
+			String linha = agenda.readLine();    
+			if (linha.contains(hora)) {    
+				return true;
 			}
-			return false;
-
 		}
+		agenda.close();
+		return false;
 	}
+
+	public boolean validaHoraAngendada(){
+		SimpleDateFormat formata = new SimpleDateFormat("h:mm - a");
+
+		Date horaInformada = new Date();
+		formata = new SimpleDateFormat("HH:mm");
+		formata.setLenient(false);
+
+		try {
+			horaInformada = formata.parse(hora);
+			Date horaInicio = formata.parse("07:00");
+			Date horaFim = formata.parse("22:00");
+
+			if (horaInformada.getTime() > horaInicio.getTime() && horaInformada.getTime() < horaFim.getTime()){
+				return true;
+			}else{
+				return false;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+
+	}
+
+
+
+	public int getCod() {
+		return cod;
+	}
+
+
+
+	public void setCod(int cod) {
+		this.cod = cod;
+	}
+
+
+
+	public String getData() {
+		return data;
+	}
+
+
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+
+
+	public String getHora() {
+		return hora;
+	}
+
+
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+
+
+	public int getCroDentista() {
+		return croDentista;
+	}
+
+
+
+	public void setCroDentista(int croDentista) {
+		this.croDentista = croDentista;
+	}
+
+
+
+	public int getIdPaciente() {
+		return idPaciente;
+	}
+
+
+
+	public void setIdPaciente(int idPaciente) {
+		this.idPaciente = idPaciente;
+	}
+
+
+
+	public int getIdTratamento() {
+		return idTratamento;
+	}
+
+
+
+	public void setIdTratamento(int idTratamento) {
+		this.idTratamento = idTratamento;
+	}
+
+}
