@@ -169,7 +169,8 @@ public class Menus {
 		System.out.println("6 - Procurar Dentista");
 		System.out.println("7 - Menu Secretario");
 		System.out.println("8 - Menu Dentista");
-		System.out.println("9 - Sair");
+		System.out.println("9 - Inativar Dentista");
+		System.out.println("10 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
 		s.nextLine();
@@ -201,6 +202,9 @@ public class Menus {
 			menuDentista();
 			break;
 		case 9:
+			d.inativarDentista();
+			break;
+		case 10:
 			Programa.main(null);
 		default:
 			System.out.println("Opção inválida.");
