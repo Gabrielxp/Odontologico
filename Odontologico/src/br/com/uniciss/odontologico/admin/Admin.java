@@ -18,6 +18,7 @@ public class Admin {
 	Scanner entrada = new Scanner(System.in);
 	LeituraDeDados leia = new LeituraDeDados();
 
+	//Metodo que edita um Dentista caso ele exista e esteja com o status Ativo 
 	public void editarSecretario() throws FileNotFoundException, IOException {
 
 		String nome;
@@ -32,10 +33,14 @@ public class Admin {
 		for (Secretario s : listaSecretario) {
 
 			if (nome.equals(s.getNome())) {
-
-				s.cadastro();
-				continua = true;
-
+				if(s.isStatus()){
+					s.cadastro();
+					continua = true;
+				} else {
+					System.out.println("Esse Dentista esta cadastrado porem esta inativo");
+					continua = false;
+				}
+				
 			}
 			Gravar g = new Gravar();
 			g.editar("documentos/secretarios.txt");
@@ -49,7 +54,7 @@ public class Admin {
 
 			int escolha;
 
-			System.out.println("Determinaste um nome invalido"
+			System.out.println("Determinaste um nome invalido ou o dentista esta inativo"
 					+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
 			escolha = entrada.nextInt();
 			entrada.nextLine();
@@ -65,6 +70,7 @@ public class Admin {
 		}
 	}
 
+	//Metodo que edita um Dentista caso ele exista e esteja com o status Ativo 
 	public void editarDentista() throws FileNotFoundException, IOException {
 		String nome;
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -79,11 +85,13 @@ public class Admin {
 
 			if (nome.equals(s.getNome())) {
 				if(s.isStatus()){
-					s.cadastro();	
+					s.cadastro();
+					continua = true;
 				}else{
 					System.out.println("Esse Dentista esta cadastrado porem esta inativo");
+					continua = false;
 				}
-				continua = true;
+				
 			}
 			Gravar g = new Gravar();
 			g.editar("documentos/dentistas.txt");
@@ -97,14 +105,14 @@ public class Admin {
 
 			int escolha;
 
-			System.out.println("Determinaste um nome invalido"
+			System.out.println("Determinaste um nome invalido ou o dentista esta inativo"
 					+ "\n Deseja voltar ao menu? 1 - sim, 2 - não");
 			escolha = entrada.nextInt();
 			entrada.nextLine();
 			if (escolha == 1) {
 				m.menuAdmin();
 			} else if (escolha != 1) {
-				editarSecretario();
+				editarDentista();
 			}
 		}
 		if (continua == true) {
