@@ -12,11 +12,11 @@ abstract public class Funcionario extends Pessoa {
 	/**
 	 * Variavel HoraDeEntrada, relacionada a hora de entrada do trabalho
 	 */
-	protected String HoraDeEntrada;
+	protected String horaDeEntrada;
 	/**
 	 * Variavel HoraDeSaida, relacionada a hora de saida do trabalho
 	 */
-	protected String HoraDeSaida;
+	protected String horaDeSaida;
 	/**
 	 * Variavel login, relacionada ao acesso de determinado nivel
 	 */
@@ -56,19 +56,19 @@ abstract public class Funcionario extends Pessoa {
 	}
 
 	protected String getHoraDeEntrada() {
-		return HoraDeEntrada;
+		return horaDeEntrada;
 	}
 
 	public void setHoraDeEntrada(String string) {
-		HoraDeEntrada = string;
+		horaDeEntrada = string;
 	}
 
 	public String getHoraDeSaida() {
-		return HoraDeSaida;
+		return horaDeSaida;
 	}
 
 	public void setHoraDeSaida(String horaDeSaida) {
-		HoraDeSaida = horaDeSaida;
+		this.horaDeSaida = horaDeSaida;
 	}
 
 	public String getSenha() {
@@ -105,14 +105,13 @@ abstract public class Funcionario extends Pessoa {
 		do {
 			System.out.println("Informe a Hora de Entrada no trabalho(HH:MM)");
 			setHoraDeEntrada(teclado.nextLine());
-			hora = HoraDeEntrada;
+	
 			
 		} while (validaHora() == false);
 
 		do {
 			System.out.println("Informe a Hora de Saida no trabalho(HH:MM)");
 			setHoraDeSaida(teclado.nextLine());
-			hora = HoraDeSaida;
 			
 		}while (validaHora() == false);
 			

@@ -34,6 +34,8 @@ public class LeituraDeDados {
 				d.setDataDeNascimento(palavras[6]);
 				d.setStatus(Boolean.parseBoolean(palavras[7]));
 				d.setCro(Integer.parseInt(palavras[8]));
+				d.setHoraDeEntrada(palavras[9]);
+				d.setHoraDeSaida(palavras[10]);
 
 				listaDentista.add(d);
 				mapaDentista.put(d.getCro(), d);
@@ -64,6 +66,8 @@ public class LeituraDeDados {
 				s.setEndereco(palavras[4]);
 				s.setDataDeNascimento(palavras[5]);
 				s.setStatus(Boolean.parseBoolean(palavras[6]));
+				s.setHoraDeEntrada(palavras[7]);
+				s.setHoraDeSaida(palavras[8]);
 
 				listaSecretario.add(s);
 				mapaSecretario.put(s.getCodigo(), s);
