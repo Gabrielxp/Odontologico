@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -288,9 +287,7 @@ public abstract class Pessoa {
 		DateFormat sis = new SimpleDateFormat("dd/MM/yyyy");
 		sis.format(d);
 		
-		System.out.println(d);
-		System.out.println(sis);
-		System.out.println(c);
+		
 		
 		try {
 			c.setTime(data.parse(dataDeNascimento));
@@ -301,7 +298,7 @@ public abstract class Pessoa {
 			System.out.println("sapora funciona");
 				return false;
 		}
-		return false;
+		return true;
 		
 		
 		

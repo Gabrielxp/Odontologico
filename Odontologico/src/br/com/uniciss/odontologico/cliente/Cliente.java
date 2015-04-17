@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.funcionario.Funcionario;
 
 public class Cliente extends Pessoa{
 	/**
@@ -40,7 +42,8 @@ public class Cliente extends Pessoa{
 		Gravar g = new Gravar();  
 		g.grava("documentos/pacientes.txt", toString());
 		
-		return;
+		Menus m = new Menus();
+		m.menuSecretario();
 	}
 	
 	public String toString() {
