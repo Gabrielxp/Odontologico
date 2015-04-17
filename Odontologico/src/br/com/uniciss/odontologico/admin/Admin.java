@@ -78,15 +78,17 @@ public class Admin {
 		for (Dentista s : listaDentista) {
 
 			if (nome.equals(s.getNome())) {
-
-				s.cadastro();
+				if(s.isStatus()){
+					s.cadastro();	
+				}else{
+					System.out.println("Esse Dentista esta cadastrado porem esta inativo");
+				}
 				continua = true;
-
 			}
 			Gravar g = new Gravar();
 			g.editar("documentos/dentistas.txt");
 			for (Dentista f : listaDentista) {
-				g.grava("documentos/dentistas.txt", f.toString());
+				g.grava("documentos/dentistas.txt", f.toStringDentista());
 			}
 
 		}

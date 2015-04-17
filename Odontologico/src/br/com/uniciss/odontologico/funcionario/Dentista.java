@@ -57,7 +57,7 @@ public class Dentista extends Funcionario {
 
 	//Metodo toString para cadastro de Funcionarios
 		public String toStringDentista(){
-			return "Dentista"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+getDataDeNascimento()+","+isStatus()+","+getCro();
+			return "Dentista"+","+getCodigo()+","+getNome()+","+getRg()+","+getCpf()+","+getEndereco()+","+getDataDeNascimento()+","+isStatus()+","+getCro()+","+getHoraDeEntrada()+","+getHoraDeSaida();
 		}
 	
 	public void consultar(int cro) {
