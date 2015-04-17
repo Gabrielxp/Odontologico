@@ -24,9 +24,9 @@ public class Agendamento {
 	Scanner teclado = new Scanner(System.in);
 
 	public void agendar() throws IOException{
-		System.out.println("Informe o nome do Dentista");
-		String nomeDentista = teclado.nextLine();
-
+		System.out.println("Informe o CRO do Dentista");
+		int cro = teclado.nextInt();
+		teclado.nextLine();
 
 		LeituraDeDados leitura = new LeituraDeDados();
 
@@ -37,20 +37,28 @@ public class Agendamento {
 
 		Dentista dentista = new Dentista();
 
-		boolean existe = false;
+		boolean existeDentista = false;
 
-		for(Dentista denti : listaDentista){
-			if(denti.getNome().equals(nomeDentista) && denti.isStatus()){
-				existe = true;
-				dentista = denti;
+		if(mapaDentista.containsKey(cro)){
+			if(mapaDentista.get(cro).isStatus()){
+				existeDentista = true;
+				dentista = mapaDentista.get(cro);
+			}else{
+				System.out.println("Dentista existe mas porem esta inativo!");
+				existeDentista = false;
 			}
+
+		}else{
+			existeDentista = false;
 		}
 
-		if(!existe){
+
+		if(!existeDentista){
 			System.out.println("Dentista não encontrado");
 
 			System.out.println("1- Deseja continuar");
 			System.out.println("2- Deseja voltar ao Menu anterior");
+			System.out.println("3- Consultar Dentistas");
 			int opc = teclado.nextInt();
 			teclado.nextLine();
 
@@ -62,94 +70,126 @@ public class Agendamento {
 			case 2:
 				Menus m = new Menus();
 				m.menuSecretario();
-				
-			default:
-				System.out.println("Opção invalida");
 				break;
-			}
-		}
-		
-		System.out.println("Informe o nome do Paciente");
-		String nomePaciente = teclado.nextLine();
-		// Cliente
-
-		List<Cliente>listaPacientes = new ArrayList<Cliente>();
-
-		leitura.leituraPacientes(listaPacientes);
-		boolean existePaciente = false;
-		
-		Cliente paciente = new Cliente();
-
-		for(Cliente client : listaPacientes){
-			if(client.getNome().equals(nomePaciente) && client.isStatus()){
-				existePaciente = true;
-				paciente = client;
-			}
-		}
-
-		if(!existePaciente){
-			System.out.println("Paciente não encontrado");
-
-			 System.out.println("1- Deseja continuar");
-			System.out.println("2- Deseja voltar ao Menu anterior");
-			int opc = teclado.nextInt();
-			teclado.nextLine();
-
-			switch (opc) {
-			case 1:
+			case 3:
+				for(Dentista d : listaDentista){
+					if(d.isStatus()){
+						System.out.println(d.getNome()+" CRO: "+d.getCro());
+					}
+				}
 				agendar();
 				break;
 
-			case 2:
-				Menus m = new Menus();
-				m.menuSecretario();
-				
 			default:
 				System.out.println("Opção invalida");
 				break;
 			}
 		}
+
+		boolean continua = false;
+
+		Scanner tecladoP = new Scanner(System.in);
 		
-		System.out.println("Informe o nome do Tratamento");
-		String tratamento = teclado.nextLine();
+		do{
+			System.out.println("Informe o nome do Paciente");
+			String nomePaciente = tecladoP.nextLine();
 
-		List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
-		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+			List<Cliente>listaPacientes = new ArrayList<Cliente>();
 
-		leitura.leituraTratamento(listaTratamento, mapaTratamento);;
+			leitura.leituraPacientes(listaPacientes);
+			boolean existePaciente = false;
 
-		Tratamentos tratamentos = new Tratamentos();
+			Cliente paciente = new Cliente();
 
-		for(Tratamentos tratado : listaTratamento){
-			if(tratado.getTratamento().equals(tratamento)){
-				existe = true;
-				tratamentos = tratado;
+			for(Cliente client : listaPacientes){
+				if(client.getNome().equals(nomePaciente) && client.isStatus()){
+					existePaciente = true;
+					paciente = client;
+					continua = false;
+				}
 			}
-		}
 
-		if(!existe){
-			System.out.println("Tratamento não encontrado");
+			if(!existePaciente){
+				System.out.println("Paciente não encontrado");
 
-			System.out.println("1- Deseja continuar");
-			System.out.println("2- Deseja voltar ao Menu anterior");
-			int opc = teclado.nextInt();
-			teclado.nextLine();
+				System.out.println("1- Deseja continuar");
+				System.out.println("2- Deseja voltar ao Menu anterior");
+				int opc = tecladoP.nextInt();
+				tecladoP.nextLine();
 
-			switch (opc) {
-			case 1:
-				agendar();
-				break;
+				switch (opc) {
+				case 1:
+					continua = true;
+					break;
 
-			case 2:
-				Menus m = new Menus();
-				m.menuSecretario();
-				
-			default:
-				System.out.println("Opção invalida");
-				break;
+				case 2:
+					Menus m = new Menus();
+					m.menuSecretario();
+					continua = false;
+					break;
+				default:
+					System.out.println("Opção invalida");
+					break;
+				}
 			}
-		}
+		}while(continua);
+
+		boolean cont = false;
+		
+		Scanner tecladoT = new Scanner(System.in); 
+
+		// Parte do Tratamento
+		do{
+			System.out.println("Informe o nome do Tratamento");
+			String tratamento = tecladoT.nextLine();
+
+			List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
+			Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+
+			leitura.leituraTratamento(listaTratamento, mapaTratamento);;
+
+			Tratamentos tratamentos = new Tratamentos();
+
+			boolean existeTratamento = false;
+
+			for(Tratamentos tratado : listaTratamento){
+				if(tratado.getTratamento().equals(tratamento)){
+					existeTratamento = true;
+					tratamentos = tratado;
+					cont = false;
+				}
+			}
 
 
+			if(!existeTratamento){
+				System.out.println("Tratamento não encontrado");
+
+				System.out.println("1- Deseja continuar");
+				System.out.println("2- Deseja voltar ao Menu anterior");
+				System.out.println("3- Listar Tratamentos");
+				int opc = tecladoT.nextInt();
+				tecladoT.nextLine();
+
+				switch (opc) {
+				case 1:
+					cont = true;
+					break;
+
+				case 2:
+					Menus m = new Menus();
+					m.menuSecretario();
+					break;
+				case 3:
+					for(Tratamentos t : listaTratamento){
+						System.out.println(t.getTratamento()+" R$"+t.getValor());
+					}
+					cont = true;
+					break;
+				default:
+					System.out.println("Opção invalida");
+					break;
+				}
+			}
+		}while(cont);	
 	}
 }
