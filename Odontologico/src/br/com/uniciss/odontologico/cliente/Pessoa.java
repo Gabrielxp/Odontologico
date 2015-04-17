@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -171,6 +172,9 @@ public abstract class Pessoa {
 			do{
 				System.out.println("Insira a data de nascimento(DD/MM/AAAA)");
 				dataDeNascimento = teclado.next();
+				
+				if (validaData() == false)
+					System.out.println("Data invalida! Tente novamente");
 			}while (validaData() == false);
 
 	}
@@ -281,26 +285,30 @@ public abstract class Pessoa {
 		DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		data.setLenient(false);
 		
-		Calendar c = Calendar.getInstance();
-		
-		Date d = new Date();
-		DateFormat sis = new SimpleDateFormat("dd/MM/yyyy");
-		sis.format(d);
+		SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+
+		Date dataInformada = new Date();
+		formata = new SimpleDateFormat("dd/MM/yyyy");
+		formata.setLenient(false);
 		
 		
 		
 		try {
-			c.setTime(data.parse(dataDeNascimento));
-			if (c.before(d)){
+			dataInformada = formata.parse(dataDeNascimento);
+			data.parse(dataDeNascimento);
+			
+			if ((new Date()).getTime() > dataInformada.getTime()){
 				return true;
 			}
-		} catch (ParseException e1) {
-			System.out.println("sapora funciona");
+			
+		} catch (ParseException e) {
 				return false;
 		}
-		return true;
+		return false;
 		
-		
+	}
+	
+	public void validaHora(){
 		
 	}
 }
