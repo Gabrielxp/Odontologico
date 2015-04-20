@@ -34,7 +34,14 @@ public class Secretario extends Funcionario {
 		Gravar g = new Gravar();
 		g.grava("documentos/secretarios.txt", toString());
 		g.grava("documentos/users.txt", toString2());
-		return;
+		
+		System.out.println();
+		System.out.println("Cadastro efetuado com sucesso!!");
+		System.out.println();
+		
+		
+		Menus m = new Menus();
+		m.menuAdmin();
 	}
 
 	public void consultarPaciente() {
@@ -248,6 +255,7 @@ public class Secretario extends Funcionario {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
 		int escolha = teclado.nextInt();
+		teclado.nextLine();
 		switch (escolha) {
 		case 1:
 			System.out.println("Informe o nome : ");
@@ -286,6 +294,10 @@ public class Secretario extends Funcionario {
 		Gravar g = new Gravar();
 		g.grava("documentos/pacientes.txt", toString());
 
+		System.out.println();
+		System.out.println("Edição Realizada com Sucesso!");
+		System.out.println();
+		
 		Menus m = new Menus();
 		m.menuSecretario();
 

@@ -128,19 +128,19 @@ public class Admin {
 
 	// Metodo que edita um Paciente caso ele exista e esteja com o status Ativo
 	public void editarPaciente() throws FileNotFoundException, IOException {
-		int cod;
+		String nome;
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
 		Menus m = new Menus();
 
 		leia.leituraPacientes(listaPacientes);
 
 		System.out.println("Determine o codigo da pessoa a ser editado: ");
-		cod = entrada.nextInt();
+		nome = entrada.nextLine();
 		boolean continua = false;
 
 		for (Cliente cliente : listaPacientes) {
 
-			if (cod == cliente.getCodigo()) {
+			if (nome.equals(cliente.getNome())) {
 				if (cliente.isStatus()) {
 					Secretario secretario = new Secretario();
 					secretario.editarPaciente();
