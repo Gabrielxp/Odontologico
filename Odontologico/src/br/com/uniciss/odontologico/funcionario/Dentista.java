@@ -176,6 +176,7 @@ public class Dentista extends Funcionario {
 					System.out
 							.println("Atenção este paciente esta como inativo");
 				}
+
 				System.out.println("Codigo:" + paciente.getCodigo());
 				System.out.println("Nome:" + paciente.getNome());
 				System.out.println("RG:" + paciente.getRg());
@@ -183,31 +184,43 @@ public class Dentista extends Funcionario {
 				System.out.println("Endereço:" + paciente.getEndereco());
 				System.out.println("---------------------");
 				System.out.println("Ficha de Encaminhamento Gerada");
+
+				Date date = new Date();
+				SimpleDateFormat formato = new SimpleDateFormat("dd.MM.YYYY");
+				FileWriter arquivo;
+				arquivo = new FileWriter(new File(formato.format(date)
+						+ paciente.getNome() + ".txt"));
+				arquivo.write("-------Ficha Encaminhamento "
+						+ paciente.getNome()
+						+ "----------"
+						+ "\nCodigo: "
+						+ paciente.getCodigo()
+						+ "\nNome:"
+						+ paciente.getNome()
+						+ "\nRG:"
+						+ paciente.getRg()
+						+ "\nCPF:"
+						+ paciente.getCpf()
+						+ "\nEndereço:"
+						+ paciente.getEndereco()
+						+ "\nTratamento:___________________________________________"
+						+ "\nObservações:__________________________________________"
+						+ "\n                     Assinatura           "
+						+ "\n                ___________________"
+						+ "\n                    " + formato.format(date)
+
+				);
+				arquivo.close();
 				Menus m = new Menus();
 				m.menuDentista();
+
 			}else{
+				System.out.println("Paciente Inexistente");
 				Menus m = new Menus();
 				m.menuDentista();
+				
 			}
-			Date date = new Date();
-			SimpleDateFormat formato = new SimpleDateFormat("dd.MM.YYYY");
-			 FileWriter arquivo;
-			arquivo = new FileWriter(new File(formato.format(date)+paciente.getNome()+".txt"));  
-            arquivo.write("-------Ficha Encaminhamento "+paciente.getNome()+"----------"
-            		+"\nCodigo: " + paciente.getCodigo()
-            		+"\nNome:" + paciente.getNome()
-            		+"\nRG:" + paciente.getRg()
-            		+"\nCPF:" + paciente.getCpf()
-            		+"\nEndereço:" + paciente.getEndereco()
-            		+"\nTratamento:___________________________________________"
-            		+"\nObservações:__________________________________________"
-            		+"\n                     Assinatura           "
-            		+"\n                ___________________"
-            		+"\n                    "+formato.format(date)
-  
-            		
-            		);  
-            arquivo.close();  
+
 		}
 
 	}
