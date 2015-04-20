@@ -137,6 +137,52 @@ public class Dentista extends Funcionario {
 		Menus m = new Menus();
 		m.menuAdmin();
 	}
+	
+	public void ativarDentista() throws IOException {
+		LeituraDeDados leitura = new LeituraDeDados();
+
+		List<Dentista> listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
+
+		leitura.leituraDentista(listaDentista, mapaDentista);
+		teclado = new Scanner(System.in);
+
+		System.out.println("Digite o CRO do dentista");
+		int cro = teclado.nextInt();
+
+		boolean existe = true;
+
+		for (Dentista d : listaDentista) {
+			if (d.getCro() == cro) {
+				existe = false;
+				if (d.isStatus()) {
+					System.out.println("Este Dentista ja foi ativado");
+				} else {
+					d.setStatus(true);
+
+					Gravar g = new Gravar();
+					g.editar("documentos/dentistas.txt");
+
+					for (Dentista f : listaDentista) {
+						g.grava("documentos/dentistas.txt",
+								f.toStringDentista());
+					}
+
+				}
+			}
+
+		}
+		if (!existe) {
+			System.out.println("CRO inexistente");
+		}
+		
+		System.out.println();
+		System.out.println("Ativação efetuada com sucesso!");
+		System.out.println();
+		
+		Menus m = new Menus();
+		m.menuAdmin();
+	}
 
 	@SuppressWarnings("resource")
 	public boolean validaCroExistente() throws IOException {
