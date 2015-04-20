@@ -36,10 +36,10 @@ public class Dentista extends Funcionario {
 			cro = teclado.nextInt();
 			croTexto = String.valueOf(cro);
 
-			if ((!validaCro(croTexto) || validaCro() == true))
+			if ((!validaCro(croTexto) || validaCroExistente() == true))
 				System.out.println("CRO invalido ou ja cadastrado");
 
-		} while ((!validaCro(croTexto) || validaCro() == true));
+		} while ((!validaCro(croTexto) || validaCroExistente() == true));
 
 		System.out.println(toStringDentista());
 		tipo = "dentista";
@@ -139,7 +139,7 @@ public class Dentista extends Funcionario {
 	}
 
 	@SuppressWarnings("resource")
-	public boolean validaCro() throws IOException {
+	public boolean validaCroExistente() throws IOException {
 		BufferedReader d = new BufferedReader(new FileReader(
 				"documentos/dentistas.txt"));
 
