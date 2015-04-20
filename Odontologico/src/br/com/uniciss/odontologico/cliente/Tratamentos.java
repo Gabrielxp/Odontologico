@@ -15,8 +15,17 @@ import br.com.uniciss.odontologico.funcionario.Secretario;
 public class Tratamentos {
 
 	protected String valor;
+	/**
+	 * Variavel valor, relacionada valor do tratamento
+	 */
 	protected String tratamento;
+	/**
+	 * Variavel tratamento, relacionada ao nome do tratamento
+	 */
 	protected int codigo;
+	/**
+	 * Variavel codigo, relacionada ao codigo individual
+	 */
 	Scanner teclado = new Scanner(System.in);
 
 	public int getCodigo() {
@@ -42,12 +51,19 @@ public class Tratamentos {
 	public void setTratamento(String tratamento) {
 		this.tratamento = tratamento;
 	}
-	
+	/**
+	 * Metodo para salvar os dados do Tratamento
+	 * @method toString();
+	 */
 	public String toString() {
 		return "Tratamento" + "," + getCodigo() + "," + getTratamento() + ","
 				+ getValor();
 	}
 
+	/**
+	 * Metodo para cadastrar um novo Tratamento
+	 * @method cadastraTratamentos();
+	 */
 	public void cadastraTratamentos() throws IOException {
 		do {
 			System.out.println("Escreva o Tratamento a ser feito: ");
