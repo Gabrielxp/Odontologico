@@ -155,7 +155,7 @@ public class Menus {
 		case 6:
 			c.listarConsulta();
 		case 7:
-			Programa.main(null);
+			Programa.main(null); 
 			break;
 		default:
 			System.out.println("Opção inválida.");
