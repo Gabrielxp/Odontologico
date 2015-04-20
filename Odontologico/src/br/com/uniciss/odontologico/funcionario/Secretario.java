@@ -276,7 +276,7 @@ public class Secretario extends Funcionario {
 				} else {
 					client.setStatus(false);
 					System.out.println();
-					System.out.println("Paciente Inativado Com Sucesso");
+					System.out.println("Paciente Inativado Com Sucesso!");
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
 
@@ -318,7 +318,7 @@ public class Secretario extends Funcionario {
 				} else {
 					client.setStatus(true);
 					System.out.println();
-					System.out.println("Paciente Ativado Com Sucesso");
+					System.out.println("Paciente Ativado Com Sucesso!");
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
 
