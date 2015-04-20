@@ -82,11 +82,6 @@ public class Cliente extends Pessoa{
 			break;
 		}
 
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Cliente> listaPacientes = new ArrayList<Cliente>();
-
-		leitura.leituraPacientes(listaPacientes);
-		setCodigo(listaPacientes.size());
 	}
 	
 	public String toStringPaciente() {

@@ -11,7 +11,9 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.cliente.Tratamentos;
 
 public class Secretario extends Funcionario {
 
@@ -251,7 +253,42 @@ public class Secretario extends Funcionario {
 	}
 
 	
-	public void alterarStatusPaciente() {
-
+	public void listarConsulta() throws IOException {
+		Scanner teclado = new Scanner(System.in);
+		
+		List<Agendamento> listaConsultas = new ArrayList<Agendamento>();
+		List<Tratamentos> listaTratamento = new ArrayList<Tratamentos>();
+		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+		List<Cliente> listaPacientes = new ArrayList<Cliente>();
+		Map<Integer, Cliente>mapaPacientes = new HashMap<Integer, Cliente>();
+		
+		//Informaçoes de Dentistas
+		List<Dentista>listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
+		
+		LeituraDeDados leitura = new LeituraDeDados();
+		leitura.leituraConsultas(listaConsultas);
+		leitura.leituraTratamento(listaTratamento, mapaTratamento);
+		leitura.leituraPacientes(listaPacientes);
+		leitura.leituraDentista(listaDentista, mapaDentista);
+		
+		for(Cliente c : listaPacientes){
+			mapaPacientes.put(c.getCodigo(), c);
+		}
+		
+		System.out.println("Informe a data");
+		String data = teclado.nextLine();
+		
+		for(Agendamento consulta : listaConsultas){
+			if(consulta.getDataDoAgendamento().equals(data)){
+				System.out.println("--------------------------------------");
+				System.out.println("Horario: "+consulta.getHora());
+				System.out.println("Tratamento: "+mapaTratamento.get(consulta.getIdTratamento()).getTratamento());
+				System.out.println("Paciente: "+mapaPacientes.get(consulta.getIdPaciente()).getNome());
+				System.out.println("Dentista: "+mapaDentista.get(consulta.getCroDentista()).getNome());
+			}
+		}
+		Menus m = new Menus();
+		m.menuSecretario();
 	}
 }

@@ -234,6 +234,9 @@ public class Agendamento {
 		cont = false;
 		continua = false;
 		
+		List<Agendamento>listaConsultas = new ArrayList<Agendamento>();
+		leitura.leituraConsultas(listaConsultas);
+		setCod(listaConsultas.size());
 		
 		Gravar gravar = new Gravar();
 		gravar.grava("documentos/consultas.txt", toString());

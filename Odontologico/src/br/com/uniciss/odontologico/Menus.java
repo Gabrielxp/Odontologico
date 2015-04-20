@@ -127,7 +127,8 @@ public class Menus {
 		System.out.println("3 - Editar Paciente");
 		System.out.println("4 - Alterar Status Paciente");
 		System.out.println("5 - Agendar Consulta");
-		System.out.println("6 - Sair");
+		System.out.println("6 - Listar Consultas");
+		System.out.println("7 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
@@ -151,8 +152,10 @@ public class Menus {
 			ag.agendar();
 			break;
 		case 6:
+			c.listarConsulta();
+		case 7:
 			Programa.main(null);
-
+			break;
 		default:
 			System.out.println("Opção inválida.");
 		}
