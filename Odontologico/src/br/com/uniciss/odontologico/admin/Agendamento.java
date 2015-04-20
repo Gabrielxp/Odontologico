@@ -232,7 +232,7 @@ public class Agendamento {
 		}while(validaHoraAngendada() == false || validaDataHoraDiponivel() == true);
 
 		cont = false;
-		continua = false;   
+		continua = false;
 		
 		List<Agendamento>listaConsultas = new ArrayList<Agendamento>();
 		leitura.leituraConsultas(listaConsultas);

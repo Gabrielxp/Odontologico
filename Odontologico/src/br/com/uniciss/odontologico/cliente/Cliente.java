@@ -27,7 +27,10 @@ public class Cliente extends Pessoa{
 		this.tratamento = tratamento;
 	}
 
-
+	/**
+	 * Metodo para Cadastrar Paciente
+	 * @method cadastrarCliente();
+	 */
 	public void cadastrarCliente() throws FileNotFoundException, IOException{
 		System.out.println("---------Cadastro de Clientes--------");
 		cadastro();
@@ -47,6 +50,10 @@ public class Cliente extends Pessoa{
 		m.menuSecretario();
 	}
 	
+	/**
+	 * Metodo para editar Paciente
+	 * @method editarPaciente();
+	 */
 	public void editarPaciente() throws IOException {
 		System.out.println("---------Editar Clientes--------");
 		Scanner teclado = new Scanner(System.in);
@@ -84,6 +91,10 @@ public class Cliente extends Pessoa{
 
 	}
 	
+	/**
+	 * Metodo para salvar os dados Paciente
+	 * @method toStringPaciente();
+	 */
 	public String toStringPaciente() {
 		return "Paciente" + "," + getCodigo() + "," + getNome() + ","
 				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
