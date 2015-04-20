@@ -169,9 +169,12 @@ public abstract class Pessoa {
 			setStatus(true);
 			
 			//Le e valida a data de nascimento
+			
+			Scanner pqp = new Scanner(System.in);
+			
 			do{
 				System.out.println("Insira a data de nascimento(DD/MM/AAAA)");
-				dataDeNascimento = teclado.next();
+				dataDeNascimento = pqp.next();
 				
 				if (validaData() == false)
 					System.out.println("Data invalida! Tente novamente");
