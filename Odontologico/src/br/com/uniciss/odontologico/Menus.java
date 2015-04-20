@@ -10,6 +10,8 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.swing.MenuSelectionManager;
+
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.admin.Agendamento;
@@ -25,7 +27,11 @@ public class Menus {
 	Map<String, Funcionario> mapaUsuario = new HashMap<String, Funcionario>();
 
 	Scanner s = new Scanner(System.in);
-
+	/**
+	 * Método Login, utilizado para validação de login e senha
+	 * @throws IOException
+	 * 
+	 */
 	public void Login() throws IOException {
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
@@ -41,7 +47,6 @@ public class Menus {
 
 			if ((mapaUsuario.containsKey(usuario))
 					&& (mapaUsuario.get(usuario).getSenha().equals(senha))) {
-				// Chamada do menu, conforme o tipo de Usuário
 
 				if ((mapaUsuario.containsKey(usuario))
 						&& (mapaUsuario.get(usuario).getTipo()
@@ -75,7 +80,10 @@ public class Menus {
 
 	}
 
-	// Menu dentista
+	/**
+	 *  Metodo menuDentista, utilizado para escolha de opcoes do usuario dentista
+	 * @throws IOException
+	 */
 	public void menuDentista() throws IOException {
 
 		Dentista d = new Dentista();
@@ -114,7 +122,10 @@ public class Menus {
 		}
 	}
 
-	// Menu Secretario
+	/**
+	 *  Metodo menuSecretario, utilizado para escolha de opcoes do usuario secretario
+	 * @throws IOException
+	 */
 	public void menuSecretario() throws IOException {
 
 		Secretario c = new Secretario();
@@ -165,6 +176,10 @@ public class Menus {
 			System.out.println("Opção inválida.");
 		}
 	}
+	/**
+	 *  Metodo menuAdmin, utilizado para escolha de opcoes do usuario administrador
+	 * @throws IOException
+	 */
 
 	public void menuAdmin() throws FileNotFoundException, IOException {
 		Secretario c = new Secretario();

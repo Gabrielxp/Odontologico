@@ -24,16 +24,29 @@ import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 
 public class Login extends JFrame implements ActionListener {
-
+	/**
+	 * Variavel login, utilizada para realização de login
+	 */
 	JTextField login;
+	/**
+	 * Variavel senha, utilizada para realização de login
+	 */
 	JPasswordField senha;
-
+	/**
+	 * Variavel logar, utilizada para criação de botão
+	 */
+	/**
+	 * Variavel cancelar, utilizada para criação de botão
+	 */
 	JButton logar, cancelar;
 
+	/**
+	 * Método Login, utilizado na formação gráfica e no login do sistema
+	 */
 	public Login() {
 		super("Atendimento Odontologico");
 
-		logar = new JButton("Logar"); 
+		logar = new JButton("Logar");
 		logar.addActionListener(this);
 
 		cancelar = new JButton("Cancelar");
@@ -50,7 +63,6 @@ public class Login extends JFrame implements ActionListener {
 		c.add(senha);
 		c.add(logar);
 		c.add(cancelar);
-	
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300, 150);
@@ -58,40 +70,35 @@ public class Login extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Método actionPerformed, utilizado para eventos
+	 */
+
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == logar){
+		if (e.getSource() == logar) {
 			setVisible(false);
 		}
 		if (e.getSource() == cancelar) {
-			 System.exit(0);  
+			System.exit(0);
 		}
-			
 
-		
+		ArrayList<Funcionario> listaUsuario = new ArrayList<Funcionario>();
+		Map<String, Funcionario> mapaUsuario = new HashMap<String, Funcionario>();
 
-	
-	
-	ArrayList<Funcionario> listaUsuario = new ArrayList<Funcionario>();
-	Map<String, Funcionario> mapaUsuario = new HashMap<String, Funcionario>();
+		Scanner s = new Scanner(System.in);
 
-	Scanner s = new Scanner(System.in);
-
-	
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
 		try {
 			BufferedReader entrada = new BufferedReader(new InputStreamReader(
 					System.in));
 
-			//System.out.println("Informe o Login:");
 			String usuario = login.getText();
 
-			//System.out.println("Informe a senha:");
 			String senhax = new String(senha.getPassword());
 
 			if ((mapaUsuario.containsKey(usuario))
 					&& (mapaUsuario.get(usuario).getSenha().equals(senhax))) {
-				// Chamada do menu, conforme o tipo de Usuário
 
 				if ((mapaUsuario.containsKey(usuario))
 						&& (mapaUsuario.get(usuario).getTipo()
@@ -108,18 +115,19 @@ public class Login extends JFrame implements ActionListener {
 
 				} else if ((mapaUsuario.containsKey(usuario))
 						&& (mapaUsuario.get(usuario).getTipo().equals("admin"))) {
-					
-						Menus m = new Menus();
-						m.menuAdmin();
-					
+
+					Menus m = new Menus();
+					m.menuAdmin();
+
 				}
 
 			} else {
 				System.out.println("Usuario e/ou senha invalido(s)!");
 				System.out.println("");
-				JOptionPane.showMessageDialog(logar, "Usuario e/ou senha invalido(s)!");
+				JOptionPane.showMessageDialog(logar,
+						"Usuario e/ou senha invalido(s)!");
 				Programa.main(null);
-				
+
 			}
 
 		} catch (InputMismatchException i) {
@@ -128,11 +136,11 @@ public class Login extends JFrame implements ActionListener {
 			System.out.println("Você informou algum caracter inválido(s)! ");
 
 		} catch (NullPointerException b) {
-			
+
 			System.out.println("Login inexistente!");
-			
-		} catch (IOException e1) {  
-			
+
+		} catch (IOException e1) {
+
 			e1.printStackTrace();
 		}
 	}
