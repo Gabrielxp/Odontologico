@@ -215,7 +215,7 @@ public class Menus {
 			c.inativarSecretario();
 			break;
 		case 11:
-			Programa.main(null);
+			System.out.println("Obrigado por utilizar nosso sistema :)");
 		break;
 		default:
 			System.out.println("Opção inválida.");

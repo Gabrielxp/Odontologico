@@ -109,7 +109,7 @@ public class LeituraDeDados {
 			System.out.println("Erro de Leitura");
 		}
 	}
-	
+
 	//Metodo que faz a leitura do arquivo tratamentos.txt
 	public void leituraTratamento(List<Tratamentos>listaTratamento,Map<Integer, Tratamentos>mapaTratamento){
 		try{  
@@ -127,7 +127,7 @@ public class LeituraDeDados {
 
 				listaTratamento.add(t);
 				mapaTratamento.put(t.getCodigo(), t);
-				
+
 				linha = lerArq.readLine();
 			} 
 
@@ -136,34 +136,32 @@ public class LeituraDeDados {
 
 		}
 	}
-	
+
 	//Metodo que faz a leitura de consultas do arquivo consultas.txt
+	public void leituraConsultas(List<Agendamento>listaConsultas){
+		try{  
+			FileReader arq = new FileReader("documentos/consultas.txt");
+			BufferedReader lerArq = new BufferedReader(arq); 
+			String linha = lerArq.readLine();  
+			while (linha != null) {
+				String palavras[] = linha.split(",");
 
-		public void leituraConsultas(List<Agendamento>listaConsultas){
-			try{  
-				FileReader arq = new FileReader("documentos/consultas.txt");
-				BufferedReader lerArq = new BufferedReader(arq); 
-				String linha = lerArq.readLine();  
+				Agendamento a = new Agendamento();
+				a.setCod(Integer.parseInt(palavras[1]));
+				a.setDataDoAgendamento(palavras[2]);
+				a.setHora(palavras[3]);
+				a.setCroDentista(Integer.parseInt(palavras[4]));
+				a.setIdPaciente(Integer.parseInt(palavras[5]));
+				a.setIdTratamento(Integer.parseInt(palavras[6]));
 
-				while (linha != null) {
-					String palavras[] = linha.split(",");
+				listaConsultas.add(a);
 
-					Agendamento a = new Agendamento();
-					a.setCod(Integer.parseInt(palavras[1]));
-					a.setDataDoAgendamento(palavras[2]);
-					a.setHora(palavras[3]);
-					a.setCroDentista(Integer.parseInt(palavras[4]));
-					a.setIdPaciente(Integer.parseInt(palavras[5]));
-					a.setIdTratamento(Integer.parseInt(palavras[6]));
+				linha = lerArq.readLine();
+			} 
 
-					listaConsultas.add(a);
+			arq.close();
+		}catch (IOException e) { 
 
-					linha = lerArq.readLine();
-				} 
-
-				arq.close();
-			}catch (IOException e) { 
-
-			}
 		}
+	}
 }
