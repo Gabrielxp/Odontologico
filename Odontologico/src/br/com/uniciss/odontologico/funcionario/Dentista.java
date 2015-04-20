@@ -42,7 +42,7 @@ public class Dentista extends Funcionario {
 		} while ((!validaCro(croTexto) || validaCro() == true));
 
 		tipo = "dentista";
-		setStatus(true);
+		setStatus(true);  
 
 		LeituraDeDados leitura = new LeituraDeDados();
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
