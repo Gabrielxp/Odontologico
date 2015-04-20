@@ -6,9 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.Menus;
+import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
@@ -166,5 +168,81 @@ abstract public class Funcionario extends Pessoa {
 		}
 		return false;
 
+	}
+	
+	public void editarFuncionario() throws IOException {
+		System.out.println("---------Editar Funcionario--------");
+		Scanner teclado1 = new Scanner(System.in);
+		Scanner teclado2 = new Scanner(System.in);
+		Scanner teclado3 = new Scanner(System.in);
+		Scanner teclado4 = new Scanner(System.in);
+		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
+		int escolha = teclado1.nextInt();
+		teclado1.nextLine();
+		switch (escolha) {
+		case 1:
+			System.out.println("Informe o nome : ");
+			setNome(teclado1.nextLine());
+
+			break;
+		case 2:
+			
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+		
+		
+		System.out.println("Deseja Editar o endereço? 1 - Sim, 2 - Não");
+		int escolha2 = teclado2.nextInt();
+		teclado2.nextLine();
+		switch (escolha2) {
+		case 1:
+			System.out.println("Informe o Endereço: ");
+			endereco = (teclado2.nextLine());
+			break;
+		case 2:
+
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+		
+		
+		System.out.println("Deseja Editar a hora de entrada ? 1 - Sim, 2 - Não");
+		int escolha3 = teclado3.nextInt();
+		switch (escolha3) {
+		case 1:
+			teclado3.nextLine();
+			System.out.println("Informe hora de entrada: ");
+			horaDeEntrada = (teclado3.next());
+			break;
+		case 2:
+
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+		
+		
+		System.out.println("Deseja Editar a hora de saida ? 1 - Sim, 2 - Não");
+		int escolha4 = teclado4.nextInt();
+		switch (escolha4) {
+		case 1:
+			teclado4.nextLine();
+			System.out.println("Informe hora de saida: ");
+			horaDeSaida = (teclado4.next());
+			break;
+		case 2:
+
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+		
 	}
 }

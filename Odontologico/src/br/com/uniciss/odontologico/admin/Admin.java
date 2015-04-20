@@ -35,7 +35,7 @@ public class Admin {
 
 			if (nome.equals(s.getNome())) {
 				if (s.isStatus()) {
-					s.cadastro();
+					s.editarFuncionario();
 					continua = true;
 				} else {
 					System.out
@@ -88,7 +88,7 @@ public class Admin {
 
 			if (nome.equals(s.getNome())) {
 				if (s.isStatus()) {
-					s.cadastro();
+					s.editarFuncionario();
 					continua = true;
 				} else {
 					System.out
