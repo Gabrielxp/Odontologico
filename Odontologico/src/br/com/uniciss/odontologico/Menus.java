@@ -108,6 +108,7 @@ public class Menus {
 			break;
 		case 5:
 			Programa.main(null);
+			break;
 		default:
 			System.out.println("Opção inválida.");
 		}

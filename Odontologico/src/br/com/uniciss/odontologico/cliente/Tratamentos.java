@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.funcionario.Secretario;
@@ -69,7 +70,8 @@ public class Tratamentos {
 		Gravar g = new Gravar();
 		g.grava("documentos/tratamentos.txt", toString());
 		
-		return;
+		Menus m = new Menus();
+		m.menuDentista();
 	}
 
 }
