@@ -84,26 +84,23 @@ public class Menus {
 		System.out.println();
 		System.out.println("-' Dentista '- ");
 		System.out.println("Escolha uma opção:");
-		System.out.println("1 - Consultar");
-		System.out.println("2 - Editar Paciente");
-		System.out.println("3 - Cadastrar Tratamento");
-		System.out.println("4 - Encaminhar Paciente");
-		System.out.println("5 - Sair");
+		System.out.println("1 - Editar Paciente");
+		System.out.println("2 - Cadastrar Tratamento");
+		System.out.println("3 - Encaminhar Paciente");
+		System.out.println("4 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
+	
 		case 1:
-			System.out.println("DESATIVADO");
-			break;
-		case 2:
 			Admin admin = new Admin();
 			admin.editarPaciente();
 			break;
-		case 3:
+		case 2:
 		Tratamentos t = new Tratamentos();
 		t.cadastraTratamentos();
 			break;
-		case 4:
+		case 3:
 			System.out.println("Determine o nome");
 			Scanner teclado = new Scanner(System.in);
 			String nome = teclado.nextLine();
