@@ -41,9 +41,8 @@ public class Dentista extends Funcionario {
 
 		} while ((!validaCro(croTexto) || validaCroExistente() == true));
 
-		System.out.println(toStringDentista());
 		tipo = "dentista";
-		setStatus(true);
+		setStatus(true);  
 
 		LeituraDeDados leitura = new LeituraDeDados();
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -56,7 +55,8 @@ public class Dentista extends Funcionario {
 		Gravar g = new Gravar();
 		g.grava("documentos/dentistas.txt", toStringDentista());
 		g.grava("documentos/users.txt", toString2());
-		return;
+		Menus menu = new Menus();
+		menu.menuAdmin();
 
 	}
 

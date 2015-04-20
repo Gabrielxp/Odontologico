@@ -117,6 +117,7 @@ public class Login extends JFrame implements ActionListener {
 			} else {
 				System.out.println("Usuario e/ou senha invalido(s)!");
 				System.out.println("");
+				JOptionPane.showMessageDialog(logar, "Usuario e/ou senha invalido(s)!");
 				Programa.main(null);
 				
 			}

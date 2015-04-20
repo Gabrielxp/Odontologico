@@ -11,7 +11,9 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.cliente.Cliente;
+import br.com.uniciss.odontologico.cliente.Tratamentos;
 
 public class Secretario extends Funcionario {
 
@@ -250,60 +252,43 @@ public class Secretario extends Funcionario {
 		m.menuSecretario();
 	}
 
-	public void editarPaciente() throws IOException {
-		System.out.println("---------Editar Clientes--------");
+	
+	public void listarConsulta() throws IOException {
 		Scanner teclado = new Scanner(System.in);
-		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
-		int escolha = teclado.nextInt();
-		teclado.nextLine();
-		switch (escolha) {
-		case 1:
-			System.out.println("Informe o nome : ");
-			setNome(teclado.nextLine());
-
-			break;
-		case 2:
-
-			break;
-		default:
-			System.out.println("Opção Errada!");
-			break;
-		}
-		System.out.println("Deseja Editar o endereço? 1 - Sim, 2 - Não");
-		int escolha2 = teclado.nextInt();
-		switch (escolha2) {
-		case 1:
-			teclado.nextLine();
-			System.out.println("Informe o Endereço: ");
-			endereco = (teclado.next());
-			break;
-		case 2:
-
-			break;
-		default:
-			System.out.println("Opção Errada!");
-			break;
-		}
-
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Cliente> listaPacientes = new ArrayList<Cliente>();
-
-		leitura.leituraPacientes(listaPacientes);
-		setCodigo(listaPacientes.size());
-
-		Gravar g = new Gravar();
-		g.grava("documentos/pacientes.txt", toString());
-
-		System.out.println();
-		System.out.println("Edição Realizada com Sucesso!");
-		System.out.println();
 		
+		List<Agendamento> listaConsultas = new ArrayList<Agendamento>();
+		List<Tratamentos> listaTratamento = new ArrayList<Tratamentos>();
+		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+		List<Cliente> listaPacientes = new ArrayList<Cliente>();
+		Map<Integer, Cliente>mapaPacientes = new HashMap<Integer, Cliente>();
+		
+		//Informaçoes de Dentistas
+		List<Dentista>listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
+		
+		LeituraDeDados leitura = new LeituraDeDados();
+		leitura.leituraConsultas(listaConsultas);
+		leitura.leituraTratamento(listaTratamento, mapaTratamento);
+		leitura.leituraPacientes(listaPacientes);
+		leitura.leituraDentista(listaDentista, mapaDentista);
+		
+		for(Cliente c : listaPacientes){
+			mapaPacientes.put(c.getCodigo(), c);
+		}
+		
+		System.out.println("Informe a data");
+		String data = teclado.nextLine();
+		
+		for(Agendamento consulta : listaConsultas){
+			if(consulta.getDataDoAgendamento().equals(data)){
+				System.out.println("--------------------------------------");
+				System.out.println("Horario: "+consulta.getHora());
+				System.out.println("Tratamento: "+mapaTratamento.get(consulta.getIdTratamento()).getTratamento());
+				System.out.println("Paciente: "+mapaPacientes.get(consulta.getIdPaciente()).getNome());
+				System.out.println("Dentista: "+mapaDentista.get(consulta.getCroDentista()).getNome());
+			}
+		}
 		Menus m = new Menus();
 		m.menuSecretario();
-
-	}
-
-	public void alterarStatusPaciente() {
-
 	}
 }

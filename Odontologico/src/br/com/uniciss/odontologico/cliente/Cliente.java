@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
@@ -44,6 +45,43 @@ public class Cliente extends Pessoa{
 		
 		Menus m = new Menus();
 		m.menuSecretario();
+	}
+	
+	public void editarPaciente() throws IOException {
+		System.out.println("---------Editar Clientes--------");
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
+		int escolha = teclado.nextInt();
+		teclado.nextLine();
+		switch (escolha) {
+		case 1:
+			System.out.println("Informe o nome : ");
+			setNome(teclado.nextLine());
+
+			break;
+		case 2:
+
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+		System.out.println("Deseja Editar o endereço? 1 - Sim, 2 - Não");
+		int escolha2 = teclado.nextInt();
+		switch (escolha2) {
+		case 1:
+			teclado.nextLine();
+			System.out.println("Informe o Endereço: ");
+			endereco = (teclado.next());
+			break;
+		case 2:
+
+			break;
+		default:
+			System.out.println("Opção Errada!");
+			break;
+		}
+
 	}
 	
 	public String toStringPaciente() {
