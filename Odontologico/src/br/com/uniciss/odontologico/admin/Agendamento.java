@@ -37,7 +37,11 @@ public class Agendamento {
 	public String toString() {
 		return "Agendamento,"+getCod()+","+getDataDoAgendamento()+","+getHora()+","+getCroDentista()+","+getIdPaciente()+","+getIdTratamento();
 	}
-
+	
+	/**
+	 * Metodo para agendar uma consulta
+	 * @method agendar();
+	 */
 	public void agendar() throws IOException{
 		System.out.println("Informe o CRO do Dentista");
 		croDentista = teclado.nextInt();
@@ -249,7 +253,10 @@ public class Agendamento {
 
 	
 	
-	
+	/**
+	 * Metodo que valida se pode agendar
+	 * @method validaDataHoraDisponivel
+	 */
 	@SuppressWarnings("resource")
 	public boolean validaDataHoraDiponivel() throws IOException{
 		@SuppressWarnings("resource")
