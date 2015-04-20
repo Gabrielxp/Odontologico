@@ -1,6 +1,5 @@
 package br.com.uniciss.odontologico.admin;
 
-import java.awt.Menu;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +29,9 @@ public class Agendamento {
 	private int croDentista;
 	private int idPaciente;
 	private int idTratamento;
-	String procura;
+	String procuraData;
+	String procuraHora;
+	String procuraCRO;
 
 	@Override
 	public String toString() {
@@ -42,6 +42,7 @@ public class Agendamento {
 		System.out.println("Informe o CRO do Dentista");
 		croDentista = teclado.nextInt();
 		teclado.nextLine();
+		procuraCRO = String.valueOf(croDentista);
 
 		LeituraDeDados leitura = new LeituraDeDados();
 
@@ -213,7 +214,7 @@ public class Agendamento {
 		do{
 			System.out.println("Insira a data da consulta");
 			dataDoAgendamento = teclado.nextLine();
-			procura = dataDoAgendamento;
+			procuraData = dataDoAgendamento;
 			
 			if (validaDataAgendada() == false)
 				System.out.println("Data invalida");
@@ -224,14 +225,23 @@ public class Agendamento {
 		do{
 			System.out.println("Insira a hora da consulta");
 			hora = teclado.nextLine();
-			procura = hora;
+			procuraHora = hora;
 			
 			if (validaHoraAngendada() == false || validaDataHoraDiponivel() == true)
 				System.out.println("Horario invalido ou indisponivel");
 		}while(validaHoraAngendada() == false || validaDataHoraDiponivel() == true);
 
+		cont = false;
+		continua = false;
+		
+		
 		Gravar gravar = new Gravar();
 		gravar.grava("documentos/consultas.txt", toString());
+		
+		System.out.println("Consulta Agendada com Sucesso");
+		
+		Menus m = new Menus();
+		m.menuSecretario();
 	}
 
 	
@@ -244,7 +254,7 @@ public class Agendamento {
 
 		while(agenda.ready()) {    
 			String linha = agenda.readLine();    
-			if (linha.contains(procura)) {    
+			if (linha.contains(procuraHora) && linha.contains(procuraData) && linha.contains(procuraCRO)) {    
 				return true;
 			}
 		}

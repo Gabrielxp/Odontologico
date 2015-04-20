@@ -250,59 +250,7 @@ public class Secretario extends Funcionario {
 		m.menuSecretario();
 	}
 
-	public void editarPaciente() throws IOException {
-		System.out.println("---------Editar Clientes--------");
-		Scanner teclado = new Scanner(System.in);
-		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
-		int escolha = teclado.nextInt();
-		teclado.nextLine();
-		switch (escolha) {
-		case 1:
-			System.out.println("Informe o nome : ");
-			setNome(teclado.nextLine());
-
-			break;
-		case 2:
-
-			break;
-		default:
-			System.out.println("Opção Errada!");
-			break;
-		}
-		System.out.println("Deseja Editar o endereço? 1 - Sim, 2 - Não");
-		int escolha2 = teclado.nextInt();
-		switch (escolha2) {
-		case 1:
-			teclado.nextLine();
-			System.out.println("Informe o Endereço: ");
-			endereco = (teclado.next());
-			break;
-		case 2:
-
-			break;
-		default:
-			System.out.println("Opção Errada!");
-			break;
-		}
-
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Cliente> listaPacientes = new ArrayList<Cliente>();
-
-		leitura.leituraPacientes(listaPacientes);
-		setCodigo(listaPacientes.size());
-
-		Gravar g = new Gravar();
-		g.grava("documentos/pacientes.txt", toString());
-
-		System.out.println();
-		System.out.println("Edição Realizada com Sucesso!");
-		System.out.println();
-		
-		Menus m = new Menus();
-		m.menuSecretario();
-
-	}
-
+	
 	public void alterarStatusPaciente() {
 
 	}

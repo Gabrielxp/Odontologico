@@ -143,14 +143,13 @@ public class Admin {
 			if (nome.equals(cliente.getNome())) {
 				if (cliente.isStatus()) {
 					Secretario secretario = new Secretario();
-					secretario.editarPaciente();
+					cliente.editarPaciente();
 
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
 					for (Cliente f : listaPacientes) {
-						g.grava("documentos/pacientes.txt", f.toString());
+						g.grava("documentos/pacientes.txt", f.toStringPaciente());
 					}
-
 					continua = true;
 				} else {
 					System.out
