@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.cliente.Cliente;
 import br.com.uniciss.odontologico.cliente.Tratamentos;
 import br.com.uniciss.odontologico.funcionario.Dentista;
@@ -135,4 +136,34 @@ public class LeituraDeDados {
 
 		}
 	}
+	
+	//Metodo que faz a leitura de consultas do arquivo consultas.txt
+
+		public void leituraConsultas(List<Agendamento>listaConsultas){
+			try{  
+				FileReader arq = new FileReader("documentos/consultas.txt");
+				BufferedReader lerArq = new BufferedReader(arq); 
+				String linha = lerArq.readLine();  
+
+				while (linha != null) {
+					String palavras[] = linha.split(",");
+
+					Agendamento a = new Agendamento();
+					a.setCod(Integer.parseInt(palavras[1]));
+					a.setDataDoAgendamento(palavras[2]);
+					a.setHora(palavras[3]);
+					a.setCroDentista(Integer.parseInt(palavras[4]));
+					a.setIdPaciente(Integer.parseInt(palavras[5]));
+					a.setIdTratamento(Integer.parseInt(palavras[6]));
+
+					listaConsultas.add(a);
+
+					linha = lerArq.readLine();
+				} 
+
+				arq.close();
+			}catch (IOException e) { 
+
+			}
+		}
 }

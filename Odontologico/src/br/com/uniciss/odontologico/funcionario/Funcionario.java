@@ -139,8 +139,6 @@ abstract public class Funcionario extends Pessoa {
 
 		} while (getSenha().equals(""));
 
-		Menus m = new Menus();
-		m.menuAdmin();
 	}
 
 	
