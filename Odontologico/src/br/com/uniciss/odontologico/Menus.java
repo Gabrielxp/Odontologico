@@ -93,7 +93,7 @@ public class Menus {
 		opc = s.nextInt();
 		switch (opc) {
 		case 1:
-			// d.consultar();
+			System.out.println("DESATIVADO");
 			break;
 		case 2:
 			Admin admin = new Admin();
@@ -104,7 +104,10 @@ public class Menus {
 		t.cadastraTratamentos();
 			break;
 		case 4:
-			d.encaminharPaciente();
+			System.out.println("Determine o nome");
+			Scanner teclado = new Scanner(System.in);
+			String nome = teclado.nextLine();
+			d.encaminharPaciente(nome);
 			break;
 		case 5:
 			Programa.main(null);
