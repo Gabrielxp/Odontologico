@@ -211,6 +211,48 @@ public class Secretario extends Funcionario {
 			System.out.println("Secretario Inexistente");
 		}
 	}
+	
+	public void ativarSecretario() throws IOException {
+		LeituraDeDados leitura = new LeituraDeDados();
+
+		List<Secretario> listaSecretario = new ArrayList<Secretario>();
+		Map<Integer, Secretario> mapaSecretario = new HashMap<Integer, Secretario>();
+
+		leitura.leituraSecretario(listaSecretario, mapaSecretario);
+		;
+		teclado = new Scanner(System.in);
+
+		System.out.println("Informe o codigo do Secretario");
+		int codSecretario = teclado.nextInt();
+
+		boolean existe = true;
+
+		for (Secretario s : listaSecretario) {
+			if (s.getCodigo() == codSecretario) {
+
+				existe = false;
+				if (s.isStatus()) {
+					System.out.println("Este Secretario ja foi Ativado");
+				} else {
+					s.setStatus(true);
+					System.out.println("Secretario Ativado Com Sucesso");
+
+					Gravar g = new Gravar();
+					g.editar("documentos/secretarios.txt");
+
+					for (Secretario ss : listaSecretario) {
+						g.grava("documentos/secretarios.txt",
+								ss.toStringSecretario());
+					}
+
+				}
+			}
+		}
+
+		if (!existe) {
+			System.out.println("Secretario Inexistente");
+		}
+	}
 
 	public void inativarPaciente() throws IOException {
 		LeituraDeDados leitura = new LeituraDeDados();
@@ -233,6 +275,7 @@ public class Secretario extends Funcionario {
 					System.out.println("Este Paciente ja foi inativado");
 				} else {
 					client.setStatus(false);
+					System.out.println();
 					System.out.println("Paciente Inativado Com Sucesso");
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
@@ -246,12 +289,54 @@ public class Secretario extends Funcionario {
 			}
 		}
 		if (!existe) {
+			
 			System.out.println("Paciente Inexistente");
 		}
 		Menus m = new Menus();
 		m.menuSecretario();
 	}
+	
+	public void ativarPaciente() throws IOException {
+		LeituraDeDados leitura = new LeituraDeDados();
 
+		List<Cliente> listaPacientes = new ArrayList<Cliente>();
+
+		leitura.leituraPacientes(listaPacientes);
+		teclado = new Scanner(System.in);
+
+		System.out.println("Informe o codigo do Paciente");
+		int codPaciente = teclado.nextInt();
+
+		boolean existe = true;
+
+		for (Cliente client : listaPacientes) {
+			if (client.getCodigo() == codPaciente) {
+
+				existe = false;
+				if (client.isStatus()) {
+					System.out.println("Este Paciente ja foi ativado");
+				} else {
+					client.setStatus(true);
+					System.out.println();
+					System.out.println("Paciente Ativado Com Sucesso");
+					Gravar g = new Gravar();
+					g.editar("documentos/pacientes.txt");
+
+					for (Cliente cc : listaPacientes) {
+						g.grava("documentos/pacientes.txt",
+								cc.toStringPaciente());
+					}
+
+				}
+			}
+		}
+		if (existe) {
+			
+			System.out.println("Paciente Inexistente");
+		}
+		Menus m = new Menus();
+		m.menuSecretario();
+	}
 	
 	public void listarConsulta() throws IOException {
 		Scanner teclado = new Scanner(System.in);

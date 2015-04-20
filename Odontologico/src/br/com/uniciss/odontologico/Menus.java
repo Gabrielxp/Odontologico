@@ -126,10 +126,11 @@ public class Menus {
 		System.out.println("1 - Cadastrar Pacientes");
 		System.out.println("2 - Listar Pacientes");
 		System.out.println("3 - Editar Paciente");
-		System.out.println("4 - Alterar Status Paciente");
-		System.out.println("5 - Agendar Consulta");
-		System.out.println("6 - Listar Consultas");
-		System.out.println("7 - Sair");
+		System.out.println("4 - Inativar Paciente");
+		System.out.println("5 - Ativar Paciente");
+		System.out.println("6 - Agendar Consulta");
+		System.out.println("7 - Listar Consultas");
+		System.out.println("8 - Sair");
 		s = new Scanner(System.in);
 		opc = s.nextInt();
 		switch (opc) {
@@ -149,12 +150,15 @@ public class Menus {
 			c.inativarPaciente();
 			break;
 		case 5:
+			c.ativarPaciente();
+			break;
+		case 6:
 			Agendamento ag = new Agendamento();
 			ag.agendar();
 			break;
-		case 6:
-			c.listarConsulta();
 		case 7:
+			c.listarConsulta();
+		case 8:
 			Programa.main(null); 
 			break;
 		default:
@@ -178,7 +182,9 @@ public class Menus {
 		System.out.println("8 - Menu Dentista");
 		System.out.println("9 - Inativar Dentista");
 		System.out.println("10 - Inativar Secretario");
-		System.out.println("11 - Sair");
+		System.out.println("11 - Ativar Dentista");
+		System.out.println("12 - Ativar Secretario");
+		System.out.println("13 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
 		s.nextLine();
@@ -211,12 +217,23 @@ public class Menus {
 			break;
 		case 9:
 			d.inativarDentista();
+			menuAdmin();
 			break;
 		case 10:
 			c.inativarSecretario();
+			menuAdmin();
 			break;
 		case 11:
+			d.ativarDentista();
+			menuAdmin();
+			break;
+		case 12:
+			c.ativarSecretario();
+			menuAdmin();
+			break;
+		case 13:
 			System.out.println("Obrigado por utilizar nosso sistema :)");
+			Programa.main(null);
 		break;
 		default:
 			System.out.println("Opção inválida.");

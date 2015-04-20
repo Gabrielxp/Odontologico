@@ -118,7 +118,8 @@ public class Dentista extends Funcionario {
 					System.out.println("Este Dentista ja foi inativado");
 				} else {
 					d.setStatus(false);
-
+					System.out.println("inativação efetuado com Sucesso");
+					
 					Gravar g = new Gravar();
 					g.editar("documentos/dentistas.txt");
 
@@ -159,7 +160,8 @@ public class Dentista extends Funcionario {
 					System.out.println("Este Dentista ja foi ativado");
 				} else {
 					d.setStatus(true);
-
+					System.out.println("Ativação efetuado com Sucesso");
+					
 					Gravar g = new Gravar();
 					g.editar("documentos/dentistas.txt");
 
