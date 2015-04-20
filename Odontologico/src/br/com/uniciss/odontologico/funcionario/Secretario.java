@@ -240,7 +240,7 @@ public class Secretario extends Funcionario {
 			System.out.println("Paciente Inexistente");
 		}
 		Menus m = new Menus();
-		m.menuAdmin();
+		m.menuSecretario();
 	}
 
 	public void editarPaciente() throws IOException {
