@@ -105,7 +105,7 @@ public class LeituraDeDados {
 
 			arq.close();
 		}catch (IOException e) { 
-			System.out.println("Deu Pau");
+			System.out.println("Erro de Leitura");
 		}
 	}
 	

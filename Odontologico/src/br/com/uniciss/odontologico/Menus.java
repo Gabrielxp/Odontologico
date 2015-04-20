@@ -210,8 +210,10 @@ public class Menus {
 			break;
 		case 10:
 			c.inativarSecretario();
+			break;
 		case 11:
 			Programa.main(null);
+		break;
 		default:
 			System.out.println("Opção inválida.");
 

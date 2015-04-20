@@ -69,7 +69,7 @@ public class Secretario extends Funcionario {
 
 	}
 
-	public void consultarSecretario() {
+	public void consultarSecretario() throws FileNotFoundException, IOException {
 
 		int opc;
 		LeituraDeDados leitura = new LeituraDeDados();
@@ -117,6 +117,8 @@ public class Secretario extends Funcionario {
 				}
 
 			}
+			Menus m = new Menus();
+			m.menuAdmin();
 			break;
 		case 2:
 			Secretario secretario = new Secretario();
@@ -144,6 +146,8 @@ public class Secretario extends Funcionario {
 			} catch (NullPointerException e) {
 				System.out.println("Secretario não encontrado");
 			}
+			Menus g = new Menus();
+			g.menuAdmin();
 
 			break;
 		}

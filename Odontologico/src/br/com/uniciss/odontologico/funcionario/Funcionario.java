@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import br.com.uniciss.odontologico.Menus;
+import br.com.uniciss.odontologico.admin.Admin;
 import br.com.uniciss.odontologico.cliente.Pessoa;
 
 abstract public class Funcionario extends Pessoa {
@@ -105,7 +107,7 @@ abstract public class Funcionario extends Pessoa {
 		// Metodo com o cadastro de pessoa herdado
 		cadastro();
 
-		//leiitura do hoario de entrada
+		//leitura do hoario de entrada
 		do {
 			System.out.println("Informe a Hora de Entrada no trabalho(HH:MM)");
 			setHoraDeEntrada(teclado.nextLine());
@@ -136,6 +138,9 @@ abstract public class Funcionario extends Pessoa {
 			setSenha(teclado.nextLine());
 
 		} while (getSenha().equals(""));
+
+		Menus m = new Menus();
+		m.menuAdmin();
 	}
 
 	
@@ -156,6 +161,7 @@ abstract public class Funcionario extends Pessoa {
 			}else{
 				return false;
 			}
+		
 			
 		} catch (Exception e) {
 			// TODO: handle exception
