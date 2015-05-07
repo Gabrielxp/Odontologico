@@ -95,8 +95,11 @@ public class Cliente extends Pessoa{
 	 * Metodo para salvar os dados Paciente
 	 * @method toStringPaciente();
 	 */
+	//TERMINARRRRR
 	public String toStringPaciente() {
-		return "Paciente" + "," + getCodigo() + "," + getNome() + ","
+		return "INSERT INTO pessoa (id_pessoa, nome, cpf, endereco, data_nascimento) "
+				+ "VALUES ("+ getCodigo()+","+getNome()+","+getCpf()+"',1,'1990-02-04')"
+				+ "Paciente" + "," + getCodigo() + "," + getNome() + ","
 				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
 				+ getDataDeNascimento()+","+ isStatus()+","+getTratamento();
 	}
