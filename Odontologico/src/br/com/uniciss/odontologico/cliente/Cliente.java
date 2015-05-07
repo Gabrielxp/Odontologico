@@ -2,6 +2,7 @@ package br.com.uniciss.odontologico.cliente;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 
 public class Cliente extends Pessoa{
@@ -29,22 +31,30 @@ public class Cliente extends Pessoa{
 
 	/**
 	 * Metodo para Cadastrar Paciente
+	 * @throws SQLException 
 	 * @method cadastrarCliente();
 	 */
-	public void cadastrarCliente() throws FileNotFoundException, IOException{
+	public void cadastrarCliente() throws FileNotFoundException, IOException, SQLException{
 		System.out.println("---------Cadastro de Clientes--------");
 		cadastro();
 		setStatus(true);
 		tratamento="";
 		
-		LeituraDeDados leitura = new  LeituraDeDados();
-		List<Cliente>listaPacientes = new ArrayList<Cliente>();
+	//	LeituraDeDados leitura = new  LeituraDeDados();
+//		List<Cliente>listaPacientes = new ArrayList<Cliente>();
 		
-		leitura.leituraPacientes(listaPacientes);
-		setCodigo(listaPacientes.size());
+	//	leitura.leituraPacientes(listaPacientes);
+		//setCodigo(listaPacientes.size());
+		String insert = "INSERT INTO pessoa (nome, rg, cpf, data_nascimento) VALUES ('"
+				+ getNome()
+				+ "' ,'"
+				+ getRg()
+				+ "', '"
+				+ getCpf()
+				+ "' ,'"
+				+ getDataDeNascimento() + "')";
 		
-		Gravar g = new Gravar();  
-		g.grava("documentos/pacientes.txt", toStringPaciente());
+		Scripts.insert(insert);
 		
 		Menus m = new Menus();
 		m.menuSecretario();
@@ -97,11 +107,13 @@ public class Cliente extends Pessoa{
 	 */
 	//TERMINARRRRR
 	public String toStringPaciente() {
-		return "INSERT INTO pessoa (id_pessoa, nome, cpf, endereco, data_nascimento) "
-				+ "VALUES ("+ getCodigo()+","+getNome()+","+getCpf()+"',1,'1990-02-04')"
-				+ "Paciente" + "," + getCodigo() + "," + getNome() + ","
-				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
-				+ getDataDeNascimento()+","+ isStatus()+","+getTratamento();
+		return "INSERT INTO pessoa( id_pessoa,nome, cpf, endereco, data_nascimento) "
+				+ "VALUES ("+"40"+","+getNome()+","+getCpf()+","+1+",'1990-02-04')";
+				//+ "Paciente" + "," + getCodigo() + "," + getNome() + ","
+			//	+ getRg() + "," + getCpf() + "," + getEndereco() + ","
+			//	+ getDataDeNascimento()+","+ isStatus()+","+getTratamento(); //DEPOIS VER ESSES TRECOS
+	//	"INSERT INTO pessoa(id_pessoa, nome, cpf, endereco, data_nascimento) " +
+		//  "VALUES (12,'CorleoneF','1216548911',1,'1990-02-04')";
 	}
 	
 }

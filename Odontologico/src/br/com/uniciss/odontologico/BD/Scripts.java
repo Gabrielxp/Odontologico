@@ -7,16 +7,18 @@ import java.sql.SQLException;
 
 public class Scripts {
 
-	private Connection conexao;
+	private static Connection conexao;
 
-	public void insert(String sql) throws SQLException {
+	public static void insert(String sql) throws SQLException {
 		try {
-			Connection conexao = null;
+		//	Connection conexao = null;
+			conexao = new Conectar().conectar();
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.execute();
 		} catch (Exception e) {
-			System.out.println("ID JÁ CADASTRADO!");
+			System.out.println("ERRO CADASTRADO!");
 		}
+		
 	}
 
 	public void select() throws ClassNotFoundException, SQLException {

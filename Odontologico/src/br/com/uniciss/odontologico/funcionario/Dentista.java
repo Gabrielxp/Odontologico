@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class Dentista extends Funcionario {
 	String croTexto;
 	private BufferedReader buffR;
 
-	public void cadastrarDentista() throws FileNotFoundException, IOException {
+	public void cadastrarDentista() throws FileNotFoundException, IOException, SQLException {
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
 
@@ -97,7 +98,7 @@ public class Dentista extends Funcionario {
 
 	}
 
-	public void inativarDentista() throws IOException {
+	public void inativarDentista() throws IOException, SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -139,7 +140,7 @@ public class Dentista extends Funcionario {
 		m.menuAdmin();
 	}
 	
-	public void ativarDentista() throws IOException {
+	public void ativarDentista() throws IOException, SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Dentista> listaDentista = new ArrayList<Dentista>();

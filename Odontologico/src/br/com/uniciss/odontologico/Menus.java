@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -30,9 +31,10 @@ public class Menus {
 	/**
 	 * Método Login, utilizado para validação de login e senha
 	 * @throws IOException
+	 * @throws SQLException 
 	 * 
 	 */
-	public void Login() throws IOException {
+	public void Login() throws IOException, SQLException {
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
 		try {
@@ -125,8 +127,9 @@ public class Menus {
 	/**
 	 *  Metodo menuSecretario, utilizado para escolha de opcoes do usuario secretario
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void menuSecretario() throws IOException {
+	public void menuSecretario() throws IOException, SQLException {
 
 		Secretario c = new Secretario();
 
@@ -179,9 +182,10 @@ public class Menus {
 	/**
 	 *  Metodo menuAdmin, utilizado para escolha de opcoes do usuario administrador
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
 
-	public void menuAdmin() throws FileNotFoundException, IOException {
+	public void menuAdmin() throws FileNotFoundException, IOException, SQLException {
 		Secretario c = new Secretario();
 		Dentista d = new Dentista();
 		Admin a = new Admin();

@@ -148,17 +148,17 @@ public abstract class Pessoa {
 		
 		// Le e valida CPF
 		cpf = "0";
-		do{
+		//do{
 			System.out.println("Insira o CPF");
 			this.cpf = teclado.next();
 
 			cpf = cpf.replace("-", "");
 			cpf = cpf.replace(".", "");
 			
-			if ((validaCpf() == false) || (validaCpfExistente() == true))
-				System.out.println("Cpf Invalido, por favor insira novamente");
+		//	if ((validaCpf() == false) || (validaCpfExistente() == true))
+		//		System.out.println("Cpf Invalido, por favor insira novamente");
 			
-		}while ((validaCpf() == false) || (validaCpfExistente() == true));
+		//}while ((validaCpf() == false) || (validaCpfExistente() == true));
 		
 			//Le o endereco
 			teclado.nextLine();
@@ -285,13 +285,13 @@ public abstract class Pessoa {
 	}
 	
 	public boolean validaData(){
-		DateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 		data.setLenient(false);
 		
-		SimpleDateFormat formata = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formata = new SimpleDateFormat("yyyy/MM/dd");
 
 		Date dataInformada = new Date();
-		formata = new SimpleDateFormat("dd/MM/yyyy");
+		formata = new SimpleDateFormat("yyyy/MM/dd");
 		formata.setLenient(false);
 		
 		

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -141,6 +142,9 @@ public class Login extends JFrame implements ActionListener {
 
 		} catch (IOException e1) {
 
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}

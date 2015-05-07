@@ -20,9 +20,10 @@ public class Conectar {
 
 	}
 
-	public static void desconectar() throws SQLException {
+	public static Connection desconectar() throws SQLException {
 
 		conexao.close();
+		return conexao;
 
 	}
 
