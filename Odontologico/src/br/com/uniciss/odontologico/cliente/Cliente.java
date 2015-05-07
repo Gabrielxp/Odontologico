@@ -45,12 +45,12 @@ public class Cliente extends Pessoa{
 		
 	//	leitura.leituraPacientes(listaPacientes);
 		//setCodigo(listaPacientes.size());
-		String insert = "INSERT INTO pessoa (nome, rg, cpf, data_nascimento) VALUES ('"
+		String insert = "INSERT INTO pessoa (nome, cpf, endereco, data_nascimento) VALUES ('"
 				+ getNome()
-				+ "' ,'"
-				+ getRg()
 				+ "', '"
 				+ getCpf()
+				+ "' ,'"
+				+getEndereco()
 				+ "' ,'"
 				+ getDataDeNascimento() + "')";
 		
