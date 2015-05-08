@@ -19,7 +19,7 @@ public class Admin {
  Scanner scanner = new Scanner(System.in);
 public static void main(String[] args) {
 	
-}
+}  
 	void updateSecretario() throws FileNotFoundException, IOException,
 	ClassNotFoundException, SQLException{
 		System.out.println("Insira o nome da pessoa para editar");
