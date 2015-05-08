@@ -18,6 +18,7 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.cliente.Cliente;
 
 public class Dentista extends Funcionario {
@@ -28,47 +29,54 @@ public class Dentista extends Funcionario {
 	String croTexto;
 	private BufferedReader buffR;
 
-	public void cadastrarDentista() throws FileNotFoundException, IOException, SQLException {
+	public void cadastrarDentista() throws FileNotFoundException, IOException,
+			SQLException, ClassNotFoundException {
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
+		//FALTA IMPLEMENTAR O VALIDA CRO!
+		System.out.println("Determine o CRO");
+		Scanner entrada = new Scanner(System.in);
+		setCro(entrada.nextInt());
+		
+		
+		String insert = "INSERT INTO pessoa (nome, cpf, endereco, data_nascimento) VALUES ('"
+				+ getNome()
+				+ "', '"
+				+ getCpf()
+				+ "' ,'"
+				+ getEndereco()
+				+ "' ,'" + getDataDeNascimento() + "')";
 
-		do {
-			System.out.println("Informe seu CRO:");
-			cro = teclado.nextInt();
-			croTexto = String.valueOf(cro);
+		Scripts.insert(insert);
 
-			if ((!validaCro(croTexto) || validaCroExistente() == true))
-				System.out.println("CRO invalido ou ja cadastrado");
+		String select = "SELECT id_pessoa FROM pessoa where cpf='" + cpf + "'";
+		Scripts.select(select);
+		String seleciona = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
+				+ "'";
+		int pegaId = Scripts.select(select);
 
-		} while ((!validaCro(croTexto) || validaCroExistente() == true));
+		String inserta = "INSERT INTO dentista (id_pessoa, cro, hora_entrada, hora_saida) VALUES ('"
+				+ pegaId + "','" + getCro() + "','" + getHoraDeEntrada() + "','" + getHoraDeSaida() + " ')";
+		Scripts.insert(inserta);
 
-		tipo = "dentista";
-		setStatus(true);  
-
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Dentista> listaDentista = new ArrayList<Dentista>();
-		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
-
-		leitura.leituraDentista(listaDentista, mapaDentista);
-
-		setCodigo(listaDentista.size());
-
-		Gravar g = new Gravar();
-		g.grava("documentos/dentistas.txt", toStringDentista());
-		g.grava("documentos/users.txt", toString2());
+		//SALVA LOGIN E SENHA
+		String pega = "SELECT nome FROM pessoa where cpf='" + cpf + "'";
+		Scripts.selectNome(pega);
+	//String seleciona2 = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
+	//			+ "'";
+		String peganome = Scripts.selectNome(pega);
+		
+		String inserta2 = "INSERT INTO users (nome_usuario, senha) VALUES ('"
+				+ peganome + "','" + getSenha() +" ')";
+		Scripts.insert(inserta2);
 		Menus menu = new Menus();
 		menu.menuAdmin();
 
+		
 	}
 
 	// Metodo toString para cadastro de Funcionarios
-	public String toStringDentista() {
-		return "Dentista" + "," + getCodigo() + "," + getNome() + "," + getRg()
-				+ "," + getCpf() + "," + getEndereco() + ","
-				+ getDataDeNascimento() + "," + isStatus() + "," + getCro()
-				+ "," + getHoraDeEntrada() + "," + getHoraDeSaida();
-	}
-
+	
 	public void consultar(int cro) {
 		LeituraDeDados leitura = new LeituraDeDados();
 		Dentista dentista = new Dentista();
@@ -98,7 +106,8 @@ public class Dentista extends Funcionario {
 
 	}
 
-	public void inativarDentista() throws IOException, SQLException {
+	public void inativarDentista() throws IOException, SQLException,
+			ClassNotFoundException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -112,35 +121,12 @@ public class Dentista extends Funcionario {
 
 		boolean existe = false;
 
-		for (Dentista d : listaDentista) {
-			if (d.getCro() == cro) {
-				existe = true;
-				if (!d.isStatus()) {
-					System.out.println("Este Dentista ja foi inativado");
-				} else {
-					d.setStatus(false);
-					System.out.println("inativação efetuado com Sucesso");
-					
-					Gravar g = new Gravar();
-					g.editar("documentos/dentistas.txt");
-
-					for (Dentista f : listaDentista) {
-						g.grava("documentos/dentistas.txt",
-								f.toStringDentista());
-					}
-
-				}
-			}
-
-		}
-		if (!existe) {
-			System.out.println("CRO inexistente");
-		}
-		Menus m = new Menus();
-		m.menuAdmin();
+		
+		
 	}
-	
-	public void ativarDentista() throws IOException, SQLException {
+
+	public void ativarDentista() throws IOException, SQLException,
+			ClassNotFoundException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
@@ -154,35 +140,6 @@ public class Dentista extends Funcionario {
 
 		boolean existe = true;
 
-		for (Dentista d : listaDentista) {
-			if (d.getCro() == cro) {
-				existe = false;
-				if (d.isStatus()) {
-					System.out.println("Este Dentista ja foi ativado");
-				} else {
-					d.setStatus(true);
-					System.out.println("Ativação efetuado com Sucesso");
-					
-					Gravar g = new Gravar();
-					g.editar("documentos/dentistas.txt");
-
-					for (Dentista f : listaDentista) {
-						g.grava("documentos/dentistas.txt",
-								f.toStringDentista());
-					}
-
-				}
-			}
-
-		}
-		if (!existe) {
-			System.out.println("CRO inexistente");
-		}
-		
-		System.out.println();
-		System.out.println("Ativação efetuada com sucesso!");
-		System.out.println();
-		
 		Menus m = new Menus();
 		m.menuAdmin();
 	}
@@ -206,7 +163,8 @@ public class Dentista extends Funcionario {
 		return texto.matches("^[0-9]*$");
 	}
 
-	public void encaminharPaciente(String nome) throws IOException {
+	public void encaminharPaciente(String nome) throws IOException,
+			ClassNotFoundException, SQLException {
 		List<Cliente> listaPaciente = new ArrayList<Cliente>();
 
 		LeituraDeDados leitura = new LeituraDeDados();
@@ -263,11 +221,11 @@ public class Dentista extends Funcionario {
 				Menus m = new Menus();
 				m.menuDentista();
 
-			}else{
+			} else {
 				System.out.println("Paciente Inexistente");
 				Menus m = new Menus();
 				m.menuDentista();
-				
+
 			}
 
 		}

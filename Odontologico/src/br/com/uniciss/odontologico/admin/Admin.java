@@ -2,6 +2,7 @@ package br.com.uniciss.odontologico.admin;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Admin {
 	LeituraDeDados leia = new LeituraDeDados();
 
 	// Metodo que edita um Dentista caso ele exista e esteja com o status Ativo
-	public void editarSecretario() throws FileNotFoundException, IOException {
+	public void editarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 
 		String nome;
 		List<Secretario> listaSecretario = new ArrayList<Secretario>();
@@ -74,7 +75,7 @@ public class Admin {
 	}
 
 	// Metodo que edita um Dentista caso ele exista e esteja com o status Ativo
-	public void editarDentista() throws FileNotFoundException, IOException {
+	public void editarDentista() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 		String nome;
 		List<Dentista> listaDentista = new ArrayList<Dentista>();
 		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
@@ -127,7 +128,7 @@ public class Admin {
 	}
 
 	// Metodo que edita um Paciente caso ele exista e esteja com o status Ativo
-	public void editarPaciente() throws FileNotFoundException, IOException {
+	public void editarPaciente() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 		String nome;
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
 		Menus m = new Menus();
@@ -148,7 +149,7 @@ public class Admin {
 					Gravar g = new Gravar();
 					g.editar("documentos/pacientes.txt");
 					for (Cliente f : listaPacientes) {
-						g.grava("documentos/pacientes.txt", f.toStringPaciente());
+						g.grava("documentos/pacientes.txt", f.toString());
 					}
 					continua = true;
 				} else {

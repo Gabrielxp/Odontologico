@@ -32,9 +32,10 @@ public class Menus {
 	 * Método Login, utilizado para validação de login e senha
 	 * @throws IOException
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * 
 	 */
-	public void Login() throws IOException, SQLException {
+	public void Login() throws IOException, SQLException, ClassNotFoundException {
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
 		try {
@@ -85,8 +86,10 @@ public class Menus {
 	/**
 	 *  Metodo menuDentista, utilizado para escolha de opcoes do usuario dentista
 	 * @throws IOException
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void menuDentista() throws IOException {
+	public void menuDentista() throws IOException, ClassNotFoundException, SQLException {
 
 		Dentista d = new Dentista();
 
@@ -128,8 +131,9 @@ public class Menus {
 	 *  Metodo menuSecretario, utilizado para escolha de opcoes do usuario secretario
 	 * @throws IOException
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void menuSecretario() throws IOException, SQLException {
+	public void menuSecretario() throws IOException, SQLException, ClassNotFoundException {
 
 		Secretario c = new Secretario();
 
@@ -183,9 +187,10 @@ public class Menus {
 	 *  Metodo menuAdmin, utilizado para escolha de opcoes do usuario administrador
 	 * @throws IOException
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 
-	public void menuAdmin() throws FileNotFoundException, IOException, SQLException {
+	public void menuAdmin() throws FileNotFoundException, IOException, SQLException, ClassNotFoundException {
 		Secretario c = new Secretario();
 		Dentista d = new Dentista();
 		Admin a = new Admin();

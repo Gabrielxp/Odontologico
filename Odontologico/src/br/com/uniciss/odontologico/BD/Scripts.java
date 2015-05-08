@@ -11,33 +11,61 @@ public class Scripts {
 
 	public static void insert(String sql) throws SQLException {
 		try {
-		//	Connection conexao = null;
 			conexao = new Conectar().conectar();
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.execute();
 		} catch (Exception e) {
+			
 			System.out.println("ERRO CADASTRADO!");
 		}
 		
 	}
 
-	public void select() throws ClassNotFoundException, SQLException {
+	public static int select(String sql) throws ClassNotFoundException, SQLException {
+		int idPessoa = 0;
 
 		conexao = new Conectar().conectar();
-		String sql = "SELECT id_pessoa, nome, cpf, endereco, data_nascimento FROM pessoa";
+	//	String sql = "SELECT id_pessoa, nome, cpf, endereco, data_nascimento FROM pessoa";
 		PreparedStatement ps = conexao.prepareStatement(sql);
 
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			int idPessoa = rs.getInt("id_pessoa");
-			String nome = rs.getString("nome");
-			String cpf = rs.getString("cpf");
-			int endereco = rs.getInt("endereco");
-
-			System.out.println("ID: " + idPessoa + " Nome:" + nome + " cpf: "
-					+ cpf + "\n endereco:" + endereco);
-		}  
+			idPessoa = rs.getInt("id_pessoa");
+			//String nome = rs.getString("nome");
+			//String cpf = rs.getString("cpf");
+			//int endereco = rs.getInt("endereco");
+			
+			System.out.println("ID: " + idPessoa );
+					
+		}
+		return idPessoa;
+		
+		
+	 
 
 	}
+	public static String selectNome(String sql) throws ClassNotFoundException, SQLException {
+		String nome = "";
+		conexao = new Conectar().conectar();
+	//	String sql = "SELECT id_pessoa, nome, cpf, endereco, data_nascimento FROM pessoa";
+		PreparedStatement ps = conexao.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			//idPessoa = rs.getInt("id_pessoa");
+			 nome = rs.getString("nome");
+			//String cpf = rs.getString("cpf");
+			//int endereco = rs.getInt("endereco");
+			
+			System.out.println("Nome: " + nome );
+					
+		}
+		return nome;
+		
+		
+	 
+
+	}
+
 
 }

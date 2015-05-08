@@ -22,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import br.com.uniciss.odontologico.BD.Gravar;
+import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
 
 public class Login extends JFrame implements ActionListener {
@@ -97,39 +98,27 @@ public class Login extends JFrame implements ActionListener {
 			String usuario = login.getText();
 
 			String senhax = new String(senha.getPassword());
-
-			if ((mapaUsuario.containsKey(usuario))
-					&& (mapaUsuario.get(usuario).getSenha().equals(senhax))) {
-
-				if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo()
-								.equals("dentista"))) {
-
-					Menus m = new Menus();
+			
+			Menus m = new Menus();
+			
+			String pega = "SELECT nome_usuario FROM users where nome_usuario" + usuario + "'";
+			String pegalogin = Scripts.selectNome(pega);
+			if (pegalogin.equals("admin")){
+				m.menuAdmin();
+			}
+					
 					m.menuDentista();
 
-				} else if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo()
-								.equals("secretario"))) {
-					Menus m = new Menus();
-					m.menuSecretario();
+				
+					Menus a = new Menus();
+					a.menuSecretario();
 
-				} else if ((mapaUsuario.containsKey(usuario))
-						&& (mapaUsuario.get(usuario).getTipo().equals("admin"))) {
+				
+					
 
-					Menus m = new Menus();
-					m.menuAdmin();
-
-				}
-
-			} else {
-				System.out.println("Usuario e/ou senha invalido(s)!");
-				System.out.println("");
-				JOptionPane.showMessageDialog(logar,
-						"Usuario e/ou senha invalido(s)!");
-				Programa.main(null);
-
-			}
+			
+			
+			
 
 		} catch (InputMismatchException i) {
 
@@ -144,6 +133,9 @@ public class Login extends JFrame implements ActionListener {
 
 			e1.printStackTrace();
 		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
