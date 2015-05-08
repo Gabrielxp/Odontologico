@@ -59,7 +59,7 @@ public class Secretario extends Funcionario {
 			String peganome = Scripts.selectNome(pega);
 			
 			String inserta2 = "INSERT INTO users (tipo_users, nome_usuario, senha) VALUES ('"
-					+"dentista"+"','"+ peganome + "','" + getSenha() +" ')";
+					+"secretario"+"','"+ peganome + "','" + getSenha() +" ')";
 			Scripts.insert(inserta2);
 			Menus menu = new Menus();
 			menu.menuAdmin();
@@ -67,7 +67,7 @@ public class Secretario extends Funcionario {
 			
 		}
 
-	}
+	
 
 	public void consultarPaciente() {
 		List<Cliente> listaPaciente = new ArrayList<Cliente>();
