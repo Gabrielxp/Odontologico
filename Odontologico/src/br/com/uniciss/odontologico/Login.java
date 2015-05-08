@@ -4,26 +4,17 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.Scripts;
-import br.com.uniciss.odontologico.funcionario.Funcionario;
 
 public class Login extends JFrame implements ActionListener {
 	/**
@@ -84,65 +75,53 @@ public class Login extends JFrame implements ActionListener {
 			System.exit(0);
 		}
 
-		ArrayList<Funcionario> listaUsuario = new ArrayList<Funcionario>();
-		Map<String, Funcionario> mapaUsuario = new HashMap<String, Funcionario>();
+		Menus m = new Menus();
 
-		Scanner s = new Scanner(System.in);
-
-		Gravar g = new Gravar();
-		g.leituraUsuario(mapaUsuario);
-			
-		BufferedReader entrada = new BufferedReader(new InputStreamReader(
-					System.in));
-
+		try{
 			String usuario = login.getText();
 
 			String senhax = new String(senha.getPassword());
 
-			Menus m = new Menus();
+			String pega = "SELECT nome_usuario FROM users WHERE nome_usuario like '" + usuario + "';";
+			String pegalogin = Scripts.selectNomeUsuario(pega);
 
-			try{
-				String pega = "SELECT nome_usuario FROM users where nome_usuario" + usuario + "'";
-				String pegalogin = Scripts.selectNome(pega);
+			String pegado = "SELECT senha FROM users WHERE senha like '" + senhax + "';";
+			String pegaSenha = Scripts.selectSenha(pegado);
 
-				String pegado = "SELECT senha FROM users where senha" + senhax + "'";
-				String pegaSenha = Scripts.selectNome(pegado);
+			String users = "SELECT tipo_users FROM users WHERE nome_usuario like '"+usuario+"';";
+			String pegaUsers = Scripts.selectTipoUsers(users);
 
-				String users = "SELECT tipo_users FROM users where nome_usuario ="+"'"+usuario+"'";
+			if(pegalogin.equals(usuario) && pegaSenha.equals(senhax)){
 
-				if(pegalogin.equals(usuario) && pegaSenha.equals(senhax)){
+				if (pegaUsers.equals("admin")){
+					m.menuAdmin();
 
-					if (users.equals("admin")){
-						m.menuAdmin();
+				}else if(pegaUsers.equals("dentista")){
+					m.menuDentista();
 
-					}else if(users.equals("dentista")){
-						m.menuDentista();
-
-					}else if(users.equals("secretario")){
-						m.menuSecretario();
-					}
+				}else if(pegaUsers.equals("secretario")){
+					m.menuSecretario();
 				}
-				m.menuDentista();
-
-			} catch (InputMismatchException i) {
-
-				s.nextLine();
-				System.out.println("Você informou algum caracter inválido(s)! ");
-
-
-			} catch (NullPointerException b) {
-
-				System.out.println("Login inexistente!");
-
-			} catch (IOException e1) {
-
-				e1.printStackTrace();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+			System.out.println("Login e/ou senha invalido!");
+			
+		} catch (InputMismatchException i) {
+
+			System.out.println("Você informou algum caracter inválido(s)! ");
+
+		} catch (NullPointerException b) {
+
+			System.out.println("Login inexistente!");
+
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
+}

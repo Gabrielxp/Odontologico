@@ -253,7 +253,7 @@ public class Menus {
 			menuAdmin();
 			break;
 		case 12:
-			c.ativarSecretario();
+		//	c.ativarSecretario();
 			menuAdmin();
 			break;
 		case 13:

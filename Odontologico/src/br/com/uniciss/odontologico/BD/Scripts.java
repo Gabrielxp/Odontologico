@@ -22,7 +22,7 @@ public class Scripts {
 	}
 
 	public static int select(String sql) throws ClassNotFoundException,
-			SQLException {
+	SQLException {
 		int idPessoa = 0;
 		try {
 			conexao = new Conectar().conectar();
@@ -43,7 +43,7 @@ public class Scripts {
 	}
 
 	public static String selectNome(String sql) throws ClassNotFoundException,
-			SQLException {
+	SQLException {
 		String nome = "";
 		try {
 
@@ -65,4 +65,56 @@ public class Scripts {
 
 	}
 
+
+
+	public static String selectNomeUsuario(String sql) throws ClassNotFoundException, SQLException {
+		String nome_usuario = "";
+
+		Connection conexao1 = new Conectar().conectar();
+
+		PreparedStatement sp0 = conexao1.prepareStatement(sql);
+
+		ResultSet sr0 = sp0.executeQuery();
+
+		while (sr0.next()) {
+			nome_usuario = sr0.getString("nome_usuario");
+			System.out.println("Nome: " + nome_usuario );		
+		}
+
+		return nome_usuario;
+
+	}
+
+	public static String selectSenha(String sql) throws ClassNotFoundException, SQLException {
+		String senha = "";
+
+		Connection conexao2 = new Conectar().conectar();
+
+		PreparedStatement sp1 = conexao2.prepareStatement(sql);
+
+		ResultSet sr1 = sp1.executeQuery();
+		while (sr1.next()) {
+			senha = sr1.getString("senha");
+			System.out.println("Senha: " + senha);
+
+		}	
+		return senha;
+	}
+
+	public static String selectTipoUsers(String sql) throws ClassNotFoundException, SQLException {
+		String tipo_users = "";
+
+		Connection conexao3 = new Conectar().conectar();
+
+		PreparedStatement sp3 = conexao3.prepareStatement(sql);
+
+		ResultSet sr3 = sp3.executeQuery();
+		while (sr3.next()) {
+			tipo_users = sr3.getString("tipo_users");
+
+			System.out.println("Tipo Usuario: " + tipo_users);
+
+		}
+		return tipo_users;
+	}
 }
