@@ -21,7 +21,7 @@ public abstract class Pessoa {
 	/**
 	 * Variavel rg, relacionada ao rg da pessoa
 	 */
-	protected String id;
+	protected int id;
 	/**
 	 * Variavel id, relacionada ao id da pessoa
 	 */
@@ -50,12 +50,11 @@ public abstract class Pessoa {
 	 * Variavel teclado, relacionada a entrada de dados do teclado
 	 */
 	protected String arquivo;
-	
-	
+
 	private Scanner teclado;
 
 	// Getters e Setters
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -66,6 +65,14 @@ public abstract class Pessoa {
 
 	public void setArquivo(String arquivo) {
 		this.arquivo = arquivo;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDataDeNascimento() {
@@ -119,72 +126,74 @@ public abstract class Pessoa {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
 	/**
-	 * Metodo public void cadastro(), utilizado para realizacao de cadastro de pessoas
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * Metodo public void cadastro(), utilizado para realizacao de cadastro de
+	 * pessoas
+	 * 
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
 	public void cadastro() throws FileNotFoundException, IOException {
 		teclado = new Scanner(System.in);
 
-		
 		do {
 			System.out.println("Informe o nome : ");
 			setNome(teclado.nextLine());
-			
+
 			if (!validaNome(nome))
-				System.out.println("Nome invalido, por favor insira novamente!");
+				System.out
+						.println("Nome invalido, por favor insira novamente!");
 		} while (!validaNome(nome));
-		
-		
+
 		// le e valida RG
 		do {
 			System.out.println("Insira o RG");
 			this.rg = teclado.next();
-			
+
 			rg.replace("-", "");
 			rg.replace(".", "");
-			
+
 			if (!validaRg(rg) || rg.length() >= 14 || rg.length() < 7)
-					System.out.println("Rg invalido, por favor tente novamente");
+				System.out.println("Rg invalido, por favor tente novamente");
 		} while (!validaRg(rg) || rg.length() >= 14 || rg.length() < 7);
 
-		
 		// Le e valida CPF
 		cpf = "0";
-		//do{
-			System.out.println("Insira o CPF");
-			this.cpf = teclado.next();
+		// do{
+		System.out.println("Insira o CPF");
+		this.cpf = teclado.next();
 
-			cpf = cpf.replace("-", "");
-			cpf = cpf.replace(".", "");
-			
-		//	if ((validaCpf() == false) || (validaCpfExistente() == true))
-		//		System.out.println("Cpf Invalido, por favor insira novamente");
-			
-		//}while ((validaCpf() == false) || (validaCpfExistente() == true));
-		
-			//Le o endereco
-			teclado.nextLine();
-			System.out.println("Informe o Endereço: ");
-			endereco = (teclado.next());
-			
-			//ativa o status da pessoa
-			setStatus(true);
-			
-			//Le e valida a data de nascimento
-			
-			Scanner pqp = new Scanner(System.in);
-			
-			do{
-				System.out.println("Insira a data de nascimento(DD/MM/AAAA)");
-				dataDeNascimento = pqp.next();
-				
-				if (validaData() == false)
-					System.out.println("Data invalida! Tente novamente");
-			}while (validaData() == false);
+		cpf = cpf.replace("-", "");
+		cpf = cpf.replace(".", "");
+
+		// if ((validaCpf() == false) || (validaCpfExistente() == true))
+		// System.out.println("Cpf Invalido, por favor insira novamente");
+
+		// }while ((validaCpf() == false) || (validaCpfExistente() == true));
+
+		// Le o endereco
+		teclado.nextLine();
+		System.out.println("Informe o Endereço: ");
+		endereco = (teclado.next());
+
+		// ativa o status da pessoa
+		setStatus(true);
+
+		// Le e valida a data de nascimento
+
+		Scanner pqp = new Scanner(System.in);
+
+		do {
+			System.out.println("Insira a data de nascimento(DD/MM/AAAA)");
+			dataDeNascimento = pqp.next();
+
+			if (validaData() == false)
+				System.out.println("Data invalida! Tente novamente");
+		} while (validaData() == false);
 
 	}
+
 	/**
 	 * Metodo public boolean validaCpf(), utilizado para realizacao de validacao
 	 */
@@ -252,67 +261,69 @@ public abstract class Pessoa {
 	public boolean validaNome(String txt) {
 		return txt.matches("[a-z A-Z]+");
 	}
-	
+
 	@SuppressWarnings("resource")
-	public boolean validaCpfExistente() throws IOException, FileNotFoundException{
-		
-		BufferedReader dentista = new BufferedReader(new FileReader("documentos/dentistas.txt"));
-		BufferedReader secretario = new BufferedReader(new FileReader("documentos/secretarios.txt"));
-		BufferedReader paciente = new BufferedReader(new FileReader("documentos/pacientes.txt"));
-		
-		while(dentista.ready()) {    
-		       String linha = dentista.readLine();    
-		       if (linha.contains(cpf)) {    
-		              return true;
-		       }
-		    
+	public boolean validaCpfExistente() throws IOException,
+			FileNotFoundException {
+
+		BufferedReader dentista = new BufferedReader(new FileReader(
+				"documentos/dentistas.txt"));
+		BufferedReader secretario = new BufferedReader(new FileReader(
+				"documentos/secretarios.txt"));
+		BufferedReader paciente = new BufferedReader(new FileReader(
+				"documentos/pacientes.txt"));
+
+		while (dentista.ready()) {
+			String linha = dentista.readLine();
+			if (linha.contains(cpf)) {
+				return true;
+			}
+
 		}
 		dentista.close();
-		
-		while(secretario.ready()) {    
-		       String linha = secretario.readLine();    
-		       if (linha.contains(cpf)) {    
-		              return true;
-		       }	
+
+		while (secretario.ready()) {
+			String linha = secretario.readLine();
+			if (linha.contains(cpf)) {
+				return true;
+			}
 		}
 		secretario.close();
-		
-		while(paciente.ready()) {    
-		       String linha = paciente.readLine();    
-		       if (linha.contains(cpf)) {    
-		              return true;
-		       }
+
+		while (paciente.ready()) {
+			String linha = paciente.readLine();
+			if (linha.contains(cpf)) {
+				return true;
+			}
 		}
 		paciente.close();
-		
+
 		return false;
 	}
-	
-	public boolean validaData(){
+
+	public boolean validaData() {
 		DateFormat data = new SimpleDateFormat("yyyy/MM/dd");
 		data.setLenient(false);
-		
+
 		SimpleDateFormat formata = new SimpleDateFormat("yyyy/MM/dd");
 
 		Date dataInformada = new Date();
 		formata = new SimpleDateFormat("yyyy/MM/dd");
 		formata.setLenient(false);
-		
-		
-		
+
 		try {
 			dataInformada = formata.parse(dataDeNascimento);
 			data.parse(dataDeNascimento);
-			
-			if ((new Date()).getTime() > dataInformada.getTime()){
+
+			if ((new Date()).getTime() > dataInformada.getTime()) {
 				return true;
 			}
-			
+
 		} catch (ParseException e) {
-				return false;
+			return false;
 		}
 		return false;
-		
+
 	}
-	
+
 }

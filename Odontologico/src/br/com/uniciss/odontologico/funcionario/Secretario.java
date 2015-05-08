@@ -12,6 +12,7 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.admin.Agendamento;
 import br.com.uniciss.odontologico.cliente.Cliente;
 import br.com.uniciss.odontologico.cliente.Tratamentos;
@@ -20,31 +21,52 @@ public class Secretario extends Funcionario {
 
 	Scanner teclado = new Scanner(System.in);
 
-	public void cadastrarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
-		super.cadastraFuncionario();
+	public void cadastrarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, 
+	SQLException {
+			System.out.println("---------CADASTRAR DENTISTA----------");
+			super.cadastraFuncionario();
+			//FALTA IMPLEMENTAR O VALIDA CRO!
+			System.out.println("Determine o CRO");
+			Scanner entrada = new Scanner(System.in);
+			setId(entrada.nextInt());
+			
+			
+			String insert = "INSERT INTO pessoa (nome, cpf, endereco, data_nascimento) VALUES ('"
+					+ getNome()
+					+ "', '"
+					+ getCpf()
+					+ "' ,'"
+					+ getEndereco()
+					+ "' ,'" + getDataDeNascimento() + "')";
 
-		tipo = "secretario";
-		setStatus(true);
+			Scripts.insert(insert);
 
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Secretario> listaSecretario = new ArrayList<Secretario>();
-		Map<Integer, Secretario> mapaSecretario = new HashMap<Integer, Secretario>();
+			String select = "SELECT id_pessoa FROM pessoa where cpf='" + cpf + "'";
+			Scripts.select(select);
+			String seleciona = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
+					+ "'";
+			int pegaId = Scripts.select(select);
 
-		leitura.leituraSecretario(listaSecretario, mapaSecretario);
+			String inserta = "INSERT INTO dentista (id_pessoa, cro, hora_entrada, hora_saida) VALUES ('"
+					+ pegaId + "','" + getId() + "','" + getHoraDeEntrada() + "','" + getHoraDeSaida() + " ')";
+			Scripts.insert(inserta);
 
-		setCodigo(listaSecretario.size());
+			//SALVA LOGIN E SENHA
+			String pega = "SELECT nome FROM pessoa where cpf='" + cpf + "'";
+			Scripts.selectNome(pega);
+		//String seleciona2 = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
+		//			+ "'";
+			String peganome = Scripts.selectNome(pega);
+			
+			String inserta2 = "INSERT INTO users (tipo_users, nome_usuario, senha) VALUES ('"
+					+"dentista"+"','"+ peganome + "','" + getSenha() +" ')";
+			Scripts.insert(inserta2);
+			Menus menu = new Menus();
+			menu.menuAdmin();
 
-		Gravar g = new Gravar();
-		g.grava("documentos/secretarios.txt", toString());
-		g.grava("documentos/users.txt", toString2());
-		
-		System.out.println();
-		System.out.println("Cadastro efetuado com sucesso!!");
-		System.out.println();
-		
-		
-		Menus m = new Menus();
-		m.menuAdmin();
+			
+		}
+
 	}
 
 	public void consultarPaciente() {
