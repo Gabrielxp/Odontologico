@@ -103,8 +103,8 @@ public class Login extends JFrame implements ActionListener {
 					m.menuSecretario();
 				}
 			}
-			m.menuDentista();
-
+			System.out.println("Login e/ou senha invalido!");
+			
 		} catch (InputMismatchException i) {
 
 			System.out.println("Você informou algum caracter inválido(s)! ");
