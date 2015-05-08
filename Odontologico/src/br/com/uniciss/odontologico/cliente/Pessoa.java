@@ -21,6 +21,10 @@ public abstract class Pessoa {
 	/**
 	 * Variavel rg, relacionada ao rg da pessoa
 	 */
+	protected String id;
+	/**
+	 * Variavel id, relacionada ao id da pessoa
+	 */
 	protected String rg;
 	/**
 	 * Variavel cpf, relacionada ao cpf da pessoa
