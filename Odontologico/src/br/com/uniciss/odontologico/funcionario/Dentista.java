@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,12 +19,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.Menus;
+import br.com.uniciss.odontologico.BD.Conectar;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.cliente.Cliente;
 
 public class Dentista extends Funcionario {
+	private static Connection conexao;
 	/**
 	 * Variavel cro, relacionada ao cro do dentista
 	 */
@@ -29,7 +34,7 @@ public class Dentista extends Funcionario {
 	String croTexto;
 	private BufferedReader buffR;
 
-	public void cadastrarDentista() throws FileNotFoundException, IOException,
+	public void cadastrarDentista() throws FileNotFoundException, IOException, //OK
 			SQLException, ClassNotFoundException {
 		System.out.println("---------CADASTRAR DENTISTA----------");
 		super.cadastraFuncionario();
@@ -77,32 +82,42 @@ public class Dentista extends Funcionario {
 
 	// Metodo toString para cadastro de Funcionarios
 	
-	public void consultar(int cro) {
-		LeituraDeDados leitura = new LeituraDeDados();
-		Dentista dentista = new Dentista();
 
-		List<Dentista> listaDentista = new ArrayList<Dentista>();
-		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
+	public void consultar(int cro) throws ClassNotFoundException, SQLException { //OK
+			
+		String select = "SELECT id_pessoa FROM dentista where cro='" + cro + "'";
+		int pega = Scripts.select(select);
+		
+		String emprime = "SELECT id_pessoa, nome, cpf, endereco FROM pessoa where id_pessoa='" + pega + "'";
+	
+			String nome = "";
+			String cpf = "";
+			int idPessoa =0;
+			int endereco = 0;
+			conexao = new Conectar().conectar();
+			PreparedStatement ps = conexao.prepareStatement(emprime);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				idPessoa = rs.getInt("id_pessoa");
+				nome = rs.getString("nome");
+				cpf = rs.getString("cpf");
+				endereco = rs.getInt("endereco");
+				System.out.println("Nome: " + nome);
 
-		leitura.leituraDentista(listaDentista, mapaDentista);
-		try {
-			dentista = mapaDentista.get(cro);
-			if (dentista.isStatus()) {
-				System.out.println("-------Dentista " + dentista.getNome()
+			}		
+			
+			
+				System.out.println("-------Dentista " + nome
 						+ "------");
-				System.out.println("Codigo:" + dentista.getCodigo());
-				System.out.println("Nome:" + dentista.getNome());
-				System.out.println("CRO:" + dentista.getCro());
-				System.out.println("RG:" + dentista.getRg());
-				System.out.println("CPF:" + dentista.getCpf());
-				System.out.println("Endereço:" + dentista.getEndereco());
+				System.out.println("Codigo:" + idPessoa);
+				System.out.println("Nome:" + nome);
+				System.out.println("CRO:" + cro);
+			//	System.out.println("RG:" + dentista.getRg());
+				System.out.println("CPF:" + cpf);
+				System.out.println("Endereço:" + endereco);
 				System.out.println("---------------------");
-			} else {
-				System.out.println("Dentista esta como inativo");
-			}
-		} catch (NullPointerException e) {
-			System.err.println("Dentista não encontrado");
-		}
+		
 
 	}
 

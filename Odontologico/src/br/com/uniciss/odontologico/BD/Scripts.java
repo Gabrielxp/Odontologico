@@ -15,57 +15,54 @@ public class Scripts {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.execute();
 		} catch (Exception e) {
-			
+
 			System.out.println("ERRO CADASTRADO!");
 		}
-		
+
 	}
 
-	public static int select(String sql) throws ClassNotFoundException, SQLException {
+	public static int select(String sql) throws ClassNotFoundException,
+			SQLException {
 		int idPessoa = 0;
+		try {
+			conexao = new Conectar().conectar();
+			PreparedStatement ps = conexao.prepareStatement(sql);
 
-		conexao = new Conectar().conectar();
-	//	String sql = "SELECT id_pessoa, nome, cpf, endereco, data_nascimento FROM pessoa";
-		PreparedStatement ps = conexao.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				idPessoa = rs.getInt("id_pessoa");
+				System.out.println("ID: " + idPessoa);
 
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			idPessoa = rs.getInt("id_pessoa");
-			//String nome = rs.getString("nome");
-			//String cpf = rs.getString("cpf");
-			//int endereco = rs.getInt("endereco");
-			
-			System.out.println("ID: " + idPessoa );
-					
+			}
+
+		} catch (Exception e) {
+			System.out.println("Algo Errado nos Scripts");
 		}
+
 		return idPessoa;
-		
-		
-	 
-
 	}
-	public static String selectNome(String sql) throws ClassNotFoundException, SQLException {
+
+	public static String selectNome(String sql) throws ClassNotFoundException,
+			SQLException {
 		String nome = "";
-		conexao = new Conectar().conectar();
-	//	String sql = "SELECT id_pessoa, nome, cpf, endereco, data_nascimento FROM pessoa";
-		PreparedStatement ps = conexao.prepareStatement(sql);
+		try {
 
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			//idPessoa = rs.getInt("id_pessoa");
-			 nome = rs.getString("nome");
-			//String cpf = rs.getString("cpf");
-			//int endereco = rs.getInt("endereco");
-			
-			System.out.println("Nome: " + nome );
-					
+			conexao = new Conectar().conectar();
+
+			PreparedStatement ps = conexao.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				nome = rs.getString("nome");
+				System.out.println("Nome: " + nome);
+
+			}
+		} catch (Exception e) {
+			System.out.println("Algo errado nos Scripts!");
 		}
+
 		return nome;
-		
-		
-	 
 
 	}
-
 
 }

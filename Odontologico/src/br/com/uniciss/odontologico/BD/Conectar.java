@@ -15,7 +15,7 @@ public class Conectar {
 		conexao = DriverManager.getConnection(
 				"jdbc:postgresql://localhost:5432/Projeto_Odontologico",
 				"postgres", "gsp020596");
-		System.out.println("Conectado!");
+		//System.out.println("Conectado!");
 		return conexao;
 
 	}

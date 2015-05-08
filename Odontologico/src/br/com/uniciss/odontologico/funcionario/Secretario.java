@@ -2,6 +2,10 @@ package br.com.uniciss.odontologico.funcionario;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +14,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import br.com.uniciss.odontologico.Menus;
+import br.com.uniciss.odontologico.BD.Conectar;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.BD.Scripts;
@@ -21,53 +26,54 @@ public class Secretario extends Funcionario {
 
 	Scanner teclado = new Scanner(System.in);
 
-	public void cadastrarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, 
-	SQLException {
-			System.out.println("---------CADASTRAR DENTISTA----------");
-			super.cadastraFuncionario();
-			//FALTA IMPLEMENTAR O VALIDA CRO!
-			System.out.println("Determine o CRO");
-			Scanner entrada = new Scanner(System.in);
-			setId(entrada.nextInt());
-			
-			
-			String insert = "INSERT INTO pessoa (nome, cpf, endereco, data_nascimento) VALUES ('"
-					+ getNome()
-					+ "', '"
-					+ getCpf()
-					+ "' ,'"
-					+ getEndereco()
-					+ "' ,'" + getDataDeNascimento() + "')";
+	public void cadastrarSecretario() throws FileNotFoundException,
+			IOException, ClassNotFoundException, SQLException {
+		System.out.println("---------CADASTRAR DENTISTA----------");
+		super.cadastraFuncionario();
+		// FALTA IMPLEMENTAR O VALIDA CRO!
+		System.out.println("Determine o CRO");
+		Scanner entrada = new Scanner(System.in);
+		setId(entrada.nextInt());
 
-			Scripts.insert(insert);
+		String insert = "INSERT INTO pessoa (nome, cpf, endereco, data_nascimento) VALUES ('"
+				+ getNome()
+				+ "', '"
+				+ getCpf()
+				+ "' ,'"
+				+ getEndereco()
+				+ "' ,'" + getDataDeNascimento() + "')";
 
-			String select = "SELECT id_pessoa FROM pessoa where cpf='" + cpf + "'";
-			Scripts.select(select);
-			String seleciona = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
-					+ "'";
-			int pegaId = Scripts.select(select);
+		Scripts.insert(insert);
 
-			String inserta = "INSERT INTO dentista (id_pessoa, cro, hora_entrada, hora_saida) VALUES ('"
-					+ pegaId + "','" + getId() + "','" + getHoraDeEntrada() + "','" + getHoraDeSaida() + " ')";
-			Scripts.insert(inserta);
+		String select = "SELECT id_pessoa FROM pessoa where cpf='" + cpf + "'";
+		Scripts.select(select);
+		String seleciona = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
+				+ "'";
+		int pegaId = Scripts.select(select);
 
-			//SALVA LOGIN E SENHA
-			String pega = "SELECT nome FROM pessoa where cpf='" + cpf + "'";
-			Scripts.selectNome(pega);
-		//String seleciona2 = "SELECT id_pessoa FROM pessoa where cpf='" + cpf
-		//			+ "'";
-			String peganome = Scripts.selectNome(pega);
-			
-			String inserta2 = "INSERT INTO users (tipo_users, nome_usuario, senha) VALUES ('"
-					+"secretario"+"','"+ peganome + "','" + getSenha() +" ')";
-			Scripts.insert(inserta2);
-			Menus menu = new Menus();
-			menu.menuAdmin();
+		String inserta = "INSERT INTO dentista (id_pessoa, cro, hora_entrada, hora_saida) VALUES ('"
+				+ pegaId
+				+ "','"
+				+ getId()
+				+ "','"
+				+ getHoraDeEntrada()
+				+ "','"
+				+ getHoraDeSaida() + " ')";
+		Scripts.insert(inserta);
 
-			
-		}
+		// SALVA LOGIN E SENHA
+		String pega = "SELECT nome FROM pessoa where cpf='" + cpf + "'";
+		Scripts.selectNome(pega);
 
-	
+		String peganome = Scripts.selectNome(pega);
+
+		String inserta2 = "INSERT INTO users (tipo_users, nome_usuario, senha) VALUES ('"
+				+ "secretario" + "','" + peganome + "','" + getSenha() + " ')";
+		Scripts.insert(inserta2);
+		Menus menu = new Menus();
+		menu.menuAdmin();
+
+	}
 
 	public void consultarPaciente() {
 		List<Cliente> listaPaciente = new ArrayList<Cliente>();
@@ -80,204 +86,77 @@ public class Secretario extends Funcionario {
 		nome = nome.replace(" ", "");
 		nome = nome.toLowerCase();
 
-		for (Cliente paciente : listaPaciente) {
-			String nomeDaVez = paciente.getNome().replace(" ", "");
+		
+		
 
-			if (nomeDaVez.toLowerCase().equals(nome)) {
-				System.out.println("------- Paciente " + paciente.getNome()
-						+ "------");
-				if (!paciente.isStatus()) {
-					System.out
-							.println("Atenção estre paciente esta como inativo");
-				}
-				System.out.println("Codigo:" + paciente.getCodigo());
-				System.out.println("Nome:" + paciente.getNome());
-				System.out.println("RG:" + paciente.getRg());
-				System.out.println("CPF:" + paciente.getCpf());
-				System.out.println("Endereço:" + paciente.getEndereco());
-				System.out.println("---------------------");
-			}
+	}
+
+	public void consultarSecretario() throws FileNotFoundException,
+			IOException, ClassNotFoundException, SQLException {
+		System.out.println("Determine o nome do secretario: ");
+		Scanner entrada = new Scanner(System.in);
+		int pega = 0;
+		String nomex = entrada.nextLine();
+		String select2 = "SELECT nome FROM pessoa where nome='" + nomex
+				+ "'";
+		String pegan = Scripts.selectNome(select2);
+		
+		
+		String select = "SELECT id_pessoa FROM pessoa where nome='" + nomex
+				+ "'";
+		pega = Scripts.select(select);
+
+		String emprime = "SELECT id_pessoa, nome, cpf, endereco FROM pessoa where id_pessoa='"
+				+ pega + "'";
+
+		nome = "";
+		String cpf = "";
+		int idPessoa = 0;
+		int endereco = 0;
+		String horaEntrada = "";
+		String horaSaida = "";
+		Connection conexao = new Conectar().conectar();
+		PreparedStatement ps = conexao.prepareStatement(emprime);
+		if (idPessoa==0){
+			System.out.println("Pessoa Inexistente");
+			consultarSecretario();
 		}
-
-	}
-
-	public void consultarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
-
-		int opc;
-		LeituraDeDados leitura = new LeituraDeDados();
-
-		List<Secretario> listaSecretario = new ArrayList<Secretario>();
-		Map<Integer, Secretario> mapaSecretario = new HashMap<Integer, Secretario>();
-
-		leitura.leituraSecretario(listaSecretario, mapaSecretario);
-
-		System.out.println("    SELECIONE UMA OPÇÃO ");
-		System.out.println("1- Consultar Secretario por Nome");
-		System.out.println("2- Consultar Secretario por ID");
-
-		teclado = new Scanner(System.in);
-		opc = teclado.nextInt();
-		teclado.nextLine();
-
-		switch (opc) {
-		case 1:
-			System.out.println("Informe o nome do Secretario");
-			String nome = teclado.nextLine();
-			nome = nome.replace(" ", "");
-			nome = nome.toLowerCase();
-
-			for (Secretario secretario : listaSecretario) {
-				String nomeDaVez = secretario.getNome().replace(" ", "");
-
-				if (nomeDaVez.toLowerCase().equals(nome)) {
-					System.out.println("------- Secretario "
-							+ secretario.getNome() + "------");
-					if (!secretario.isStatus()) {
-						System.out
-								.println("Atenção estre paciente esta como inativo");
-					}
-					System.out.println("Codigo:" + secretario.getCodigo());
-					System.out.println("Nome:" + secretario.getNome());
-					System.out.println("RG:" + secretario.getRg());
-					System.out.println("CPF:" + secretario.getCpf());
-					System.out.println("Endereço:" + secretario.getEndereco());
-					System.out.println("Hora Entrada:"
-							+ secretario.getHoraDeEntrada());
-					System.out.println("Hora Saida:"
-							+ secretario.getHoraDeSaida());
-					System.out.println("---------------------");
-				}
-
-			}
-			Menus m = new Menus();
-			m.menuAdmin();
-			break;
-		case 2:
-			Secretario secretario = new Secretario();
-
-			System.out.println("Informe seu ID");
-			int cro = teclado.nextInt();
-
-			try {
-				secretario = listaSecretario.get(cro);
-				System.out.println("------- Secretario " + secretario.getNome()
-						+ "------");
-				if (!secretario.isStatus()) {
-					System.out
-							.println("Atenção estre paciente esta como inativo");
-				}
-				System.out.println("Codigo:" + secretario.getCodigo());
-				System.out.println("Nome:" + secretario.getNome());
-				System.out.println("RG:" + secretario.getRg());
-				System.out.println("CPF:" + secretario.getCpf());
-				System.out.println("Endereço:" + secretario.getEndereco());
-				System.out.println("Hora Entrada:"
-						+ secretario.getHoraDeEntrada());
-				System.out.println("Hora Saida:" + secretario.getHoraDeSaida());
-				System.out.println("---------------------");
-			} catch (NullPointerException e) {
-				System.out.println("Secretario não encontrado");
-			}
-			Menus g = new Menus();
-			g.menuAdmin();
-
-			break;
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			idPessoa = rs.getInt("id_pessoa");
+			nome = rs.getString("nome");
+			cpf = rs.getString("cpf");
+			endereco = rs.getInt("endereco");
+			
+			System.out.println("Nome: " + nome);
+		
 		}
+		System.out.println("Codigo:" + idPessoa);
+		System.out.println("Nome:" + nome);
+		System.out.println("CPF:" + cpf);
+		System.out.println("Endereço:" + endereco);
+		System.out.println("Hora Entrada:" + horaEntrada);
+		System.out.println("Hora Saida:" + horaSaida);
+		System.out.println("---------------------");
 
 	}
 
-	public String toStringSecretario() {
-		return "Secretario" + "," + getCodigo() + "," + getNome() + ","
-				+ getRg() + "," + getCpf() + "," + getEndereco() + ","
-				+ getDataDeNascimento() + "," + isStatus() + ","
-				+ getHoraDeEntrada() + "," + getHoraDeSaida();
-	}
 
 	public void inativarSecretario() throws IOException {
-		LeituraDeDados leitura = new LeituraDeDados();
-
-		List<Secretario> listaSecretario = new ArrayList<Secretario>();
-		Map<Integer, Secretario> mapaSecretario = new HashMap<Integer, Secretario>();
-
-		leitura.leituraSecretario(listaSecretario, mapaSecretario);
-		;
-		teclado = new Scanner(System.in);
-
-		System.out.println("Informe o codigo do Secretario");
-		int codSecretario = teclado.nextInt();
-
-		boolean existe = false;
-
-		for (Secretario s : listaSecretario) {
-			if (s.getCodigo() == codSecretario) {
-
-				existe = true;
-				if (!s.isStatus()) {
-					System.out.println("Este Secretario ja foi inativado");
-				} else {
-					s.setStatus(false);
-					System.out.println("Paciente Inativado Com Sucesso");
-
-					Gravar g = new Gravar();
-					g.editar("documentos/secretarios.txt");
-
-					for (Secretario ss : listaSecretario) {
-						g.grava("documentos/secretarios.txt",
-								ss.toStringSecretario());
-					}
-
-				}
-			}
-		}
-
-		if (!existe) {
-			System.out.println("Secretario Inexistente");
-		}
-	}
 	
-	public void ativarSecretario() throws IOException {
-		LeituraDeDados leitura = new LeituraDeDados();
-
-		List<Secretario> listaSecretario = new ArrayList<Secretario>();
-		Map<Integer, Secretario> mapaSecretario = new HashMap<Integer, Secretario>();
-
-		leitura.leituraSecretario(listaSecretario, mapaSecretario);
-		;
 		teclado = new Scanner(System.in);
 
 		System.out.println("Informe o codigo do Secretario");
 		int codSecretario = teclado.nextInt();
 
-		boolean existe = true;
+		
 
-		for (Secretario s : listaSecretario) {
-			if (s.getCodigo() == codSecretario) {
-
-				existe = false;
-				if (s.isStatus()) {
-					System.out.println("Este Secretario ja foi Ativado");
-				} else {
-					s.setStatus(true);
-					System.out.println("Secretario Ativado Com Sucesso");
-
-					Gravar g = new Gravar();
-					g.editar("documentos/secretarios.txt");
-
-					for (Secretario ss : listaSecretario) {
-						g.grava("documentos/secretarios.txt",
-								ss.toStringSecretario());
-					}
-
-				}
-			}
-		}
-
-		if (!existe) {
-			System.out.println("Secretario Inexistente");
-		}
+	
+		
 	}
 
-	public void inativarPaciente() throws IOException, ClassNotFoundException, SQLException {
+	public void inativarPaciente() throws IOException, ClassNotFoundException,
+			SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
@@ -304,22 +183,22 @@ public class Secretario extends Funcionario {
 					g.editar("documentos/pacientes.txt");
 
 					for (Cliente cc : listaPacientes) {
-						g.grava("documentos/pacientes.txt",
-								cc.toString());
+						g.grava("documentos/pacientes.txt", cc.toString());
 					}
 
 				}
 			}
 		}
 		if (!existe) {
-			
+
 			System.out.println("Paciente Inexistente");
 		}
 		Menus m = new Menus();
 		m.menuSecretario();
 	}
-	
-	public void ativarPaciente() throws IOException, ClassNotFoundException, SQLException {
+
+	public void ativarPaciente() throws IOException, ClassNotFoundException,
+			SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
@@ -346,54 +225,62 @@ public class Secretario extends Funcionario {
 					g.editar("documentos/pacientes.txt");
 
 					for (Cliente cc : listaPacientes) {
-						g.grava("documentos/pacientes.txt",
-								cc.toString());
+						g.grava("documentos/pacientes.txt", cc.toString());
 					}
 
 				}
 			}
 		}
 		if (existe) {
-			
+
 			System.out.println("Paciente Inexistente");
 		}
 		Menus m = new Menus();
 		m.menuSecretario();
 	}
-	
-	public void listarConsulta() throws IOException, ClassNotFoundException, SQLException {
+
+	public void listarConsulta() throws IOException, ClassNotFoundException,
+			SQLException {
 		Scanner teclado = new Scanner(System.in);
-		
+
 		List<Agendamento> listaConsultas = new ArrayList<Agendamento>();
 		List<Tratamentos> listaTratamento = new ArrayList<Tratamentos>();
-		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
+		Map<Integer, Tratamentos> mapaTratamento = new HashMap<Integer, Tratamentos>();
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
-		Map<Integer, Cliente>mapaPacientes = new HashMap<Integer, Cliente>();
-		
-		//Informaçoes de Dentistas
-		List<Dentista>listaDentista = new ArrayList<Dentista>();
-		Map<Integer, Dentista>mapaDentista = new HashMap<Integer, Dentista>();
-		
+		Map<Integer, Cliente> mapaPacientes = new HashMap<Integer, Cliente>();
+
+		// Informaçoes de Dentistas
+		List<Dentista> listaDentista = new ArrayList<Dentista>();
+		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
+
 		LeituraDeDados leitura = new LeituraDeDados();
 		leitura.leituraConsultas(listaConsultas);
 		leitura.leituraTratamento(listaTratamento, mapaTratamento);
 		leitura.leituraPacientes(listaPacientes);
 		leitura.leituraDentista(listaDentista, mapaDentista);
-		
-		for(Cliente c : listaPacientes){
+
+		for (Cliente c : listaPacientes) {
 			mapaPacientes.put(c.getCodigo(), c);
 		}
-		
+
 		System.out.println("Informe a data");
 		String data = teclado.nextLine();
-		
-		for(Agendamento consulta : listaConsultas){
-			if(consulta.getDataDoAgendamento().equals(data)){
+
+		for (Agendamento consulta : listaConsultas) {
+			if (consulta.getDataDoAgendamento().equals(data)) {
 				System.out.println("--------------------------------------");
-				System.out.println("Horario: "+consulta.getHora());
-				System.out.println("Tratamento: "+mapaTratamento.get(consulta.getIdTratamento()).getTratamento());
-				System.out.println("Paciente: "+mapaPacientes.get(consulta.getIdPaciente()).getNome());
-				System.out.println("Dentista: "+mapaDentista.get(consulta.getCroDentista()).getNome());
+				System.out.println("Horario: " + consulta.getHora());
+				System.out.println("Tratamento: "
+						+ mapaTratamento.get(consulta.getIdTratamento())
+								.getTratamento());
+				System.out
+						.println("Paciente: "
+								+ mapaPacientes.get(consulta.getIdPaciente())
+										.getNome());
+				System.out
+						.println("Dentista: "
+								+ mapaDentista.get(consulta.getCroDentista())
+										.getNome());
 			}
 		}
 		Menus m = new Menus();
