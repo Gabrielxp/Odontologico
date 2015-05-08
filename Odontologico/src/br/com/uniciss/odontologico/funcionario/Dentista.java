@@ -66,8 +66,8 @@ public class Dentista extends Funcionario {
 	//			+ "'";
 		String peganome = Scripts.selectNome(pega);
 		
-		String inserta2 = "INSERT INTO users (nome_usuario, senha) VALUES ('"
-				+ peganome + "','" + getSenha() +" ')";
+		String inserta2 = "INSERT INTO users (tipo_users, nome_usuario, senha) VALUES ('"
+				+"dentista"+"','"+ peganome + "','" + getSenha() +" ')";
 		Scripts.insert(inserta2);
 		Menus menu = new Menus();
 		menu.menuAdmin();

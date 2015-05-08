@@ -101,7 +101,7 @@ public class Admin {
 			Gravar g = new Gravar();
 			g.editar("documentos/dentistas.txt");
 			for (Dentista f : listaDentista) {
-				g.grava("documentos/dentistas.txt", f.toStringDentista());
+				g.grava("documentos/dentistas.txt", f.toString());
 			}
 
 		}

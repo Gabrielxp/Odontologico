@@ -1,6 +1,7 @@
 package br.com.uniciss.odontologico.cliente;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,9 +63,11 @@ public class Tratamentos {
 
 	/**
 	 * Metodo para cadastrar um novo Tratamento
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @method cadastraTratamentos();
 	 */
-	public void cadastraTratamentos() throws IOException {
+	public void cadastraTratamentos() throws IOException, ClassNotFoundException, SQLException {
 		do {
 			System.out.println("Escreva o Tratamento a ser feito: ");
 			setTratamento(teclado.nextLine());

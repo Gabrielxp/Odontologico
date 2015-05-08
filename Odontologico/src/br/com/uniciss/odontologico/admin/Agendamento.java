@@ -3,6 +3,7 @@ package br.com.uniciss.odontologico.admin;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,9 +41,11 @@ public class Agendamento {
 	
 	/**
 	 * Metodo para agendar uma consulta
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @method agendar();
 	 */
-	public void agendar() throws IOException{
+	public void agendar() throws IOException, ClassNotFoundException, SQLException{
 		System.out.println("Informe o CRO do Dentista");
 		croDentista = teclado.nextInt();
 		teclado.nextLine();

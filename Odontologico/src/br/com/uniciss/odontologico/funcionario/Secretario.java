@@ -2,6 +2,7 @@ package br.com.uniciss.odontologico.funcionario;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Secretario extends Funcionario {
 
 	Scanner teclado = new Scanner(System.in);
 
-	public void cadastrarSecretario() throws FileNotFoundException, IOException {
+	public void cadastrarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 		super.cadastraFuncionario();
 
 		tipo = "secretario";
@@ -78,7 +79,7 @@ public class Secretario extends Funcionario {
 
 	}
 
-	public void consultarSecretario() throws FileNotFoundException, IOException {
+	public void consultarSecretario() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
 
 		int opc;
 		LeituraDeDados leitura = new LeituraDeDados();
@@ -254,7 +255,7 @@ public class Secretario extends Funcionario {
 		}
 	}
 
-	public void inativarPaciente() throws IOException {
+	public void inativarPaciente() throws IOException, ClassNotFoundException, SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
@@ -282,7 +283,7 @@ public class Secretario extends Funcionario {
 
 					for (Cliente cc : listaPacientes) {
 						g.grava("documentos/pacientes.txt",
-								cc.toStringPaciente());
+								cc.toString());
 					}
 
 				}
@@ -296,7 +297,7 @@ public class Secretario extends Funcionario {
 		m.menuSecretario();
 	}
 	
-	public void ativarPaciente() throws IOException {
+	public void ativarPaciente() throws IOException, ClassNotFoundException, SQLException {
 		LeituraDeDados leitura = new LeituraDeDados();
 
 		List<Cliente> listaPacientes = new ArrayList<Cliente>();
@@ -324,7 +325,7 @@ public class Secretario extends Funcionario {
 
 					for (Cliente cc : listaPacientes) {
 						g.grava("documentos/pacientes.txt",
-								cc.toStringPaciente());
+								cc.toString());
 					}
 
 				}
@@ -338,7 +339,7 @@ public class Secretario extends Funcionario {
 		m.menuSecretario();
 	}
 	
-	public void listarConsulta() throws IOException {
+	public void listarConsulta() throws IOException, ClassNotFoundException, SQLException {
 		Scanner teclado = new Scanner(System.in);
 		
 		List<Agendamento> listaConsultas = new ArrayList<Agendamento>();
