@@ -34,7 +34,8 @@ public class Menus {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 * 
-	 */
+	
+	
 	public void Login() throws IOException, SQLException, ClassNotFoundException {
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
@@ -82,7 +83,7 @@ public class Menus {
 		}
 
 	}
-
+*/
 	/**
 	 *  Metodo menuDentista, utilizado para escolha de opcoes do usuario dentista
 	 * @throws IOException

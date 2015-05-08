@@ -91,53 +91,58 @@ public class Login extends JFrame implements ActionListener {
 
 		Gravar g = new Gravar();
 		g.leituraUsuario(mapaUsuario);
-		try {
-			BufferedReader entrada = new BufferedReader(new InputStreamReader(
+			
+		BufferedReader entrada = new BufferedReader(new InputStreamReader(
 					System.in));
 
 			String usuario = login.getText();
 
 			String senhax = new String(senha.getPassword());
-			
+
 			Menus m = new Menus();
-			
-			String pega = "SELECT nome_usuario FROM users where nome_usuario" + usuario + "'";
-			String pegalogin = Scripts.selectNome(pega);
-			if (pegalogin.equals("admin")){
-				m.menuAdmin();
+
+			try{
+				String pega = "SELECT nome_usuario FROM users where nome_usuario" + usuario + "'";
+				String pegalogin = Scripts.selectNome(pega);
+
+				String pegado = "SELECT senha FROM users where senha" + senhax + "'";
+				String pegaSenha = Scripts.selectNome(pegado);
+
+				String users = "SELECT tipo_users FROM users where nome_usuario ="+"'"+usuario+"'";
+
+				if(pegalogin.equals(usuario) && pegaSenha.equals(senhax)){
+
+					if (users.equals("admin")){
+						m.menuAdmin();
+
+					}else if(users.equals("dentista")){
+						m.menuDentista();
+
+					}else if(users.equals("secretario")){
+						m.menuSecretario();
+					}
+				}
+				m.menuDentista();
+
+			} catch (InputMismatchException i) {
+
+				s.nextLine();
+				System.out.println("Você informou algum caracter inválido(s)! ");
+
+
+			} catch (NullPointerException b) {
+
+				System.out.println("Login inexistente!");
+
+			} catch (IOException e1) {
+
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-					
-					m.menuDentista();
-
-				
-					Menus a = new Menus();
-					a.menuSecretario();
-
-				
-					
-
-			
-			
-			
-
-		} catch (InputMismatchException i) {
-
-			s.nextLine();
-			System.out.println("Você informou algum caracter inválido(s)! ");
-
-		} catch (NullPointerException b) {
-
-			System.out.println("Login inexistente!");
-
-		} catch (IOException e1) {
-
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
-}
