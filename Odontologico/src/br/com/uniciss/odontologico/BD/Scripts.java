@@ -69,21 +69,16 @@ public class Scripts {
 
 	public static String selectNomeUsuario(String sql) throws ClassNotFoundException, SQLException {
 		String nome_usuario = "";
-		try{
 
-			Connection conexao1 = new Conectar().conectar();
+		Connection conexao1 = new Conectar().conectar();
 
-			PreparedStatement sp0 = conexao1.prepareStatement(sql);
+		PreparedStatement sp0 = conexao1.prepareStatement(sql);
 
-			ResultSet sr0 = sp0.executeQuery();
+		ResultSet sr0 = sp0.executeQuery();
 
-			while (sr0.next()) {
-				nome_usuario = sr0.getString("nome_usuario");
-				System.out.println("Nome: " + nome_usuario );		
-			}
-
-		} catch (Exception e) {
-			System.out.println("Algo errado nos Scripts!");
+		while (sr0.next()) {
+			nome_usuario = sr0.getString("nome_usuario");
+			System.out.println("Nome: " + nome_usuario );		
 		}
 
 		return nome_usuario;
@@ -92,40 +87,33 @@ public class Scripts {
 
 	public static String selectSenha(String sql) throws ClassNotFoundException, SQLException {
 		String senha = "";
-		try{
-			Connection conexao2 = new Conectar().conectar();
 
-			PreparedStatement sp1 = conexao2.prepareStatement(sql);
+		Connection conexao2 = new Conectar().conectar();
 
-			ResultSet sr1 = sp1.executeQuery();
-			while (sr1.next()) {
-				senha = sr1.getString("senha");
-				System.out.println("Senha: " + senha);
+		PreparedStatement sp1 = conexao2.prepareStatement(sql);
 
-			}	 
-		}catch (Exception e) {
-			System.out.println("Algo errado nos Scripts!");
-		}
+		ResultSet sr1 = sp1.executeQuery();
+		while (sr1.next()) {
+			senha = sr1.getString("senha");
+			System.out.println("Senha: " + senha);
+
+		}	
 		return senha;
 	}
 
 	public static String selectTipoUsers(String sql) throws ClassNotFoundException, SQLException {
 		String tipo_users = "";
-		try{
 
-			Connection conexao3 = new Conectar().conectar();
+		Connection conexao3 = new Conectar().conectar();
 
-			PreparedStatement sp3 = conexao3.prepareStatement(sql);
+		PreparedStatement sp3 = conexao3.prepareStatement(sql);
 
-			ResultSet sr3 = sp3.executeQuery();
-			while (sr3.next()) {
-				tipo_users = sr3.getString("tipo_users");
+		ResultSet sr3 = sp3.executeQuery();
+		while (sr3.next()) {
+			tipo_users = sr3.getString("tipo_users");
 
-				System.out.println("Tipo Usuario: " + tipo_users);
+			System.out.println("Tipo Usuario: " + tipo_users);
 
-			}
-		} catch (Exception e) {
-			System.out.println("Algo errado nos Scripts!");
 		}
 		return tipo_users;
 	}

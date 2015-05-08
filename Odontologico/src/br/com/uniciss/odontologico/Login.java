@@ -73,54 +73,55 @@ public class Login extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == cancelar) {
 			System.exit(0);
+		}
 
-			Menus m = new Menus();
-			try{
-				String usuario = login.getText();
+		Menus m = new Menus();
 
-				String senhax = new String(senha.getPassword());
+		try{
+			String usuario = login.getText();
 
-				String pega = "SELECT nome_usuario FROM users where nome_usuario" + usuario + "'";
-				String pegalogin = Scripts.selectNomeUsuario(pega);
+			String senhax = new String(senha.getPassword());
 
-				String pegado = "SELECT senha FROM users where senha" + senhax + "'";
-				String pegaSenha = Scripts.selectSenha(pegado);
+			String pega = "SELECT nome_usuario FROM users WHERE nome_usuario like '" + usuario + "';";
+			String pegalogin = Scripts.selectNomeUsuario(pega);
 
-				String users = "SELECT tipo_users FROM users where nome_usuario ="+"'"+usuario+"'";
-				String pegaUsers = Scripts.selectTipoUsers(users);
+			String pegado = "SELECT senha FROM users WHERE senha like '" + senhax + "';";
+			String pegaSenha = Scripts.selectSenha(pegado);
 
-				if(pegalogin.equals(usuario) && pegaSenha.equals(senhax)){
+			String users = "SELECT tipo_users FROM users WHERE nome_usuario like '"+usuario+"';";
+			String pegaUsers = Scripts.selectTipoUsers(users);
 
-					if (pegaUsers.equals("admin")){
-						m.menuAdmin();
+			if(pegalogin.equals(usuario) && pegaSenha.equals(senhax)){
 
-					}else if(pegaUsers.equals("dentista")){
-						m.menuDentista();
+				if (pegaUsers.equals("admin")){
+					m.menuAdmin();
 
-					}else if(pegaUsers.equals("secretario")){
-						m.menuSecretario();
-					}
+				}else if(pegaUsers.equals("dentista")){
+					m.menuDentista();
+
+				}else if(pegaUsers.equals("secretario")){
+					m.menuSecretario();
 				}
-				m.menuDentista();
-
-			} catch (InputMismatchException i) {
-
-				System.out.println("Você informou algum caracter inválido(s)! ");
-
-			} catch (NullPointerException b) {
-
-				System.out.println("Login inexistente!");
-
-			} catch (IOException e1) {
-
-				e1.printStackTrace();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
+			m.menuDentista();
+
+		} catch (InputMismatchException i) {
+
+			System.out.println("Você informou algum caracter inválido(s)! ");
+
+		} catch (NullPointerException b) {
+
+			System.out.println("Login inexistente!");
+
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
-}	
+}
