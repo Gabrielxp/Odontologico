@@ -67,7 +67,7 @@ public abstract class Pessoa {
 		this.arquivo = arquivo;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
