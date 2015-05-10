@@ -37,11 +37,7 @@ public class Scripts {
 				System.out.println("ID: " + idPessoa);
 
 			}
-			if (idPessoa==0){
-				System.out.println("Pessoa Inexistente");
-				Cliente c = new Cliente();
-				c.editarPaciente();
-			}
+			
 			
 
 		} catch (Exception e) {

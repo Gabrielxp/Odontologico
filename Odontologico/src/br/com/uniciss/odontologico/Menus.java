@@ -120,7 +120,7 @@ public class Menus {
 			String nome = teclado.nextLine();
 			d.encaminharPaciente(nome);
 			break;
-		case 5:
+		case 4:
 			Programa.main(null);
 			break;
 		default:
@@ -205,14 +205,12 @@ public class Menus {
 		System.out.println("6 - Procurar Dentista");
 		System.out.println("7 - Menu Secretario");
 		System.out.println("8 - Menu Dentista");
-		System.out.println("9 - Inativar Dentista");
-		System.out.println("10 - Inativar Secretario");
-		System.out.println("11 - Ativar Dentista");
-		System.out.println("12 - Ativar Secretario");
-		System.out.println("13 - Sair");
+		System.out.println("9 - Sair");
 		s = new Scanner(System.in);
 		int opc = s.nextInt();
-		s.nextLine();
+		if(opc==9){
+			System.exit(0);
+		}
 		switch (opc) {
 		case 1:
 			c.cadastrarSecretario();
@@ -241,25 +239,9 @@ public class Menus {
 			menuDentista();
 			break;
 		case 9:
-			d.inativarDentista();
-			menuAdmin();
+			System.exit(0);
 			break;
-		case 10:
-			c.inativarSecretario();
-			menuAdmin();
-			break;
-		case 11:
-			d.ativarDentista();
-			menuAdmin();
-			break;
-		case 12:
-		//	c.ativarSecretario();
-			menuAdmin();
-			break;
-		case 13:
-			System.out.println("Obrigado por utilizar nosso sistema :)");
-			Programa.main(null);
-		break;
+		
 		default:
 			System.out.println("Opção inválida.");
 

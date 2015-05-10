@@ -121,89 +121,47 @@ public class Dentista extends Funcionario {
 
 	}
 
-	public void inativarDentista() throws IOException, SQLException,
-			ClassNotFoundException {
-		LeituraDeDados leitura = new LeituraDeDados();
-
-		List<Dentista> listaDentista = new ArrayList<Dentista>();
-		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
-
-		leitura.leituraDentista(listaDentista, mapaDentista);
-		teclado = new Scanner(System.in);
-
-		System.out.println("Digite o CRO do dentista");
-		int cro = teclado.nextInt();
-
-		boolean existe = false;
-
-		
-		
-	}
-
-	public void ativarDentista() throws IOException, SQLException,
-			ClassNotFoundException {
-		LeituraDeDados leitura = new LeituraDeDados();
-
-		List<Dentista> listaDentista = new ArrayList<Dentista>();
-		Map<Integer, Dentista> mapaDentista = new HashMap<Integer, Dentista>();
-
-		leitura.leituraDentista(listaDentista, mapaDentista);
-		teclado = new Scanner(System.in);
-
-		System.out.println("Digite o CRO do dentista");
-		int cro = teclado.nextInt();
-
-		boolean existe = true;
-
-		Menus m = new Menus();
-		m.menuAdmin();
-	}
-
-	@SuppressWarnings("resource")
-	public boolean validaCroExistente() throws IOException {
-		BufferedReader d = new BufferedReader(new FileReader(
-				"documentos/dentistas.txt"));
-
-		while (d.ready()) {
-			String linha = d.readLine();
-			if (linha.contains(croTexto)) {
-				return true;
-			}
-		}
-		d.close();
-		return false;
-	}
-
 	public boolean validaCro(String texto) {
 		return texto.matches("^[0-9]*$");
 	}
 
 	public void encaminharPaciente(String nome) throws IOException,
 			ClassNotFoundException, SQLException {
-		List<Cliente> listaPaciente = new ArrayList<Cliente>();
+		String select = "SELECT id_pessoa FROM pessoa where nome='" + nome + "'";
+		int pega = Scripts.select(select);
+		if (pega==0){
+			System.out.println("Selecione uma pessoa cadastrada!");
+			Menus m = new Menus();
+			m.menuDentista();
+		}
+		String emprime = "SELECT id_pessoa, nome, cpf, endereco FROM pessoa where id_pessoa='" + pega + "'";
+	
+			String nomex = "";
+			String cpf = "";
+			int idPessoa =0;
+			int endereco = 0;
+			conexao = new Conectar().conectar();
+			PreparedStatement ps = conexao.prepareStatement(emprime);
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				idPessoa = rs.getInt("id_pessoa");
+				nomex = rs.getString("nome");
+				cpf = rs.getString("cpf");
+				endereco = rs.getInt("endereco");
+				System.out.println("Nome: " + nome);
 
-		LeituraDeDados leitura = new LeituraDeDados();
-		leitura.leituraPacientes(listaPaciente);
-
-		nome = nome.replace(" ", "");
-		nome = nome.toLowerCase();
-
-		for (Cliente paciente : listaPaciente) {
-			String nomeDaVez = paciente.getNome().replace(" ", "");
-
-			if (nomeDaVez.toLowerCase().equals(nome)) {
-				System.out.println("------- Paciente " + paciente.getNome()
+			}
+			
+				System.out.println("------- Paciente " +nomex
 						+ "------");
-				if (!paciente.isStatus()) {
-					System.out
-							.println("Atenção este paciente esta como inativo");
-				}
+				
 
-				System.out.println("Codigo:" + paciente.getCodigo());
-				System.out.println("Nome:" + paciente.getNome());
-				System.out.println("RG:" + paciente.getRg());
-				System.out.println("CPF:" + paciente.getCpf());
-				System.out.println("Endereço:" + paciente.getEndereco());
+				System.out.println("Codigo:" + idPessoa);
+				System.out.println("Nome:" + nomex);
+				//System.out.println("RG:" + paciente.getRg());
+				System.out.println("CPF:" + cpf);
+				System.out.println("Endereço:" + endereco);
 				System.out.println("---------------------");
 				System.out.println("Ficha de Encaminhamento Gerada");
 
@@ -211,20 +169,18 @@ public class Dentista extends Funcionario {
 				SimpleDateFormat formato = new SimpleDateFormat("dd.MM.YYYY");
 				FileWriter arquivo;
 				arquivo = new FileWriter(new File(formato.format(date)
-						+ paciente.getNome() + ".txt"));
+						+ nomex + ".txt"));
 				arquivo.write("-------Ficha Encaminhamento "
-						+ paciente.getNome()
+						+ nomex
 						+ "----------"
 						+ "\nCodigo: "
-						+ paciente.getCodigo()
+						+ idPessoa
 						+ "\nNome:"
-						+ paciente.getNome()
-						+ "\nRG:"
-						+ paciente.getRg()
+						+ nomex
 						+ "\nCPF:"
-						+ paciente.getCpf()
+						+ cpf
 						+ "\nEndereço:"
-						+ paciente.getEndereco()
+						+ endereco
 						+ "\nTratamento:___________________________________________"
 						+ "\nObservações:__________________________________________"
 						+ "\n                     Assinatura           "
@@ -236,14 +192,9 @@ public class Dentista extends Funcionario {
 				Menus m = new Menus();
 				m.menuDentista();
 
-			} else {
-				System.out.println("Paciente Inexistente");
-				Menus m = new Menus();
-				m.menuDentista();
+		
 
-			}
-
-		}
+		
 
 	}
 

@@ -17,6 +17,7 @@ import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.funcionario.Funcionario;
+import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class Cliente extends Pessoa {
 	/**
@@ -98,6 +99,11 @@ public class Cliente extends Pessoa {
 			setNome(teclado.nextLine());
 			String select = "SELECT id_pessoa FROM pessoa where nome='" + getNome() + "'";
 			int pegaId = Scripts.select(select);
+			if (pegaId==0){
+				System.out.println("Pessoa Inexistente");
+				Cliente c = new Cliente();
+				c.editarPaciente();
+			}
 			System.out.println("Novo nome: ");
 			String nome2 = teclado.nextLine();
 			
@@ -113,20 +119,10 @@ public class Cliente extends Pessoa {
 			System.out.println("Opção Errada!");
 			break;
 		}
-		System.out.println("Deseja Editar o endereço? 1 - Sim, 2 - Não");
-		int escolha2 = teclado.nextInt();
-		switch (escolha2) {
-		case 1:
-			teclado.nextLine();
-			System.out.println("Informe o Endereço: ");
-			endereco = (teclado.next());
-			break;
-		case 2:
-
-			break;
-		default:
-			System.out.println("Opção Errada!");
-		}
+		
+			Menus m = new Menus();
+			m.menuSecretario();
+		
 
 	}
 
