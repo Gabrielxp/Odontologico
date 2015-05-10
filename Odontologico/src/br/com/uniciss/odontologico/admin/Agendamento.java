@@ -46,6 +46,7 @@ public class Agendamento {
 	 * @method agendar();
 	 */
 	public void agendar() throws IOException, ClassNotFoundException, SQLException{
+		
 		System.out.println("EM CONSTRUÇÃO!");
 		
 		Menus m = new Menus();

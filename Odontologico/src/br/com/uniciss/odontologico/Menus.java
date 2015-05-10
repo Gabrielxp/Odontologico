@@ -108,7 +108,7 @@ public class Menus {
 	
 		case 1:
 			Admin admin = new Admin();
-		//	admin.editarPaciente();
+			admin.updatePaciente();
 			break;
 		case 2:
 		Tratamentos t = new Tratamentos();
@@ -216,7 +216,8 @@ public class Menus {
 			c.cadastrarSecretario();
 			break;
 		case 2:
-		//	a.editarSecretario();
+			Admin admin = new Admin();
+			Admin.updateSecretario();
 			break;
 		case 3:
 			c.consultarSecretario();

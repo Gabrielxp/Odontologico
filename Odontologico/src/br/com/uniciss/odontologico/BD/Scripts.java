@@ -34,7 +34,7 @@ public class Scripts {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				idPessoa = rs.getInt("id_pessoa");
-				System.out.println("ID: " + idPessoa);
+			//	System.out.println("ID: " + idPessoa);
 
 			}
 			
@@ -60,7 +60,7 @@ public class Scripts {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				nome = rs.getString("nome");
-				System.out.println("Nome: " + nome);
+			//	System.out.println("Nome: " + nome);
 
 			}
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class Scripts {
 
 		while (sr0.next()) {
 			nome_usuario = sr0.getString("nome_usuario");
-			System.out.println("Nome: " + nome_usuario );		
+		//	System.out.println("Nome: " + nome_usuario );		
 		}
 
 		return nome_usuario;
@@ -101,7 +101,7 @@ public class Scripts {
 		ResultSet sr1 = sp1.executeQuery();
 		while (sr1.next()) {
 			senha = sr1.getString("senha");
-			System.out.println("Senha: " + senha);
+		//	System.out.println("Senha: " + senha);
 
 		}	
 		return senha;
@@ -118,7 +118,7 @@ public class Scripts {
 		while (sr3.next()) {
 			tipo_users = sr3.getString("tipo_users");
 
-			System.out.println("Tipo Usuario: " + tipo_users);
+		//	System.out.println("Tipo Usuario: " + tipo_users);
 
 		}
 		return tipo_users;
