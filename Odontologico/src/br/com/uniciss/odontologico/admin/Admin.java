@@ -3,6 +3,7 @@ package br.com.uniciss.odontologico.admin;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,20 +25,17 @@ public class Admin {
 	static void updateSecretario() throws FileNotFoundException, IOException,
 			ClassNotFoundException, SQLException {
 		Connection conn = null;
+		PreparedStatement st = null;
 		JOptionPane.showInputDialog("Insira o nome da pessoa para editar");
 		nome = scanner.next();
 		try {
-			Statement stmt;
 			String sql;
+			st = conn.prepareStatement("select nome from pessoa where nome ="+ nome);
+			ResultSet rs = st.executeQuery();
 
-			sql = "select nome from pessoa where nome = " + nome;
-			stmt = conn.createStatement();
-			ResultSet rs;
 			while (rs.next()) {
 				System.out.println(rs.getString("nome"));
 			}
-			rs.close();
-			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
