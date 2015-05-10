@@ -108,7 +108,7 @@ public class Menus {
 	
 		case 1:
 			Admin admin = new Admin();
-			admin.editarPaciente();
+		//	admin.editarPaciente();
 			break;
 		case 2:
 		Tratamentos t = new Tratamentos();
@@ -163,7 +163,7 @@ public class Menus {
 			break;
 		case 3:
 			Admin admin = new Admin();
-			admin.editarPaciente();
+		//	admin.editarPaciente();
 			break;
 		case 4:
 			c.inativarPaciente();
@@ -218,7 +218,7 @@ public class Menus {
 			c.cadastrarSecretario();
 			break;
 		case 2:
-			a.editarSecretario();
+		//	a.editarSecretario();
 			break;
 		case 3:
 			c.consultarSecretario();
@@ -227,7 +227,7 @@ public class Menus {
 			d.cadastrarDentista();
 			break;
 		case 5:
-			a.editarDentista();
+			//.editarDentista();
 			break;
 		case 6:
 			System.out.println("Informe o CRO do Dentista");

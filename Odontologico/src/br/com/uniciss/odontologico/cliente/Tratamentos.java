@@ -11,6 +11,7 @@ import java.util.Scanner;
 import br.com.uniciss.odontologico.Menus;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
+import br.com.uniciss.odontologico.BD.Scripts;
 import br.com.uniciss.odontologico.funcionario.Secretario;
 
 public class Tratamentos {
@@ -68,26 +69,19 @@ public class Tratamentos {
 	 * @method cadastraTratamentos();
 	 */
 	public void cadastraTratamentos() throws IOException, ClassNotFoundException, SQLException {
-		do {
-			System.out.println("Escreva o Tratamento a ser feito: ");
-			setTratamento(teclado.nextLine());
-		} while (getTratamento() == "");
-
-		do {
-			System.out.println("Determine o valor: ");
-			setValor(teclado.nextLine());
-		} while (getValor() == "");   
-
-		LeituraDeDados leitura = new LeituraDeDados();
-		List<Tratamentos>listaTratamento = new ArrayList<Tratamentos>();
-		Map<Integer, Tratamentos>mapaTratamento = new HashMap<Integer, Tratamentos>();
-
-		leitura.leituraTratamento(listaTratamento, mapaTratamento);
-
-		setCodigo(listaTratamento.size());
+		Scanner entrada = new Scanner(System.in);
+		System.out.println("Defina o nome do tratamento: ");
+		setTratamento(entrada.nextLine());
+		System.out.println("Defina o valor do tratamento");
+		setValor(entrada.nextLine());
 		
-		Gravar g = new Gravar();
-		g.grava("documentos/tratamentos.txt", toString());
+		String inserta = "INSERT INTO tratamento (nome_tratamento, valor_tratamento) VALUES ('"
+				+ getTratamento()
+				+ "', '"
+				+ getValor()
+				+ "'"
+				+")";
+		Scripts.insert(inserta);
 		
 		Menus m = new Menus();
 		m.menuDentista();

@@ -4,17 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import br.com.uniciss.odontologico.cliente.Cliente;
 
 public class Scripts {
 
 	private static Connection conexao;
 
-	public static void insert(String sql) throws SQLException {
+	public static void insert(String sql) throws SQLException, ClassNotFoundException {
 		try {
 			conexao = new Conectar().conectar();
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.execute();
-		} catch (Exception e) {
+	} catch (Exception e) {
 
 			System.out.println("ERRO CADASTRADO!");
 		}
@@ -34,8 +37,15 @@ public class Scripts {
 				System.out.println("ID: " + idPessoa);
 
 			}
+			if (idPessoa==0){
+				System.out.println("Pessoa Inexistente");
+				Cliente c = new Cliente();
+				c.editarPaciente();
+			}
+			
 
 		} catch (Exception e) {
+			
 			System.out.println("Algo Errado nos Scripts");
 		}
 
@@ -116,5 +126,22 @@ public class Scripts {
 
 		}
 		return tipo_users;
+	}
+	public static String update(String nome) throws ClassNotFoundException, SQLException{
+	try {  
+		Connection conexao3 = new Conectar().conectar();
+		Statement conecta = conexao3.createStatement();
+		
+	    // Prepare a statement to update a record  
+	    String sql = "UPDATE my_table SET col_string='a new string' WHERE col_string = 'a string'";  
+	  
+	    // Execute the insert statement  
+		
+	    int updateCount =  conecta.executeUpdate(nome);    
+	    // updateCount contains the number of updated rows  
+	} catch (SQLException e) {  
+		System.out.println("Erro no update!");
+	}
+	return nome;
 	}
 }

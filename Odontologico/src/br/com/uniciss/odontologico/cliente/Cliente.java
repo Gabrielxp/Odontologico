@@ -2,7 +2,9 @@ package br.com.uniciss.odontologico.cliente;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import br.com.uniciss.odontologico.Menus;
+import br.com.uniciss.odontologico.BD.Conectar;
 import br.com.uniciss.odontologico.BD.Gravar;
 import br.com.uniciss.odontologico.BD.LeituraDeDados;
 import br.com.uniciss.odontologico.BD.Scripts;
@@ -78,10 +81,12 @@ public class Cliente extends Pessoa {
 
 	/**
 	 * Metodo para editar Paciente
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * 
 	 * @method editarPaciente();
 	 */
-	public void editarPaciente() throws IOException {
+	public void editarPaciente() throws IOException, ClassNotFoundException, SQLException {
 		System.out.println("---------Editar Clientes--------");
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("Deseja Editar o nome? 1 - Sim, 2 - Não");
@@ -91,8 +96,16 @@ public class Cliente extends Pessoa {
 		case 1:
 			System.out.println("Informe o nome : ");
 			setNome(teclado.nextLine());
-
-			break;
+			String select = "SELECT id_pessoa FROM pessoa where nome='" + getNome() + "'";
+			int pegaId = Scripts.select(select);
+			System.out.println("Novo nome: ");
+			String nome2 = teclado.nextLine();
+			
+			 String update1 = "UPDATE pessoa SET nome='"+nome2+"' where nome='"+getNome()+"'";
+			 Scripts.update(update1);
+				
+			    
+			    break;
 		case 2:
 
 			break;
